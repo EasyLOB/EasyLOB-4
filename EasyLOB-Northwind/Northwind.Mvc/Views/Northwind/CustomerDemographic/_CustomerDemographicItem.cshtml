@@ -1,0 +1,90 @@
+﻿@model CustomerDemographicItemModel
+
+@{
+    string CSHTML = "_CustomerDemographicItem.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(CustomerDemographic));    
+    // Associations (FK)
+}
+
+<div id="Item_CustomerDemographic">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "CustomerDemographic_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "CustomerDemographic_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "CustomerDemographic_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "CustomerDemographic_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "CustomerDemographic_Item_IsSave")
+
+    @{Html.EJ().Tab("Tab_CustomerDemographic")
+        .ClientSideEvents(clientEvent => clientEvent
+            .ItemActive("itemActive_Tab_CustomerDemographic")
+        )
+        //.EnablePersistence()
+        .Items(data =>
+        {
+            data.Add().ID("TabSheet_CustomerDemographic_CustomerDemographic").Text(CustomerDemographicResources.EntitySingular).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">
+                
+                <div id="Group_CustomerDemographic_CustomerTypeId" class="@profile.EditCSSGroupFor("CustomerTypeId")">
+                    @Html.LabelFor(model => model.CustomerDemographic.CustomerTypeId, new { @class = profile.EditCSSLabelFor("CustomerTypeId") })
+                    @Html.EditorFor(model => model.CustomerDemographic.CustomerTypeId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("CustomerTypeId"), id = "CustomerDemographic_CustomerTypeId" } })
+                    @* @Html.ValidationMessageFor(model => model.CustomerDemographic.CustomerTypeId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_CustomerDemographic_CustomerDesc" class="@profile.EditCSSGroupFor("CustomerDesc")">
+                    @Html.LabelFor(model => model.CustomerDemographic.CustomerDesc, new { @class = profile.EditCSSLabelFor("CustomerDesc") })
+                    @Html.EditorFor(model => model.CustomerDemographic.CustomerDesc, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("CustomerDesc"), id = "CustomerDemographic_CustomerDesc" } })
+                    @* @Html.ValidationMessageFor(model => model.CustomerDemographic.CustomerDesc, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+
+            </div>);
+            data.Add().ID("TabSheet_CustomerDemographic_CustomerCustomerDemos").Text(CustomerCustomerDemoResources.EntityPlural).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">    
+                <div id="Ajax_CustomerDemographic_CustomerCustomerDemos"></div>
+            </div>);
+        })
+        .Render();
+    }
+</div>
+
+<script>
+    zSyncfusionItem("Item_CustomerDemographic");
+    
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_CustomerDemographic");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            // Associations (FK)
+
+            // Collections (PK)
+            if (controllerAction != "create" && zContains(profile.EditCollections, "CustomerCustomerDemos")) {
+                zUrlDictionaryWrite("CustomerCustomerDemo", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "CustomerCustomerDemo", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "CustomerDemographic", MasterKey = Model.CustomerDemographic.CustomerTypeId })))";
+                zAjaxLoadSync("Ajax_CustomerDemographic_CustomerCustomerDemos", ajaxUrl);
+            }
+
+            zOnItemView(model, profile);        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });    
+
+    function itemActive_Tab_CustomerDemographic(args) {
+        zTabDictionaryWrite("CustomerDemographic", args.model.selectedItemIndex);
+
+        try {        
+            var ejTab = zTab("Tab_CustomerDemographic");
+            var tabId = ejTab.contentPanels[args.model.selectedItemIndex].id;
+            switch (tabId) {
+                case "TabSheet_CustomerDemographic_CustomerCustomerDemos":
+                    zGridDataSource("Grid_CustomerCustomerDemo", "@Url.Action("DataSource", "CustomerCustomerDemo")");
+                    break;
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "itemActive_Tab_CustomerDemographic", exception));
+        }
+    }
+</script>

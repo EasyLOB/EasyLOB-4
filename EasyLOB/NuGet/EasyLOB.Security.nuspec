@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <version>$propertyVersion$</version>
+        <authors>EasyLOB</authors>
+        <owners />
+        <icon>icon.png</icon>
+        <id>EasyLOB.Security</id>
+        <title>EasyLOB.Security</title>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>EasyLOB Security</description>
+        <license type="expression">MIT</license>        
+        <dependencies>
+            <group targetFramework="net46">
+                <dependency id="AutoMapper" version="9.0.0" />
+                <dependency id="Newtonsoft.Json" version="12.0.2" />
+            </group>
+        </dependencies>    
+    </metadata>
+    <files>
+        <file src="icon.png" target="" />
+        <file src="..\EasyLOB.Activity\EasyLOB.Activity\bin\Debug\EasyLOB.Activity.dll" target="lib\net46" />
+        <file src="..\EasyLOB.Activity\EasyLOB.Activity\bin\Debug\EasyLOB.Activity.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.Activity\EasyLOB.Activity\bin\Debug\pt-BR\EasyLOB.Activity.resources.dll" target="lib\net46\pt-BR" />
+            <file src="..\EasyLOB.Activity\EasyLOB.Activity.Application\bin\Debug\EasyLOB.Activity.Application.dll" target="lib\net46" />
+            <file src="..\EasyLOB.Activity\EasyLOB.Activity.Application\bin\Debug\EasyLOB.Activity.Application.pdb" target="lib\net46" />
+            <file src="..\EasyLOB.Activity\EasyLOB.Activity.Data\bin\Debug\EasyLOB.Activity.Data.dll" target="lib\net46" />
+            <file src="..\EasyLOB.Activity\EasyLOB.Activity.Data\bin\Debug\EasyLOB.Activity.Data.pdb" target="lib\net46" />
+            <file src="..\EasyLOB.Activity\EasyLOB.Activity.Data\bin\Debug\pt-BR\EasyLOB.Activity.Data.resources.dll" target="lib\net46\pt-BR" />
+            <file src="..\EasyLOB.Activity\EasyLOB.Activity.PersistenceEntityFramework\bin\Debug\EasyLOB.Activity.PersistenceEntityFramework.dll" target="lib\net46" />
+            <file src="..\EasyLOB.Activity\EasyLOB.Activity.PersistenceEntityFramework\bin\Debug\EasyLOB.Activity.PersistenceEntityFramework.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.Identity\EasyLOB.Identity\bin\Debug\EasyLOB.Identity.dll" target="lib\net46" />
+        <file src="..\EasyLOB.Identity\EasyLOB.Identity\bin\Debug\EasyLOB.Identity.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.Identity\EasyLOB.Identity\bin\Debug\pt-BR\EasyLOB.Identity.resources.dll" target="lib\net46\pt-BR" />
+            <file src="..\EasyLOB.Identity\EasyLOB.Identity.Application\bin\Debug\EasyLOB.Identity.Application.dll" target="lib\net46" />
+            <file src="..\EasyLOB.Identity\EasyLOB.Identity.Application\bin\Debug\EasyLOB.Identity.Application.pdb" target="lib\net46" />
+            <file src="..\EasyLOB.Identity\EasyLOB.Identity.Data\bin\Debug\EasyLOB.Identity.Data.dll" target="lib\net46" />
+            <file src="..\EasyLOB.Identity\EasyLOB.Identity.Data\bin\Debug\EasyLOB.Identity.Data.pdb" target="lib\net46" />
+            <file src="..\EasyLOB.Identity\EasyLOB.Identity.Data\bin\Debug\pt-BR\EasyLOB.Identity.Data.resources.dll" target="lib\net46\pt-BR" />
+            <file src="..\EasyLOB.Identity\EasyLOB.Identity.PersistenceEntityFramework\bin\Debug\EasyLOB.Identity.PersistenceEntityFramework.dll" target="lib\net46" />
+            <file src="..\EasyLOB.Identity\EasyLOB.Identity.PersistenceEntityFramework\bin\Debug\EasyLOB.Identity.PersistenceEntityFramework.pdb" target="lib\net46" />
+            <file src="..\EasyLOB.Identity\EasyLOB.IdentityEntityFramework\bin\Debug\EasyLOB.IdentityEntityFramework.dll" target="lib\net46" />
+            <file src="..\EasyLOB.Identity\EasyLOB.IdentityEntityFramework\bin\Debug\EasyLOB.IdentityEntityFramework.pdb" target="lib\net46" />
+    </files>
+</package>

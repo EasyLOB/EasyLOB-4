@@ -1,0 +1,302 @@
+﻿@model UserCollectionModel
+
+@{
+    string CSHTML = "_UserCollection.cshtml";
+
+    IZProfile profile = DataHelper.GetProfile(typeof(User));
+    // Associations (FK)
+    string query = "";
+}
+
+<div id="Collection_@(Model.Id)">
+    @(Html.EJ().Grid<User>("Grid_" + Model.Id)
+        .Query(query)
+        .AllowFiltering()
+        .AllowGrouping()
+        .AllowPaging()
+        .AllowReordering()
+        //.AllowResizeToFit()
+        .AllowResizing()
+        //.AllowScrolling()
+        .AllowSearching()
+        .AllowSorting()
+        .AllowTextWrap()
+        .TextWrapSettings(wrap =>
+        {
+            wrap.WrapMode(WrapMode.Both);
+        })
+        .ClientSideEvents(clientEvent => clientEvent
+            .ActionBegin("actionBegin_Grid_" + Model.Id)
+            .ActionFailure("actionFailure_Grid_" + Model.Id)
+            .Load("load_Grid_" + Model.Id)
+            .ToolbarClick("toolbarClick_Grid_" + Model.Id)
+        )
+        .Columns(column =>
+        {
+            column.Field("Id")
+                .Type("string")
+                .EditType(EditingType.StringEdit)
+                .HeaderText(UserResources.PropertyId)
+                .IsPrimaryKey(true)
+                .Visible(profile.IsGridVisibleFor("Id"))
+                .Width(profile.GridWidthFor("Id"))
+                .Add();
+            column.Field("Email")
+                .Type("string")
+                .EditType(EditingType.StringEdit)
+                .HeaderText(UserResources.PropertyEmail)
+                .Visible(profile.IsGridVisibleFor("Email"))
+                .Width(profile.GridWidthFor("Email"))
+                .Add();
+            column.Field("EmailConfirmed")
+                .Type("boolean")
+                .EditType(EditingType.BooleanEdit)
+                .HeaderText(UserResources.PropertyEmailConfirmed)
+                .Visible(profile.IsGridVisibleFor("EmailConfirmed"))
+                .Width(profile.GridWidthFor("EmailConfirmed"))
+                .Add();
+            column.Field("PasswordHash")
+                .Type("string")
+                .EditType(EditingType.StringEdit)
+                .HeaderText(UserResources.PropertyPasswordHash)
+                .Visible(profile.IsGridVisibleFor("PasswordHash"))
+                .Width(profile.GridWidthFor("PasswordHash"))
+                .Add();
+            column.Field("SecurityStamp")
+                .Type("string")
+                .EditType(EditingType.StringEdit)
+                .HeaderText(UserResources.PropertySecurityStamp)
+                .Visible(profile.IsGridVisibleFor("SecurityStamp"))
+                .Width(profile.GridWidthFor("SecurityStamp"))
+                .Add();
+            column.Field("PhoneNumber")
+                .Type("string")
+                .EditType(EditingType.StringEdit)
+                .HeaderText(UserResources.PropertyPhoneNumber)
+                .Visible(profile.IsGridVisibleFor("PhoneNumber"))
+                .Width(profile.GridWidthFor("PhoneNumber"))
+                .Add();
+            column.Field("PhoneNumberConfirmed")
+                .Type("boolean")
+                .EditType(EditingType.BooleanEdit)
+                .HeaderText(UserResources.PropertyPhoneNumberConfirmed)
+                .Visible(profile.IsGridVisibleFor("PhoneNumberConfirmed"))
+                .Width(profile.GridWidthFor("PhoneNumberConfirmed"))
+                .Add();
+            column.Field("TwoFactorEnabled")
+                .Type("boolean")
+                .EditType(EditingType.BooleanEdit)
+                .HeaderText(UserResources.PropertyTwoFactorEnabled)
+                .Visible(profile.IsGridVisibleFor("TwoFactorEnabled"))
+                .Width(profile.GridWidthFor("TwoFactorEnabled"))
+                .Add();
+            column.Field("LockoutEndDateUtc")
+                .Type("datetime")
+                .EditType(EditingType.DateTimePicker)
+                .Format(SyncfusionPatternResources.GridFormat_DateTime)
+                .HeaderText(UserResources.PropertyLockoutEndDateUtc)
+                .Visible(profile.IsGridVisibleFor("LockoutEndDateUtc"))
+                .Width(profile.GridWidthFor("LockoutEndDateUtc"))
+                .Add();
+            column.Field("LockoutEnabled")
+                .Type("boolean")
+                .EditType(EditingType.BooleanEdit)
+                .HeaderText(UserResources.PropertyLockoutEnabled)
+                .Visible(profile.IsGridVisibleFor("LockoutEnabled"))
+                .Width(profile.GridWidthFor("LockoutEnabled"))
+                .Add();
+            column.Field("AccessFailedCount")
+                .Type("number")
+                .EditType(EditingType.NumericEdit)
+                .Format(SyncfusionPatternResources.GridFormat_Integer)
+                .HeaderText(UserResources.PropertyAccessFailedCount)
+                .TextAlign(TextAlign.Right)
+                .Visible(profile.IsGridVisibleFor("AccessFailedCount"))
+                .Width(profile.GridWidthFor("AccessFailedCount"))
+                .Add();
+            column.Field("UserName")
+                .Type("string")
+                .EditType(EditingType.StringEdit)
+                .HeaderText(UserResources.PropertyUserName)
+                .Visible(profile.IsGridVisibleFor("UserName"))
+                .Width(profile.GridWidthFor("UserName"))
+                .Add();
+        })
+        .EditSettings(edit => edit
+            .AllowAdding()
+            .AllowDeleting()
+            .AllowEditing()
+            .AllowEditOnDblClick(false)
+        )
+        //.EnablePersistence()
+        .EnableTouch(false)
+        //.IsResponsive(true)
+        .FilterSettings(filter => filter
+            .EnableCaseSensitivity(false)
+            .FilterType(FilterType.Excel)
+            .MaxFilterChoices(AppDefaults.SyncfusionRecordsForFiltering)
+        )
+        .Mappers(map => map
+            .ExportToExcelAction(Url.Content("~/User/ExportToExcel"))
+            //.ExportToPdfAction(Url.Content("~/User/ExportToPdf"))
+            //.ExportToWordAction(Url.Content("~/User/ExportToWord"))
+        ) @* !?! *@
+        .PageSettings(page => page
+            .PageSize(AppDefaults.SyncfusionRecordsByPage)
+        )
+        .ShowColumnChooser()
+        .ToolbarSettings(toolbar => toolbar
+            .CustomToolbarItems(new List<object>() {
+                new Syncfusion.JavaScript.Models.CustomToolbarItem() { TemplateID = "#Grid_" + Model.Id + "_Toolbar", Tooltip = "" }
+            })
+            .ShowToolbar()
+            .ToolbarItems(items =>
+            {
+                items.AddTool(ToolBarItems.Search);
+                items.AddTool(ToolBarItems.Add);
+                items.AddTool(ToolBarItems.Edit);
+                items.AddTool(ToolBarItems.Delete);
+                //items.AddTool(ToolBarItems.ExcelExport);
+                //items.AddTool(ToolBarItems.PdfExport);
+                //items.AddTool(ToolBarItems.WordExport);
+            })
+        )
+    )
+</div>
+
+<script type="text/x-jsrender" id="Grid_@(Model.Id)_Toolbar">
+    <div id="Grid_@(Model.Id)_Toolbar_Read" class="e-toolbaricons e-icon e-document" title="@PresentationResources.Read"></div>
+    <div id="Grid_@(Model.Id)_Toolbar_Refresh" class="e-toolbaricons e-icon e-reload" title="@PresentationResources.Refresh"></div>
+</script>
+
+<script>
+    zSyncfusionCollection("Collection_@(Model.Id)");
+
+    $(function () {
+        try {
+            zSyncfusionCollectionReady("Collection_@(Model.Id)");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+
+            zOnCollectionView(model, profile, "@Url.Action("DataSource", "User")");
+
+            // !?!
+            var ejGrid = zGrid("Grid_" + profile.Name);
+            ejGrid.setModel({
+                allowGrouping: true,
+                exportToExcelAction: '@Url.Content("~/" + profile.Name + "/ExportToExcel")',
+                //exportToPdfAction: '@Url.Content("~/" + profile.Name + "/ExportToPdf")',
+                //exportToWordAction: '@Url.Content("~/" + profile.Name + "/ExportToWord")',
+                toolbarSettings: {
+                    toolbarItems: [
+                        ej.Grid.ToolBarItems.Search,
+                        ej.Grid.ToolBarItems.Add,
+                        ej.Grid.ToolBarItems.Edit,
+                        ej.Grid.ToolBarItems.Delete,
+                        ej.Grid.ToolBarItems.ExcelExport,
+                        //ej.Grid.ToolBarItems.PdfExport,
+                        //ej.Grid.ToolBarItems.WordExport
+                    ]
+                }
+            });
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }                
+    });
+    
+    function actionBegin_Grid_@(Model.Id)(args) {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+    
+            // Associations (FK)
+            var url = "";
+
+            var scrud = zOnCollectionViewActionBeginSCRUD(model);
+            switch (args.requestType) {
+                case "searching":
+                    // Search
+                    if (scrud.isSearch) {
+                        zSearchDictionaryWrite("User", args.keyValue);
+                    }
+                    break;
+                case "add":
+                    // Create
+                    if (model.ActivityOperations.IsCreate && scrud.isCreate) {
+                        $("#ZAjax").load("@(Url.Action("Create", "User", null, Request.Url.Scheme))" +
+                            (url == "" ? "" : "?") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                    }
+                    break;
+                case "read":
+                    // Read
+                    if (model.ActivityOperations.IsRead && scrud.isRead) {
+                        var data = args.data;
+                        if (!ej.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Read", "User", null, Request.Url.Scheme))?Id=" + String(data.Id) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;                        
+                case "beginedit":
+                    // Update
+                    if (model.ActivityOperations.IsUpdate && scrud.isUpdate) {
+                        var data = args.rowData;
+                        if (!ej.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Update", "User", null, Request.Url.Scheme))?Id=" + String(data.Id) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+                case "delete":
+                    // Delete
+                    if (model.ActivityOperations.IsDelete && scrud.isDelete) {
+                        var data = args.data;
+                        if (!ej.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Delete", "User", null, Request.Url.Scheme))?Id=" + String(data.Id) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+            }
+
+            zOnCollectionViewActionBegin(model, args);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "actionBegin_Grid_@(Model.Id)", exception));
+        }            
+    }
+    
+    function actionFailure_Grid_@(Model.Id)(args) {
+        try {
+            zAlert(args.error.responseText);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "actionFailure_Grid_@(Model.Id)", exception));
+        }
+    }    
+
+    function load_Grid_@(Model.Id)(args) {
+        try {            
+            var culture = "@System.Globalization.CultureInfo.CurrentCulture.Name";
+            this.model.locale = culture;
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "load_Grid_@(Model.Id)", exception));
+        }
+    }
+
+    function toolbarClick_Grid_@(Model.Id)(sender) {
+        try {
+            var toolbar = $(sender.target);
+
+            if (toolbar.prop("id") == "Grid_@(Model.Id)_Toolbar_Refresh") {
+                this.refreshContent();
+            } else if (toolbar.prop("id") == "Grid_@(Model.Id)_Toolbar_Read") {
+                var records = this.getSelectedRecords();
+                if (records.length == 1) {
+                    var args = { requestType: "read", data: records[0] };
+                    actionBegin_Grid_@(Model.Id)(args);
+                }
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "toolbarClick_Grid_@(Model.Id)", exception));
+        }
+    }
+</script>

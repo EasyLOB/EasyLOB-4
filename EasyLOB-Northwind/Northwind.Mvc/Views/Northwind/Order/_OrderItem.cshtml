@@ -1,0 +1,206 @@
+﻿@model OrderItemModel
+
+@{
+    string CSHTML = "_OrderItem.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(Order));    
+    // Associations (FK)
+    string customerText = Model.Order == null ? "" : (Model.Order.CustomerLookupText ?? "");
+    string employeeText = Model.Order == null ? "" : (Model.Order.EmployeeLookupText ?? "");
+    string shipperText = Model.Order == null ? "" : (Model.Order.ShipperLookupText ?? "");
+}
+
+<div id="Item_Order">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "Order_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "Order_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "Order_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "Order_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "Order_Item_IsSave")
+
+    @{Html.EJ().Tab("Tab_Order")
+        .ClientSideEvents(clientEvent => clientEvent
+            .ItemActive("itemActive_Tab_Order")
+        )
+        //.EnablePersistence()
+        .Items(data =>
+        {
+            data.Add().ID("TabSheet_Order_Order").Text(OrderResources.EntitySingular).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">
+                
+                <div id="Group_Order_OrderId" class="@profile.EditCSSGroupFor("OrderId")">
+                    @Html.LabelFor(model => model.Order.OrderId, new { @class = profile.EditCSSLabelFor("OrderId") })
+                    @Html.EditorFor(model => model.Order.OrderId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("OrderId"), id = "Order_OrderId" } })
+                    @* @Html.ValidationMessageFor(model => model.Order.OrderId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_CustomerId" class="@profile.EditCSSGroupFor("CustomerLookupText")">
+                    @Html.LabelFor(model => model.Order.CustomerId, new { @class = profile.EditCSSLabelFor("CustomerId") })
+                    @Html.EditorFor(model => model.Order.CustomerId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("CustomerId"), id = "Order_CustomerId" } })
+                    @{
+                        Html.RenderAction("Lookup", "Customer", new
+                        {
+                            Text = customerText,
+                            ValueId = "Order_CustomerId",
+                            Required = profile.IsRequiredView("CustomerId")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.Order.CustomerId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_EmployeeId" class="@profile.EditCSSGroupFor("EmployeeLookupText")">
+                    @Html.LabelFor(model => model.Order.EmployeeId, new { @class = profile.EditCSSLabelFor("EmployeeId") })
+                    @Html.EditorFor(model => model.Order.EmployeeId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("EmployeeId"), id = "Order_EmployeeId" } })
+                    @{
+                        Html.RenderAction("Lookup", "Employee", new
+                        {
+                            Text = employeeText,
+                            ValueId = "Order_EmployeeId",
+                            Required = profile.IsRequiredView("EmployeeId")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.Order.EmployeeId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_OrderDate" class="@profile.EditCSSGroupFor("OrderDate")">
+                    @Html.LabelFor(model => model.Order.OrderDate, new { @class = profile.EditCSSLabelFor("OrderDate") })
+                    @* @Html.EditorFor(model => model.Order.OrderDate, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("OrderDate"), id = "Order_OrderDate" } }) *@
+                    @Html.EJ().DateTimePickerFor(model => model.Order.OrderDate, AppHelper.DateTimeModel, new { @class = profile.EditCSSEditorDateTimeFor("OrderDate"), id = "Order_OrderDate" })
+                    @* @Html.ValidationMessageFor(model => model.Order.OrderDate, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_RequiredDate" class="@profile.EditCSSGroupFor("RequiredDate")">
+                    @Html.LabelFor(model => model.Order.RequiredDate, new { @class = profile.EditCSSLabelFor("RequiredDate") })
+                    @* @Html.EditorFor(model => model.Order.RequiredDate, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("RequiredDate"), id = "Order_RequiredDate" } }) *@
+                    @Html.EJ().DateTimePickerFor(model => model.Order.RequiredDate, AppHelper.DateTimeModel, new { @class = profile.EditCSSEditorDateTimeFor("RequiredDate"), id = "Order_RequiredDate" })
+                    @* @Html.ValidationMessageFor(model => model.Order.RequiredDate, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_ShippedDate" class="@profile.EditCSSGroupFor("ShippedDate")">
+                    @Html.LabelFor(model => model.Order.ShippedDate, new { @class = profile.EditCSSLabelFor("ShippedDate") })
+                    @* @Html.EditorFor(model => model.Order.ShippedDate, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ShippedDate"), id = "Order_ShippedDate" } }) *@
+                    @Html.EJ().DateTimePickerFor(model => model.Order.ShippedDate, AppHelper.DateTimeModel, new { @class = profile.EditCSSEditorDateTimeFor("ShippedDate"), id = "Order_ShippedDate" })
+                    @* @Html.ValidationMessageFor(model => model.Order.ShippedDate, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_ShipVia" class="@profile.EditCSSGroupFor("ShipperLookupText")">
+                    @Html.LabelFor(model => model.Order.ShipVia, new { @class = profile.EditCSSLabelFor("ShipVia") })
+                    @Html.EditorFor(model => model.Order.ShipVia, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ShipVia"), id = "Order_ShipVia" } })
+                    @{
+                        Html.RenderAction("Lookup", "Shipper", new
+                        {
+                            Text = shipperText,
+                            ValueId = "Order_ShipVia",
+                            Required = profile.IsRequiredView("ShipVia")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.Order.ShipVia, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_Freight" class="@profile.EditCSSGroupFor("Freight")">
+                    @Html.LabelFor(model => model.Order.Freight, new { @class = profile.EditCSSLabelFor("Freight") })
+                    @Html.EditorFor(model => model.Order.Freight, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Freight"), id = "Order_Freight" } })
+                    @* @Html.ValidationMessageFor(model => model.Order.Freight, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_ShipName" class="@profile.EditCSSGroupFor("ShipName")">
+                    @Html.LabelFor(model => model.Order.ShipName, new { @class = profile.EditCSSLabelFor("ShipName") })
+                    @Html.EditorFor(model => model.Order.ShipName, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ShipName"), id = "Order_ShipName" } })
+                    @* @Html.ValidationMessageFor(model => model.Order.ShipName, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_ShipAddress" class="@profile.EditCSSGroupFor("ShipAddress")">
+                    @Html.LabelFor(model => model.Order.ShipAddress, new { @class = profile.EditCSSLabelFor("ShipAddress") })
+                    @Html.EditorFor(model => model.Order.ShipAddress, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ShipAddress"), id = "Order_ShipAddress" } })
+                    @* @Html.ValidationMessageFor(model => model.Order.ShipAddress, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_ShipCity" class="@profile.EditCSSGroupFor("ShipCity")">
+                    @Html.LabelFor(model => model.Order.ShipCity, new { @class = profile.EditCSSLabelFor("ShipCity") })
+                    @Html.EditorFor(model => model.Order.ShipCity, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ShipCity"), id = "Order_ShipCity" } })
+                    @* @Html.ValidationMessageFor(model => model.Order.ShipCity, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_ShipRegion" class="@profile.EditCSSGroupFor("ShipRegion")">
+                    @Html.LabelFor(model => model.Order.ShipRegion, new { @class = profile.EditCSSLabelFor("ShipRegion") })
+                    @Html.EditorFor(model => model.Order.ShipRegion, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ShipRegion"), id = "Order_ShipRegion" } })
+                    @* @Html.ValidationMessageFor(model => model.Order.ShipRegion, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_ShipPostalCode" class="@profile.EditCSSGroupFor("ShipPostalCode")">
+                    @Html.LabelFor(model => model.Order.ShipPostalCode, new { @class = profile.EditCSSLabelFor("ShipPostalCode") })
+                    @Html.EditorFor(model => model.Order.ShipPostalCode, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ShipPostalCode"), id = "Order_ShipPostalCode" } })
+                    @* @Html.ValidationMessageFor(model => model.Order.ShipPostalCode, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Order_ShipCountry" class="@profile.EditCSSGroupFor("ShipCountry")">
+                    @Html.LabelFor(model => model.Order.ShipCountry, new { @class = profile.EditCSSLabelFor("ShipCountry") })
+                    @Html.EditorFor(model => model.Order.ShipCountry, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ShipCountry"), id = "Order_ShipCountry" } })
+                    @* @Html.ValidationMessageFor(model => model.Order.ShipCountry, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+
+            </div>);
+            data.Add().ID("TabSheet_Order_OrderDetails").Text(OrderDetailResources.EntityPlural).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">    
+                <div id="Ajax_Order_OrderDetails"></div>
+            </div>);
+        })
+        .Render();
+    }
+</div>
+
+<script>
+    zSyncfusionItem("Item_Order");
+    
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_Order");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            // Associations (FK)
+            switch (model.MasterEntity) {
+                case "Customer":
+                    $("#Order_CustomerId").val(model.MasterKey);
+                    $("#Group_Order_CustomerId").hide();
+                    break;
+                case "Employee":
+                    $("#Order_EmployeeId").val(model.MasterKey);
+                    $("#Group_Order_EmployeeId").hide();
+                    break;
+                case "Shipper":
+                    $("#Order_ShipVia").val(model.MasterKey);
+                    $("#Group_Order_ShipVia").hide();
+                    break;
+            }
+
+            // Collections (PK)
+            if (controllerAction != "create" && zContains(profile.EditCollections, "OrderDetails")) {
+                zUrlDictionaryWrite("OrderDetail", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "OrderDetail", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "Order", MasterKey = Model.Order.OrderId })))";
+                zAjaxLoadSync("Ajax_Order_OrderDetails", ajaxUrl);
+            }
+
+            zOnItemView(model, profile);        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });    
+
+    function itemActive_Tab_Order(args) {
+        zTabDictionaryWrite("Order", args.model.selectedItemIndex);
+
+        try {        
+            var ejTab = zTab("Tab_Order");
+            var tabId = ejTab.contentPanels[args.model.selectedItemIndex].id;
+            switch (tabId) {
+                case "TabSheet_Order_OrderDetails":
+                    zGridDataSource("Grid_OrderDetail", "@Url.Action("DataSource", "OrderDetail")");
+                    break;
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "itemActive_Tab_Order", exception));
+        }
+    }
+</script>

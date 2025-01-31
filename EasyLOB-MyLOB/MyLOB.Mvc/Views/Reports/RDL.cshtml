@@ -1,0 +1,42 @@
+@model ReportRDLModel
+
+@{ 
+    string reportPath = "/" + Model.ReportDirectory + "/" + Model.ReportName;
+    string rdlUrl = ConfigurationHelper.AppSettings<string>("EasyLOB.Report.RDL.Url");
+}
+
+@section Styles {
+    <style>
+        #ReportViewer {
+            min-height: 768px;
+            min-width: 100%;
+        }
+    </style>
+}
+
+<br />
+
+<div style="width: 100%">
+    @(Html.EJ().ReportViewer("ReportViewer")
+        .Locale(System.Globalization.CultureInfo.CurrentCulture.Name)
+        .Parameters(Model.ReportParameters)
+        .ProcessingMode(Syncfusion.JavaScript.ReportViewerEnums.ProcessingMode.Remote)
+        .ReportLoaded("loaded_ReportViewer")
+        .ReportPath(reportPath)
+        .ReportServiceUrl(@Url.Content("~/syncfusion/RDLApi"))
+        .ReportServerUrl(rdlUrl)
+    )
+</div>
+
+<script>
+    function loaded_ReportViewer(args) {
+        try {
+            var culture = "@System.Globalization.CultureInfo.CurrentCulture.Name";
+            var reportViewer = $("#ReportViewer");
+            var ejReportViewer = reportViewer.data("ejReportViewer");
+            ejReportViewer.model.locale = culture;
+        } catch (exception) {
+            zAlert(zExceptionMessage("RDL.cshtml", "loaded_ReportViewer", exception));
+        }
+    }
+</script>

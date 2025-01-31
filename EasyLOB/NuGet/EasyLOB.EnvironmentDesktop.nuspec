@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <version>$propertyVersion$</version>
+        <authors>EasyLOB</authors>
+        <owners />
+        <icon>icon.png</icon>
+        <id>EasyLOB.EnvironmentDesktop</id>
+        <title>EasyLOB.EnvironmentDesktop</title>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>EasyLOB Environment Desktop</description>
+        <license type="expression">MIT</license>        
+        <dependencies>
+            <group targetFramework="net46">
+            </group>
+        </dependencies>    
+    </metadata>
+    <files>
+        <file src="icon.png" target="" />
+        <file src="..\EasyLOB.Environment\EasyLOB.EnvironmentDesktop\bin\Debug\EasyLOB.EnvironmentDesktop.dll" target="lib\net46" />
+        <file src="..\EasyLOB.Environment\EasyLOB.EnvironmentDesktop\bin\Debug\EasyLOB.EnvironmentDesktop.pdb" target="lib\net46" />
+    </files>
+</package>

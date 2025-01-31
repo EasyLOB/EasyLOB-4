@@ -1,0 +1,110 @@
+﻿@model CategoryItemModel
+
+@{
+    string CSHTML = "_CategoryItem.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(Category));    
+    // Associations (FK)
+    string category_Picture_Base64 = Convert.ToBase64String(new byte[] {});
+    if (Model.Category != null && Model.Category.Picture != null)
+    {
+        category_Picture_Base64 = Convert.ToBase64String(Model.Category.Picture);
+    }
+    string category_Picture_Source = string.Format("data:image/jpg;base64,{0}", category_Picture_Base64);        
+}
+
+<div id="Item_Category">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "Category_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "Category_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "Category_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "Category_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "Category_Item_IsSave")
+
+    @{Html.EJ().Tab("Tab_Category")
+        .ClientSideEvents(clientEvent => clientEvent
+            .ItemActive("itemActive_Tab_Category")
+        )
+        //.EnablePersistence()
+        .Items(data =>
+        {
+            data.Add().ID("TabSheet_Category_Category").Text(CategoryResources.EntitySingular).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">
+                
+                <div id="Group_Category_CategoryId" class="@profile.EditCSSGroupFor("CategoryId")">
+                    @Html.LabelFor(model => model.Category.CategoryId, new { @class = profile.EditCSSLabelFor("CategoryId") })
+                    @Html.EditorFor(model => model.Category.CategoryId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("CategoryId"), id = "Category_CategoryId" } })
+                    @* @Html.ValidationMessageFor(model => model.Category.CategoryId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Category_CategoryName" class="@profile.EditCSSGroupFor("CategoryName")">
+                    @Html.LabelFor(model => model.Category.CategoryName, new { @class = profile.EditCSSLabelFor("CategoryName") })
+                    @Html.EditorFor(model => model.Category.CategoryName, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("CategoryName"), id = "Category_CategoryName" } })
+                    @* @Html.ValidationMessageFor(model => model.Category.CategoryName, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Category_Description" class="@profile.EditCSSGroupFor("Description")">
+                    @Html.LabelFor(model => model.Category.Description, new { @class = profile.EditCSSLabelFor("Description") })
+                    @Html.EditorFor(model => model.Category.Description, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Description"), id = "Category_Description" } })
+                    @* @Html.ValidationMessageFor(model => model.Category.Description, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Category_Picture" class="@AppDefaults.CSSClassGroupImage col-md-2">
+                    @Html.LabelFor(model => model.Category.Picture, new { @class = profile.EditCSSLabelFor("Picture") })
+                    <div>
+                        <img src="@category_Picture_Source" class="z-image" />
+                    </div>
+                    @* @Html.ValidationMessageFor(model => model.Category.Picture, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+
+            </div>);
+            data.Add().ID("TabSheet_Category_Products").Text(ProductResources.EntityPlural).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">    
+                <div id="Ajax_Category_Products"></div>
+            </div>);
+        })
+        .Render();
+    }
+</div>
+
+<script>
+    zSyncfusionItem("Item_Category");
+    
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_Category");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            // Associations (FK)
+
+            // Collections (PK)
+            if (controllerAction != "create" && zContains(profile.EditCollections, "Products")) {
+                zUrlDictionaryWrite("Product", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "Product", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "Category", MasterKey = Model.Category.CategoryId })))";
+                zAjaxLoadSync("Ajax_Category_Products", ajaxUrl);
+            }
+
+            zOnItemView(model, profile);        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });    
+
+    function itemActive_Tab_Category(args) {
+        zTabDictionaryWrite("Category", args.model.selectedItemIndex);
+
+        try {        
+            var ejTab = zTab("Tab_Category");
+            var tabId = ejTab.contentPanels[args.model.selectedItemIndex].id;
+            switch (tabId) {
+                case "TabSheet_Category_Products":
+                    zGridDataSource("Grid_Product", "@Url.Action("DataSource", "Product")");
+                    break;
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "itemActive_Tab_Category", exception));
+        }
+    }
+</script>

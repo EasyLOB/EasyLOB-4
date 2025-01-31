@@ -1,0 +1,91 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>   
+        body, html {
+            height: 100%;
+        }
+    </style>
+    <title>Syncfusion Dashboard</title>
+
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/bootstrap.css")" rel="stylesheet">
+
+    @* <link href="@Url.Content("~/Content/ej/dashboard/themes/default-theme/ej.widgets.all.min.css")" rel="stylesheet"> *@
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/ej.widgets.core.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/default-theme/ej.theme.min.css")" rel="stylesheet">
+
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/ej.DashboardViewer.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/e-Breadcrumb.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/e-Card.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/ej.dashboarddatepicker.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/ej.DashboardViewer_light.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/lightcontroltheme.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/default-theme/ej.theme.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/ej/dashboard/themes/ej.pivotgridcustomtheme.css")" rel="stylesheet">
+
+    <script src="@Url.Content("~/Scripts/syncfusion/jquery-1.10.2.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/syncfusion/jquery.easing.1.3.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/syncfusion/jquery.globalize.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/ej/dashboard/ej.dashboardViewer.all.min.js")"></script>
+</head>
+
+<body>
+    <div id="Dashboard" style="width:100%; height:100%;" ></div>
+   
+    <script type="text/javascript">
+        var browser = ej.browserInfo();
+        if (browser != null && browser.name === "msie" && parseFloat(browser.version) <= 8.0) {
+            var divString = '<div style="top:20%;width:575px;margin:0px auto;position:relative;text-align:center">' +
+                '<div style="padding:35px 68px 35px 68px;" class="e-dbrd-control-container">' +
+                '<p style="font-size:18px;font-weight:bold">Internet Explorer 8 and Internet Explorer 11 in Enterprise Mode are not supported</p>' +
+                '<p style="font-size:10px">Please upgrade to a newer browser if you are using IE8 or turn off Enterprise Mode if you are using IE11 in Enterprise Mode.</p>' +
+                '<p style="text-align:left;margin-top:20px">Supported Browsers:</p><div class="alert-ie">' +
+                '<div><span><img  src="@Url.Content("~/Content/ej/dashboard/common-images/IE.png")" /></span><p>Internet Explorer 9+</p> </div> ' +
+                '<div><span><img  src="@Url.Content("~/Content/ej/dashboard/common-images/Edge.png")"/> </span><p>Microsoft Edge</p></div>' +
+                '<div><span><img  src="@Url.Content("~/Content/ej/dashboard/common-images/Firefox.png")" /></span><p>Mozilla Firefox 22+</p></div>' +
+                '<div><span><img  src="@Url.Content("~/Content/ej/dashboard/common-images/Chrome.png")" /></span><p>Chrome 17+</p></div>' +
+                '<div><span><img  src="@Url.Content("~/Content/ej/dashboard/common-images/Opera.png")" /></span><p>Opera 12+</p></div>' +
+                '<div><span><img  src="@Url.Content("~/Content/ej/dashboard/common-images/Safari.png")" /></span><p>Safari 5+</p></div></div></div>'
+            var body = document.getElementById("dashboard");
+            body.style.backgroundColor = "white";
+            body.innerHTML = divString;
+        }
+        else {
+            $(document).ready(function () {
+                if ("@ViewBag.ServiceURL" == "") {
+                    alert("@ViewBag.Errormessage");
+                    return;
+                }
+                $("#Dashboard").ejDashboardViewer({
+                    url: "@ViewBag.ServiceURL",
+                    report: "@ViewBag.ReportPath",
+                    enableExport: true,
+                    enablePrint: false,
+                    filterParameters: location.search.substr(1),
+                    ondemandChangeConnectionString: "ChangeConnectionString"
+                });
+            });
+        }
+
+        function ChangeConnectionString(sender) {
+            var changestring = {
+                "DataSources": [
+                    {
+                        "Name": "@MultiTenantHelper.Tenant.Name",
+                        "ConnectionString": "@MultiTenantHelper.GetConnectionString(@MultiTenantHelper.Tenant.Name)",
+                        "IsEncrypted": "false"
+                    }
+                ]
+            };
+
+            sender.data.modifiedConnectionStrings = JSON.stringify(changestring);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+[
+  {
+    "Culture": "en-US",
+    "Resources": {
+      "About": "About",
+      "Administration": "Administration",
+      "Application": "Northwind",
+      "Contact": "Contact",
+      "Globalization": "Globalization",
+      "Home": "Home",
+      "Status": "Status",
+      "System": "System"
+    }
+  },
+  {
+    "Culture": "pt-BR",
+    "Resources": {
+      "About": "Sobre",
+      "Administration": "Administração",
+      "Application": "Northwind",
+      "Contact": "Contato",
+      "Globalization": "Globalização",
+      "Home": "Home",
+      "Status": "Status",
+      "System": "Sistema"
+    }
+  }
+]

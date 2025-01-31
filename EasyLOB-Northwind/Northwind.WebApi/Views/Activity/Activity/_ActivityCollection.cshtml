@@ -1,0 +1,269 @@
+﻿@model ActivityCollectionModel
+
+@{
+    string CSHTML = "_ActivityCollection.cshtml";
+
+    IZProfile profile = DataHelper.GetProfile(typeof(Activity));
+    // Associations (FK)
+    string query = "";
+}
+
+<div id="Collection_@(Model.Id)">
+    @(Html.EJ().Grid<Activity>("Grid_" + Model.Id)
+        .Query(query)
+        .AllowFiltering()
+        .AllowGrouping()
+        .AllowPaging()
+        .AllowReordering()
+        //.AllowResizeToFit()
+        .AllowResizing()
+        //.AllowScrolling()
+        .AllowSearching()
+        .AllowSorting()
+        .AllowTextWrap()
+        .TextWrapSettings(wrap =>
+        {
+            wrap.WrapMode(WrapMode.Both);
+        })
+        .ClientSideEvents(clientEvent => clientEvent
+            .ActionBegin("actionBegin_Grid_" + Model.Id)
+            .ActionFailure("actionFailure_Grid_" + Model.Id)
+            .Load("load_Grid_" + Model.Id)
+            .ToolbarClick("toolbarClick_Grid_" + Model.Id)
+        )
+        .Columns(column =>
+        {
+            column.Field("Id")
+                .Type("string")
+                .EditType(EditingType.StringEdit)
+                .HeaderText(ActivityResources.PropertyId)
+                .IsPrimaryKey(true)
+                .Visible(profile.IsGridVisibleFor("Id"))
+                .Width(profile.GridWidthFor("Id"))
+                .Add();
+            column.Field("Name")
+                .Type("string")
+                .EditType(EditingType.StringEdit)
+                .HeaderText(ActivityResources.PropertyName)
+                .Visible(profile.IsGridVisibleFor("Name"))
+                .Width(profile.GridWidthFor("Name"))
+                .Add();
+        })
+        .EditSettings(edit => edit
+            .AllowAdding()
+            .AllowDeleting()
+            .AllowEditing()
+            .AllowEditOnDblClick(false)
+        )
+        //.EnablePersistence()
+        .EnableTouch(false)
+        //.IsResponsive(true)
+        .FilterSettings(filter => filter
+            .EnableCaseSensitivity(false)
+            .FilterType(FilterType.Excel)
+            .MaxFilterChoices(AppDefaults.SyncfusionRecordsForFiltering)
+        )
+        //.Mappers(map => map
+        //    .ExportToExcelAction(Url.Content("~/Activity/ExportToExcel"))
+        //    .ExportToPdfAction(Url.Content("~/Activity/ExportToPdf"))
+        //    .ExportToWordAction(Url.Content("~/Activity/ExportToWord"))
+        //)
+        .PageSettings(page => page
+            .PageSize(AppDefaults.SyncfusionRecordsByPage)
+        )
+        .ShowColumnChooser()
+        .ToolbarSettings(toolbar => toolbar
+            .CustomToolbarItems(new List<object>() {
+                new Syncfusion.JavaScript.Models.CustomToolbarItem() { TemplateID = "#Grid_" + Model.Id + "_Toolbar", Tooltip = "" }
+            })
+            .ShowToolbar()
+            .ToolbarItems(items =>
+            {
+                items.AddTool(ToolBarItems.Search);
+                items.AddTool(ToolBarItems.Add);
+                items.AddTool(ToolBarItems.Edit);
+                items.AddTool(ToolBarItems.Delete);
+                //items.AddTool(ToolBarItems.ExcelExport);
+                //items.AddTool(ToolBarItems.PdfExport);
+                //items.AddTool(ToolBarItems.WordExport);
+            })
+        )
+    )
+</div>
+
+<script type="text/x-jsrender" id="Grid_@(Model.Id)_Toolbar">
+    <div id="Grid_@(Model.Id)_Toolbar_Read" class="e-toolbaricons e-icon e-document" title="@PresentationResources.Read"></div>
+    <div id="Grid_@(Model.Id)_Toolbar_Refresh" class="e-toolbaricons e-icon e-reload" title="@PresentationResources.Refresh"></div>
+    @* ### *@
+    <div id="Grid_@(Model.Id)_Toolbar_AjaxFailure" class="e-toolbaricons e-icon e-arrowheaddown-2x" title="Ajax Failure"></div>
+    <div id="Grid_@(Model.Id)_Toolbar_AjaxSuccess" class="e-toolbaricons e-icon e-arrowheadup-2x" title="Ajax Success"></div>
+</script>
+
+<script>
+    zSyncfusionCollection("Collection_@(Model.Id)");
+
+    $(function () {
+        try {
+            zSyncfusionCollectionReady("Collection_@(Model.Id)");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+
+            zOnCollectionView(model, profile, "@Url.Action("DataSource", "Activity")");
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function actionBegin_Grid_@(Model.Id)(args) {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+            // Associations (FK)
+            var url = "";
+
+            var scrud = zOnCollectionViewActionBeginSCRUD(model);
+            switch (args.requestType) {
+                case "searching":
+                    // Search
+                    if (scrud.isSearch) {
+                        zSearchDictionaryWrite("Activity", args.keyValue);
+                    }
+                    break;
+                case "add":
+                    // Create
+                    if (model.ActivityOperations.IsCreate && scrud.isCreate) {
+                        $("#ZAjax").load("@(Url.Action("Create", "Activity", null, Request.Url.Scheme))" +
+                            (url == "" ? "" : "?") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                    }
+                    break;
+                case "read":
+                    // Read
+                    if (model.ActivityOperations.IsRead && scrud.isRead) {
+
+                        debugger; // ###
+
+                        var data = args.data;
+                        if (!ej.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Read", "Activity", null, Request.Url.Scheme))?Id=" + String(data.Id) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+                case "beginedit":
+                    // Update
+                    if (model.ActivityOperations.IsUpdate && scrud.isUpdate) {
+
+                        debugger; // ###
+
+                        var data = args.rowData;
+                        if (!ej.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Update", "Activity", null, Request.Url.Scheme))?Id=" + String(data.Id) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+                case "delete":
+                    // Delete
+                    if (model.ActivityOperations.IsDelete && scrud.isDelete) {
+
+                        debugger; // ###
+
+                        var data = args.data;
+                        if (!ej.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Delete", "Activity", null, Request.Url.Scheme))?Id=" + String(data.Id) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+            }
+
+            zOnCollectionViewActionBegin(model, args);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "actionBegin_Grid_@(Model.Id)", exception));
+        }
+    }
+
+    function actionFailure_Grid_@(Model.Id)(args) {
+        try {
+
+            debugger; // ###
+
+            zAlert(args.error.responseText);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "actionFailure_Grid_@(Model.Id)", exception));
+        }
+    }
+
+    function load_Grid_@(Model.Id)(args) {
+        try {
+            var culture = "@System.Globalization.CultureInfo.CurrentCulture.Name";
+            this.model.locale = culture;
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "load_Grid_@(Model.Id)", exception));
+        }
+    }
+
+    function toolbarClick_Grid_@(Model.Id)(sender) {
+        try {
+            var toolbar = $(sender.target);
+
+            if (toolbar.prop("id") == "Grid_@(Model.Id)_Toolbar_Refresh") {
+                this.refreshContent();
+            } else if (toolbar.prop("id") == "Grid_@(Model.Id)_Toolbar_Read") {
+                var records = this.getSelectedRecords();
+                if (records.length == 1) {
+                    var args = { requestType: "read", data: records[0] };
+                    actionBegin_Grid_@(Model.Id)(args);
+                }
+            @* ### *@
+            } else if (toolbar.prop("id") == "Grid_@(Model.Id)_Toolbar_AjaxFailure") {
+
+                $.ajax({
+
+                    async: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    url: "/Tasks/AjaxOperationResultFalse"
+
+                }).done(function (data, textStatus, jqXHR) {
+
+                    zAjaxSuccess(data, textStatus, jqXHR);
+
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+
+                    debugger;
+
+                    zAjaxFailure(jqXHR, textStatus, errorThrown);
+
+                })
+
+            } else if (toolbar.prop("id") == "Grid_@(Model.Id)_Toolbar_AjaxSuccess") {
+
+                $.ajax({
+
+                    async: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    url: "/Tasks/AjaxOperationResultTrue"
+
+                }).done(function (data, textStatus, jqXHR) {
+
+                    debugger;
+
+                    zAjaxSuccess(data, textStatus, jqXHR);
+
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+
+                    zAjaxFailure(jqXHR, textStatus, errorThrown);
+
+                })
+
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "toolbarClick_Grid_@(Model.Id)", exception));
+        }
+    }
+</script>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <version>$propertyVersion$</version>
+        <authors>EasyLOB</authors>
+        <owners />
+        <icon>icon.png</icon>
+        <id>EasyLOB.Extensions.Edm</id>
+        <title>EasyLOB.Extensions.Edm</title>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>EasyLOB Extensions EDM</description>
+        <license type="expression">MIT</license>        
+        <dependencies>
+            <group targetFramework="net46">
+                <dependency id="FluentFTP" version="25.0.3" />
+            </group>
+        </dependencies>    
+    </metadata>
+    <files>
+        <file src="icon.png" target="" />
+        <file src="..\EasyLOB.Extensions\EasyLOB.Extensions.Edm\bin\Debug\EasyLOB.Extensions.Edm.dll" target="lib\net46" />
+        <file src="..\EasyLOB.Extensions\EasyLOB.Extensions.Edm\bin\Debug\EasyLOB.Extensions.Edm.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.Extensions\EasyLOB.Extensions.Edm\bin\Debug\pt-BR\EasyLOB.Extensions.Edm.resources.dll" target="lib\net46\pt-BR" />
+    </files>
+</package>

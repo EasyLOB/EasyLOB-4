@@ -1,0 +1,832 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Northwind.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:EasyLOB.AuditTrail.WebApi.AuditTrailLogAPIController.DeleteAuditTrailLog(System.Int32)">
+            <summary>
+            DELETE: api/AuditTrailLog/1 
+            </summary>
+            <param name="id">id</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:EasyLOB.AuditTrail.WebApi.AuditTrailLogAPIController.GetAuditTrailLog(System.Int32)">
+            <summary>
+            GET: api/AuditTrailLog/1
+            </summary>
+            <param name="id">id</param>
+            <returns>AuditTrailLogDTO</returns>
+        </member>
+        <member name="M:EasyLOB.AuditTrail.WebApi.AuditTrailLogAPIController.GetAuditTrailLogs(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/AuditTrailLog/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[AuditTrailLogDTO]</returns>
+        </member>
+        <member name="M:EasyLOB.AuditTrail.WebApi.AuditTrailLogAPIController.PostAuditTrailLog(EasyLOB.AuditTrail.Data.AuditTrailLogDTO)">
+            <summary>
+            POST: api/AuditTrailLog
+            </summary>
+            <param name="auditTrailLogDTO">AuditTrailLogDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:EasyLOB.AuditTrail.WebApi.AuditTrailLogAPIController.PutAuditTrailLog(EasyLOB.AuditTrail.Data.AuditTrailLogDTO)">
+            <summary>
+            PUT: api/AuditTrailLog
+            </summary>
+            <param name="auditTrailLogDTO">AuditTrailLogDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="T:EasyLOB.Security.Resources.EasyLOBSecurityResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ChangePassword">
+            <summary>
+              Looks up a localized string similar to Change Password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ConfirmPassword">
+            <summary>
+              Looks up a localized string similar to Confirm new password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ConfirmPasswordError">
+            <summary>
+              Looks up a localized string similar to The new password and confirmation password do not match.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.EMail">
+            <summary>
+              Looks up a localized string similar to e-mail.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ForgotPassword">
+            <summary>
+              Looks up a localized string similar to Forgot your password ?.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ForgotPasswordConfirmation">
+            <summary>
+              Looks up a localized string similar to &quot;Forgot your password ?&quot; confirmation.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ForgotPasswordConfirmationMessage">
+            <summary>
+              Looks up a localized string similar to Please check your email to reset your password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ForgotPasswordEMail">
+            <summary>
+              Looks up a localized string similar to Please reset your password by clicking &lt;a href=&quot;{0}&quot;&gt;here&lt;/a&gt;.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.LogIn">
+            <summary>
+              Looks up a localized string similar to Log In.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.LogInInvalid">
+            <summary>
+              Looks up a localized string similar to Invalid Login.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.LogOut">
+            <summary>
+              Looks up a localized string similar to Log Out.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.NewPassword">
+            <summary>
+              Looks up a localized string similar to New password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.NewPasswordError">
+            <summary>
+              Looks up a localized string similar to The {0} must be at least {2} characters long.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.OldPassword">
+            <summary>
+              Looks up a localized string similar to Old password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.Password">
+            <summary>
+              Looks up a localized string similar to Password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.RememberMe">
+            <summary>
+              Looks up a localized string similar to Remember me ?.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ResetPassword">
+            <summary>
+              Looks up a localized string similar to Reset your password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ResetPasswordConfirmation">
+            <summary>
+              Looks up a localized string similar to Reset your password confirmation.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ResetPasswordConfirmationMessage">
+            <summary>
+              Looks up a localized string similar to Your password has been reset.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.TenantName">
+            <summary>
+              Looks up a localized string similar to Tenant.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.UserLocked">
+            <summary>
+              Looks up a localized string similar to User Locked.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.UserName">
+            <summary>
+              Looks up a localized string similar to User.
+            </summary>
+        </member>
+        <member name="M:EasyLOB.DashboardViewer.ValidateDashboardService(System.String)">
+            <summary>
+            Validate whether Dashboard Service is running in the Url
+            </summary>
+            <param name="dashboardServiceUrl">Dashboard Service Url</param>
+            <returns>returns whether valid dashboard service</returns>
+        </member>
+        <member name="M:EasyLOB.DashboardViewer.GetWindowsServiceUrl">
+            <summary>
+            Used to pick the Windows Dashboard Service URL
+            </summary>
+            <returns>ServiceURL of Windows Dashboard Service</returns>
+        </member>
+        <member name="M:EasyLOB.SyncfusionExcelExtensions.SaveAsActionResult(Syncfusion.XlsIO.ExcelEngine,Syncfusion.XlsIO.IWorkbook,System.String,System.Web.HttpResponse,Syncfusion.XlsIO.ExcelDownloadType)">
+             <summary>
+            
+             </summary>
+             <param name="_workbook"></param>
+             <param name="filename"></param>
+             <param name="response"></param>
+             <param name="DownloadType"></param>
+             <returns></returns>
+        </member>
+        <member name="M:EasyLOB.SyncfusionExcelExtensions.SaveAsActionResult(Syncfusion.XlsIO.ExcelEngine,Syncfusion.XlsIO.IWorkbook,System.String,System.Web.HttpResponse,Syncfusion.XlsIO.ExcelHttpContentType)">
+             <summary>
+            
+             </summary>
+             <param name="_workbook"></param>
+             <param name="filename"></param>
+             <param name="response"></param>
+             <param name="contentType"></param>
+             <returns></returns>
+        </member>
+        <member name="M:EasyLOB.SyncfusionExcelExtensions.SaveAsActionResult(Syncfusion.XlsIO.ExcelEngine,Syncfusion.XlsIO.IWorkbook,System.String,System.Web.HttpResponse,Syncfusion.XlsIO.ExcelDownloadType,Syncfusion.XlsIO.ExcelHttpContentType)">
+             <summary>
+            
+             </summary>
+             <param name="_workbook"></param>
+             <param name="filename"></param>
+             <param name="response"></param>
+             <param name="DownloadType"></param>
+             <param name="contentType"></param>
+             <returns></returns>
+        </member>
+        <member name="M:EasyLOB.SyncfusionExcelExtensions.SaveAsActionResult(Syncfusion.XlsIO.ExcelEngine,Syncfusion.XlsIO.IWorkbook,System.String,Syncfusion.XlsIO.ExcelSaveType,System.Web.HttpResponse,Syncfusion.XlsIO.ExcelDownloadType,Syncfusion.XlsIO.ExcelHttpContentType)">
+             <summary>
+            
+             </summary>
+             <param name="_workbook"></param>
+             <param name="filename"></param>
+             <param name="saveType"></param>
+             <param name="response"></param>
+             <param name="DownloadType"></param>
+             <param name="contentType"></param>
+             <returns></returns>
+        </member>
+        <member name="M:EasyLOB.SyncfusionExcelExtensions.SaveAsActionResult(Syncfusion.XlsIO.ExcelEngine,Syncfusion.XlsIO.IWorkbook,System.String,System.String,System.Web.HttpResponse,Syncfusion.XlsIO.ExcelDownloadType,Syncfusion.XlsIO.ExcelHttpContentType)">
+             <summary>
+            
+             </summary>
+             <param name="_workbook"></param>
+             <param name="filename"></param>
+             <param name="saveType"></param>
+             <param name="response"></param>
+             <param name="DownloadType"></param>
+             <param name="contentType"></param>
+             <returns></returns>
+        </member>
+        <member name="T:EasyLOB.Resources.EasyLOBPresentationResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskAPI">
+            <summary>
+              Looks up a localized string similar to API.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskApplicationAPI">
+            <summary>
+              Looks up a localized string similar to API.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskApplicationHelp">
+            <summary>
+              Looks up a localized string similar to Help.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskApplicationStatus">
+            <summary>
+              Looks up a localized string similar to Status.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskCleanExportImport">
+            <summary>
+              Looks up a localized string similar to Clean export and import directories.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskCleanLocalStorage">
+            <summary>
+              Looks up a localized string similar to Clean Browser Local Storage.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskExportAutoMapper">
+            <summary>
+              Looks up a localized string similar to Export AutoMapper.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskExportProfile">
+            <summary>
+              Looks up a localized string similar to Export Profile.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskExportSecurity">
+            <summary>
+              Looks up a localized string similar to Export Security.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskHelp">
+            <summary>
+              Looks up a localized string similar to Help.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskStatus">
+            <summary>
+              Looks up a localized string similar to Status.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskUrlDictionary">
+            <summary>
+              Looks up a localized string similar to URLs Dictionary.
+            </summary>
+        </member>
+        <member name="M:Northwind.WebApi.CategoryAPIController.DeleteCategory(System.Int32)">
+            <summary>
+            DELETE: api/Category/1 
+            </summary>
+            <param name="categoryId">categoryId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CategoryAPIController.GetCategory(System.Int32)">
+            <summary>
+            GET: api/Category/1
+            </summary>
+            <param name="categoryId">categoryId</param>
+            <returns>CategoryDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CategoryAPIController.GetCategories(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/Category/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[CategoryDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CategoryAPIController.PostCategory(Northwind.Data.CategoryDTO)">
+            <summary>
+            POST: api/Category
+            </summary>
+            <param name="categoryDTO">CategoryDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CategoryAPIController.PutCategory(Northwind.Data.CategoryDTO)">
+            <summary>
+            PUT: api/Category
+            </summary>
+            <param name="categoryDTO">CategoryDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerAPIController.DeleteCustomer(System.String)">
+            <summary>
+            DELETE: api/Customer/1 
+            </summary>
+            <param name="customerId">customerId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerAPIController.GetCustomer(System.String)">
+            <summary>
+            GET: api/Customer/1
+            </summary>
+            <param name="customerId">customerId</param>
+            <returns>CustomerDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerAPIController.GetCustomers(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/Customer/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[CustomerDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerAPIController.PostCustomer(Northwind.Data.CustomerDTO)">
+            <summary>
+            POST: api/Customer
+            </summary>
+            <param name="customerDTO">CustomerDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerAPIController.PutCustomer(Northwind.Data.CustomerDTO)">
+            <summary>
+            PUT: api/Customer
+            </summary>
+            <param name="customerDTO">CustomerDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerCustomerDemoAPIController.DeleteCustomerCustomerDemo(System.String,System.String)">
+            <summary>
+            DELETE: api/CustomerCustomerDemo/1 
+            </summary>
+            <param name="customerId">customerId</param>
+            <param name="customerTypeId">customerTypeId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerCustomerDemoAPIController.GetCustomerCustomerDemo(System.String,System.String)">
+            <summary>
+            GET: api/CustomerCustomerDemo/1
+            </summary>
+            <param name="customerId">customerId</param>
+            <param name="customerTypeId">customerTypeId</param>
+            <returns>CustomerCustomerDemoDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerCustomerDemoAPIController.GetCustomerCustomerDemos(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/CustomerCustomerDemo/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[CustomerCustomerDemoDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerCustomerDemoAPIController.PostCustomerCustomerDemo(Northwind.Data.CustomerCustomerDemoDTO)">
+            <summary>
+            POST: api/CustomerCustomerDemo
+            </summary>
+            <param name="customerCustomerDemoDTO">CustomerCustomerDemoDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerCustomerDemoAPIController.PutCustomerCustomerDemo(Northwind.Data.CustomerCustomerDemoDTO)">
+            <summary>
+            PUT: api/CustomerCustomerDemo
+            </summary>
+            <param name="customerCustomerDemoDTO">CustomerCustomerDemoDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerDemographicAPIController.DeleteCustomerDemographic(System.String)">
+            <summary>
+            DELETE: api/CustomerDemographic/1 
+            </summary>
+            <param name="customerTypeId">customerTypeId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerDemographicAPIController.GetCustomerDemographic(System.String)">
+            <summary>
+            GET: api/CustomerDemographic/1
+            </summary>
+            <param name="customerTypeId">customerTypeId</param>
+            <returns>CustomerDemographicDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerDemographicAPIController.GetCustomerDemographics(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/CustomerDemographic/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[CustomerDemographicDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerDemographicAPIController.PostCustomerDemographic(Northwind.Data.CustomerDemographicDTO)">
+            <summary>
+            POST: api/CustomerDemographic
+            </summary>
+            <param name="customerDemographicDTO">CustomerDemographicDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.CustomerDemographicAPIController.PutCustomerDemographic(Northwind.Data.CustomerDemographicDTO)">
+            <summary>
+            PUT: api/CustomerDemographic
+            </summary>
+            <param name="customerDemographicDTO">CustomerDemographicDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.EmployeeAPIController.DeleteEmployee(System.Int32)">
+            <summary>
+            DELETE: api/Employee/1 
+            </summary>
+            <param name="employeeId">employeeId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.EmployeeAPIController.GetEmployee(System.Int32)">
+            <summary>
+            GET: api/Employee/1
+            </summary>
+            <param name="employeeId">employeeId</param>
+            <returns>EmployeeDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.EmployeeAPIController.GetEmployees(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/Employee/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[EmployeeDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.EmployeeAPIController.PostEmployee(Northwind.Data.EmployeeDTO)">
+            <summary>
+            POST: api/Employee
+            </summary>
+            <param name="employeeDTO">EmployeeDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.EmployeeAPIController.PutEmployee(Northwind.Data.EmployeeDTO)">
+            <summary>
+            PUT: api/Employee
+            </summary>
+            <param name="employeeDTO">EmployeeDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.EmployeeTerritoryAPIController.DeleteEmployeeTerritory(System.Int32,System.String)">
+            <summary>
+            DELETE: api/EmployeeTerritory/1 
+            </summary>
+            <param name="employeeId">employeeId</param>
+            <param name="territoryId">territoryId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.EmployeeTerritoryAPIController.GetEmployeeTerritory(System.Int32,System.String)">
+            <summary>
+            GET: api/EmployeeTerritory/1
+            </summary>
+            <param name="employeeId">employeeId</param>
+            <param name="territoryId">territoryId</param>
+            <returns>EmployeeTerritoryDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.EmployeeTerritoryAPIController.GetEmployeeTerritories(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/EmployeeTerritory/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[EmployeeTerritoryDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.EmployeeTerritoryAPIController.PostEmployeeTerritory(Northwind.Data.EmployeeTerritoryDTO)">
+            <summary>
+            POST: api/EmployeeTerritory
+            </summary>
+            <param name="employeeTerritoryDTO">EmployeeTerritoryDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.EmployeeTerritoryAPIController.PutEmployeeTerritory(Northwind.Data.EmployeeTerritoryDTO)">
+            <summary>
+            PUT: api/EmployeeTerritory
+            </summary>
+            <param name="employeeTerritoryDTO">EmployeeTerritoryDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.OrderAPIController.DeleteOrder(System.Int32)">
+            <summary>
+            DELETE: api/Order/1 
+            </summary>
+            <param name="orderId">orderId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.OrderAPIController.GetOrder(System.Int32)">
+            <summary>
+            GET: api/Order/1
+            </summary>
+            <param name="orderId">orderId</param>
+            <returns>OrderDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.OrderAPIController.GetOrders(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/Order/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[OrderDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.OrderAPIController.PostOrder(Northwind.Data.OrderDTO)">
+            <summary>
+            POST: api/Order
+            </summary>
+            <param name="orderDTO">OrderDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.OrderAPIController.PutOrder(Northwind.Data.OrderDTO)">
+            <summary>
+            PUT: api/Order
+            </summary>
+            <param name="orderDTO">OrderDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.OrderDetailAPIController.DeleteOrderDetail(System.Int32,System.Int32)">
+            <summary>
+            DELETE: api/OrderDetail/1 
+            </summary>
+            <param name="orderId">orderId</param>
+            <param name="productId">productId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.OrderDetailAPIController.GetOrderDetail(System.Int32,System.Int32)">
+            <summary>
+            GET: api/OrderDetail/1
+            </summary>
+            <param name="orderId">orderId</param>
+            <param name="productId">productId</param>
+            <returns>OrderDetailDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.OrderDetailAPIController.GetOrderDetails(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/OrderDetail/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[OrderDetailDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.OrderDetailAPIController.PostOrderDetail(Northwind.Data.OrderDetailDTO)">
+            <summary>
+            POST: api/OrderDetail
+            </summary>
+            <param name="orderDetailDTO">OrderDetailDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.OrderDetailAPIController.PutOrderDetail(Northwind.Data.OrderDetailDTO)">
+            <summary>
+            PUT: api/OrderDetail
+            </summary>
+            <param name="orderDetailDTO">OrderDetailDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.ProductAPIController.DeleteProduct(System.Int32)">
+            <summary>
+            DELETE: api/Product/1 
+            </summary>
+            <param name="productId">productId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.ProductAPIController.GetProduct(System.Int32)">
+            <summary>
+            GET: api/Product/1
+            </summary>
+            <param name="productId">productId</param>
+            <returns>ProductDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.ProductAPIController.GetProducts(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/Product/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[ProductDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.ProductAPIController.PostProduct(Northwind.Data.ProductDTO)">
+            <summary>
+            POST: api/Product
+            </summary>
+            <param name="productDTO">ProductDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.ProductAPIController.PutProduct(Northwind.Data.ProductDTO)">
+            <summary>
+            PUT: api/Product
+            </summary>
+            <param name="productDTO">ProductDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.RegionAPIController.DeleteRegion(System.Int32)">
+            <summary>
+            DELETE: api/Region/1 
+            </summary>
+            <param name="regionId">regionId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.RegionAPIController.GetRegion(System.Int32)">
+            <summary>
+            GET: api/Region/1
+            </summary>
+            <param name="regionId">regionId</param>
+            <returns>RegionDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.RegionAPIController.GetRegions(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/Region/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[RegionDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.RegionAPIController.PostRegion(Northwind.Data.RegionDTO)">
+            <summary>
+            POST: api/Region
+            </summary>
+            <param name="regionDTO">RegionDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.RegionAPIController.PutRegion(Northwind.Data.RegionDTO)">
+            <summary>
+            PUT: api/Region
+            </summary>
+            <param name="regionDTO">RegionDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.ShipperAPIController.DeleteShipper(System.Int32)">
+            <summary>
+            DELETE: api/Shipper/1 
+            </summary>
+            <param name="shipperId">shipperId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.ShipperAPIController.GetShipper(System.Int32)">
+            <summary>
+            GET: api/Shipper/1
+            </summary>
+            <param name="shipperId">shipperId</param>
+            <returns>ShipperDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.ShipperAPIController.GetShippers(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/Shipper/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[ShipperDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.ShipperAPIController.PostShipper(Northwind.Data.ShipperDTO)">
+            <summary>
+            POST: api/Shipper
+            </summary>
+            <param name="shipperDTO">ShipperDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.ShipperAPIController.PutShipper(Northwind.Data.ShipperDTO)">
+            <summary>
+            PUT: api/Shipper
+            </summary>
+            <param name="shipperDTO">ShipperDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.SupplierAPIController.DeleteSupplier(System.Int32)">
+            <summary>
+            DELETE: api/Supplier/1 
+            </summary>
+            <param name="supplierId">supplierId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.SupplierAPIController.GetSupplier(System.Int32)">
+            <summary>
+            GET: api/Supplier/1
+            </summary>
+            <param name="supplierId">supplierId</param>
+            <returns>SupplierDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.SupplierAPIController.GetSuppliers(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/Supplier/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[SupplierDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.SupplierAPIController.PostSupplier(Northwind.Data.SupplierDTO)">
+            <summary>
+            POST: api/Supplier
+            </summary>
+            <param name="supplierDTO">SupplierDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.SupplierAPIController.PutSupplier(Northwind.Data.SupplierDTO)">
+            <summary>
+            PUT: api/Supplier
+            </summary>
+            <param name="supplierDTO">SupplierDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.TerritoryAPIController.DeleteTerritory(System.String)">
+            <summary>
+            DELETE: api/Territory/1 
+            </summary>
+            <param name="territoryId">territoryId</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.TerritoryAPIController.GetTerritory(System.String)">
+            <summary>
+            GET: api/Territory/1
+            </summary>
+            <param name="territoryId">territoryId</param>
+            <returns>TerritoryDTO</returns>
+        </member>
+        <member name="M:Northwind.WebApi.TerritoryAPIController.GetTerritories(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/Territory/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[TerritoryDTO]</returns>
+        </member>
+        <member name="M:Northwind.WebApi.TerritoryAPIController.PostTerritory(Northwind.Data.TerritoryDTO)">
+            <summary>
+            POST: api/Territory
+            </summary>
+            <param name="territoryDTO">TerritoryDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:Northwind.WebApi.TerritoryAPIController.PutTerritory(Northwind.Data.TerritoryDTO)">
+            <summary>
+            PUT: api/Territory
+            </summary>
+            <param name="territoryDTO">TerritoryDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="T:Northwind.WebApi.Resources.NorthwindPresentationResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Northwind.WebApi.Resources.NorthwindPresentationResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Northwind.WebApi.Resources.NorthwindPresentationResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

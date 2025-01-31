@@ -1,0 +1,108 @@
+﻿@model CustomerCustomerDemoItemModel
+
+@{
+    string CSHTML = "_CustomerCustomerDemoItem.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(CustomerCustomerDemo));    
+    // Associations (FK)
+    string customerDemographicText = Model.CustomerCustomerDemo == null ? "" : (Model.CustomerCustomerDemo.CustomerDemographicLookupText ?? "");
+    string customerText = Model.CustomerCustomerDemo == null ? "" : (Model.CustomerCustomerDemo.CustomerLookupText ?? "");
+}
+
+<div id="Item_CustomerCustomerDemo">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "CustomerCustomerDemo_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "CustomerCustomerDemo_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "CustomerCustomerDemo_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "CustomerCustomerDemo_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "CustomerCustomerDemo_Item_IsSave")
+
+    @{Html.EJ().Tab("Tab_CustomerCustomerDemo")
+        .ClientSideEvents(clientEvent => clientEvent
+            .ItemActive("itemActive_Tab_CustomerCustomerDemo")
+        )
+        //.EnablePersistence()
+        .Items(data =>
+        {
+            data.Add().ID("TabSheet_CustomerCustomerDemo_CustomerCustomerDemo").Text(CustomerCustomerDemoResources.EntitySingular).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">
+                
+                <div id="Group_CustomerCustomerDemo_CustomerId" class="@profile.EditCSSGroupFor("CustomerLookupText")">
+                    @Html.LabelFor(model => model.CustomerCustomerDemo.CustomerId, new { @class = profile.EditCSSLabelFor("CustomerId") })
+                    @Html.EditorFor(model => model.CustomerCustomerDemo.CustomerId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("CustomerId"), id = "CustomerCustomerDemo_CustomerId" } })
+                    @{
+                        Html.RenderAction("Lookup", "Customer", new
+                        {
+                            Text = customerText,
+                            ValueId = "CustomerCustomerDemo_CustomerId",
+                            Required = profile.IsRequiredView("CustomerId")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.CustomerCustomerDemo.CustomerId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_CustomerCustomerDemo_CustomerTypeId" class="@profile.EditCSSGroupFor("CustomerDemographicLookupText")">
+                    @Html.LabelFor(model => model.CustomerCustomerDemo.CustomerTypeId, new { @class = profile.EditCSSLabelFor("CustomerTypeId") })
+                    @Html.EditorFor(model => model.CustomerCustomerDemo.CustomerTypeId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("CustomerTypeId"), id = "CustomerCustomerDemo_CustomerTypeId" } })
+                    @{
+                        Html.RenderAction("Lookup", "CustomerDemographic", new
+                        {
+                            Text = customerDemographicText,
+                            ValueId = "CustomerCustomerDemo_CustomerTypeId",
+                            Required = profile.IsRequiredView("CustomerTypeId")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.CustomerCustomerDemo.CustomerTypeId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+
+            </div>);
+        })
+        .Render();
+    }
+</div>
+
+<script>
+    zSyncfusionItem("Item_CustomerCustomerDemo");
+    
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_CustomerCustomerDemo");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            if (controllerAction != "create" || profile.IsIdentity) {
+                $("#Group_CustomerCustomerDemo_CustomerId").hide();
+                $("#Group_CustomerCustomerDemo_CustomerTypeId").hide();
+            }
+
+            // Associations (FK)
+            switch (model.MasterEntity) {
+                case "CustomerDemographic":
+                    $("#CustomerCustomerDemo_CustomerTypeId").val(model.MasterKey);
+                    $("#Group_CustomerCustomerDemo_CustomerTypeId").hide();
+                    break;
+                case "Customer":
+                    $("#CustomerCustomerDemo_CustomerId").val(model.MasterKey);
+                    $("#Group_CustomerCustomerDemo_CustomerId").hide();
+                    break;
+            }
+
+            // Collections (PK)
+
+            zOnItemView(model, profile);        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });    
+
+    function itemActive_Tab_CustomerCustomerDemo(args) {
+        zTabDictionaryWrite("CustomerCustomerDemo", args.model.selectedItemIndex);
+
+        try {        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "itemActive_Tab_CustomerCustomerDemo", exception));
+        }
+    }
+</script>

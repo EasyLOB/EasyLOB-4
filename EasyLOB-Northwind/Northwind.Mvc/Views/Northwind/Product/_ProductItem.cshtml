@@ -1,0 +1,168 @@
+﻿@model ProductItemModel
+
+@{
+    string CSHTML = "_ProductItem.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(Product));    
+    // Associations (FK)
+    string categoryText = Model.Product == null ? "" : (Model.Product.CategoryLookupText ?? "");
+    string supplierText = Model.Product == null ? "" : (Model.Product.SupplierLookupText ?? "");
+}
+
+<div id="Item_Product">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "Product_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "Product_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "Product_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "Product_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "Product_Item_IsSave")
+
+    @{Html.EJ().Tab("Tab_Product")
+        .ClientSideEvents(clientEvent => clientEvent
+            .ItemActive("itemActive_Tab_Product")
+        )
+        //.EnablePersistence()
+        .Items(data =>
+        {
+            data.Add().ID("TabSheet_Product_Product").Text(ProductResources.EntitySingular).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">
+                
+                <div id="Group_Product_ProductId" class="@profile.EditCSSGroupFor("ProductId")">
+                    @Html.LabelFor(model => model.Product.ProductId, new { @class = profile.EditCSSLabelFor("ProductId") })
+                    @Html.EditorFor(model => model.Product.ProductId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ProductId"), id = "Product_ProductId" } })
+                    @* @Html.ValidationMessageFor(model => model.Product.ProductId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Product_ProductName" class="@profile.EditCSSGroupFor("ProductName")">
+                    @Html.LabelFor(model => model.Product.ProductName, new { @class = profile.EditCSSLabelFor("ProductName") })
+                    @Html.EditorFor(model => model.Product.ProductName, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ProductName"), id = "Product_ProductName" } })
+                    @* @Html.ValidationMessageFor(model => model.Product.ProductName, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Product_SupplierId" class="@profile.EditCSSGroupFor("SupplierLookupText")">
+                    @Html.LabelFor(model => model.Product.SupplierId, new { @class = profile.EditCSSLabelFor("SupplierId") })
+                    @Html.EditorFor(model => model.Product.SupplierId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("SupplierId"), id = "Product_SupplierId" } })
+                    @{
+                        Html.RenderAction("Lookup", "Supplier", new
+                        {
+                            Text = supplierText,
+                            ValueId = "Product_SupplierId",
+                            Required = profile.IsRequiredView("SupplierId")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.Product.SupplierId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Product_CategoryId" class="@profile.EditCSSGroupFor("CategoryLookupText")">
+                    @Html.LabelFor(model => model.Product.CategoryId, new { @class = profile.EditCSSLabelFor("CategoryId") })
+                    @Html.EditorFor(model => model.Product.CategoryId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("CategoryId"), id = "Product_CategoryId" } })
+                    @{
+                        Html.RenderAction("Lookup", "Category", new
+                        {
+                            Text = categoryText,
+                            ValueId = "Product_CategoryId",
+                            Required = profile.IsRequiredView("CategoryId"),
+                            @* ??? *@
+                            Query = "ej.Query().where('CategoryName', ej.FilterOperators.startsWith, 'C')"
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.Product.CategoryId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Product_QuantityPerUnit" class="@profile.EditCSSGroupFor("QuantityPerUnit")">
+                    @Html.LabelFor(model => model.Product.QuantityPerUnit, new { @class = profile.EditCSSLabelFor("QuantityPerUnit") })
+                    @Html.EditorFor(model => model.Product.QuantityPerUnit, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("QuantityPerUnit"), id = "Product_QuantityPerUnit" } })
+                    @* @Html.ValidationMessageFor(model => model.Product.QuantityPerUnit, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Product_UnitPrice" class="@profile.EditCSSGroupFor("UnitPrice")">
+                    @Html.LabelFor(model => model.Product.UnitPrice, new { @class = profile.EditCSSLabelFor("UnitPrice") })
+                    @Html.EditorFor(model => model.Product.UnitPrice, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("UnitPrice"), id = "Product_UnitPrice" } })
+                    @* @Html.ValidationMessageFor(model => model.Product.UnitPrice, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Product_UnitsInStock" class="@profile.EditCSSGroupFor("UnitsInStock")">
+                    @Html.LabelFor(model => model.Product.UnitsInStock, new { @class = profile.EditCSSLabelFor("UnitsInStock") })
+                    @Html.EditorFor(model => model.Product.UnitsInStock, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("UnitsInStock"), id = "Product_UnitsInStock" } })
+                    @* @Html.ValidationMessageFor(model => model.Product.UnitsInStock, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Product_UnitsOnOrder" class="@profile.EditCSSGroupFor("UnitsOnOrder")">
+                    @Html.LabelFor(model => model.Product.UnitsOnOrder, new { @class = profile.EditCSSLabelFor("UnitsOnOrder") })
+                    @Html.EditorFor(model => model.Product.UnitsOnOrder, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("UnitsOnOrder"), id = "Product_UnitsOnOrder" } })
+                    @* @Html.ValidationMessageFor(model => model.Product.UnitsOnOrder, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Product_ReorderLevel" class="@profile.EditCSSGroupFor("ReorderLevel")">
+                    @Html.LabelFor(model => model.Product.ReorderLevel, new { @class = profile.EditCSSLabelFor("ReorderLevel") })
+                    @Html.EditorFor(model => model.Product.ReorderLevel, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ReorderLevel"), id = "Product_ReorderLevel" } })
+                    @* @Html.ValidationMessageFor(model => model.Product.ReorderLevel, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Product_Discontinued" class="@profile.EditCSSGroupFor("Discontinued")">
+                    @Html.LabelFor(model => model.Product.Discontinued, new { @class = profile.EditCSSLabelFor("Discontinued") })
+                    @Html.EditorFor(model => model.Product.Discontinued, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Discontinued"), id = "Product_Discontinued" } })
+                    @* @Html.ValidationMessageFor(model => model.Product.Discontinued, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+
+            </div>);
+            data.Add().ID("TabSheet_Product_OrderDetails").Text(OrderDetailResources.EntityPlural).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">    
+                <div id="Ajax_Product_OrderDetails"></div>
+            </div>);
+        })
+        .Render();
+    }
+</div>
+
+<script>
+    zSyncfusionItem("Item_Product");
+    
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_Product");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            // Associations (FK)
+            switch (model.MasterEntity) {
+                case "Category":
+                    $("#Product_CategoryId").val(model.MasterKey);
+                    $("#Group_Product_CategoryId").hide();
+                    break;
+                case "Supplier":
+                    $("#Product_SupplierId").val(model.MasterKey);
+                    $("#Group_Product_SupplierId").hide();
+                    break;
+            }
+
+            // Collections (PK)
+            if (controllerAction != "create" && zContains(profile.EditCollections, "OrderDetails")) {
+                zUrlDictionaryWrite("OrderDetail", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "OrderDetail", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "Product", MasterKey = Model.Product.ProductId })))";
+                zAjaxLoadSync("Ajax_Product_OrderDetails", ajaxUrl);
+            }
+
+            zOnItemView(model, profile);        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });    
+
+    function itemActive_Tab_Product(args) {
+        zTabDictionaryWrite("Product", args.model.selectedItemIndex);
+
+        try {        
+            var ejTab = zTab("Tab_Product");
+            var tabId = ejTab.contentPanels[args.model.selectedItemIndex].id;
+            switch (tabId) {
+                case "TabSheet_Product_OrderDetails":
+                    zGridDataSource("Grid_OrderDetail", "@Url.Action("DataSource", "OrderDetail")");
+                    break;
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "itemActive_Tab_Product", exception));
+        }
+    }
+</script>

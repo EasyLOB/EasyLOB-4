@@ -1,0 +1,90 @@
+﻿@model RegionItemModel
+
+@{
+    string CSHTML = "_RegionItem.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(Region));    
+    // Associations (FK)
+}
+
+<div id="Item_Region">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "Region_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "Region_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "Region_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "Region_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "Region_Item_IsSave")
+
+    @{Html.EJ().Tab("Tab_Region")
+        .ClientSideEvents(clientEvent => clientEvent
+            .ItemActive("itemActive_Tab_Region")
+        )
+        //.EnablePersistence()
+        .Items(data =>
+        {
+            data.Add().ID("TabSheet_Region_Region").Text(RegionResources.EntitySingular).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">
+                
+                <div id="Group_Region_RegionId" class="@profile.EditCSSGroupFor("RegionId")">
+                    @Html.LabelFor(model => model.Region.RegionId, new { @class = profile.EditCSSLabelFor("RegionId") })
+                    @Html.EditorFor(model => model.Region.RegionId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("RegionId"), id = "Region_RegionId" } })
+                    @* @Html.ValidationMessageFor(model => model.Region.RegionId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Region_RegionDescription" class="@profile.EditCSSGroupFor("RegionDescription")">
+                    @Html.LabelFor(model => model.Region.RegionDescription, new { @class = profile.EditCSSLabelFor("RegionDescription") })
+                    @Html.EditorFor(model => model.Region.RegionDescription, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("RegionDescription"), id = "Region_RegionDescription" } })
+                    @* @Html.ValidationMessageFor(model => model.Region.RegionDescription, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+
+            </div>);
+            data.Add().ID("TabSheet_Region_Territories").Text(TerritoryResources.EntityPlural).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">    
+                <div id="Ajax_Region_Territories"></div>
+            </div>);
+        })
+        .Render();
+    }
+</div>
+
+<script>
+    zSyncfusionItem("Item_Region");
+    
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_Region");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            // Associations (FK)
+
+            // Collections (PK)
+            if (controllerAction != "create" && zContains(profile.EditCollections, "Territories")) {
+                zUrlDictionaryWrite("Territory", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "Territory", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "Region", MasterKey = Model.Region.RegionId })))";
+                zAjaxLoadSync("Ajax_Region_Territories", ajaxUrl);
+            }
+
+            zOnItemView(model, profile);        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });    
+
+    function itemActive_Tab_Region(args) {
+        zTabDictionaryWrite("Region", args.model.selectedItemIndex);
+
+        try {        
+            var ejTab = zTab("Tab_Region");
+            var tabId = ejTab.contentPanels[args.model.selectedItemIndex].id;
+            switch (tabId) {
+                case "TabSheet_Region_Territories":
+                    zGridDataSource("Grid_Territory", "@Url.Action("DataSource", "Territory")");
+                    break;
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "itemActive_Tab_Region", exception));
+        }
+    }
+</script>

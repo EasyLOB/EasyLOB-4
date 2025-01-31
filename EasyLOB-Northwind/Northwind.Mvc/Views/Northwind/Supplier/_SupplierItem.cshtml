@@ -1,0 +1,150 @@
+﻿@model SupplierItemModel
+
+@{
+    string CSHTML = "_SupplierItem.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(Supplier));    
+    // Associations (FK)
+}
+
+<div id="Item_Supplier">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "Supplier_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "Supplier_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "Supplier_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "Supplier_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "Supplier_Item_IsSave")
+
+    @{Html.EJ().Tab("Tab_Supplier")
+        .ClientSideEvents(clientEvent => clientEvent
+            .ItemActive("itemActive_Tab_Supplier")
+        )
+        //.EnablePersistence()
+        .Items(data =>
+        {
+            data.Add().ID("TabSheet_Supplier_Supplier").Text(SupplierResources.EntitySingular).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">
+                
+                <div id="Group_Supplier_SupplierId" class="@profile.EditCSSGroupFor("SupplierId")">
+                    @Html.LabelFor(model => model.Supplier.SupplierId, new { @class = profile.EditCSSLabelFor("SupplierId") })
+                    @Html.EditorFor(model => model.Supplier.SupplierId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("SupplierId"), id = "Supplier_SupplierId" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.SupplierId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_CompanyName" class="@profile.EditCSSGroupFor("CompanyName")">
+                    @Html.LabelFor(model => model.Supplier.CompanyName, new { @class = profile.EditCSSLabelFor("CompanyName") })
+                    @Html.EditorFor(model => model.Supplier.CompanyName, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("CompanyName"), id = "Supplier_CompanyName" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.CompanyName, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_ContactName" class="@profile.EditCSSGroupFor("ContactName")">
+                    @Html.LabelFor(model => model.Supplier.ContactName, new { @class = profile.EditCSSLabelFor("ContactName") })
+                    @Html.EditorFor(model => model.Supplier.ContactName, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ContactName"), id = "Supplier_ContactName" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.ContactName, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_ContactTitle" class="@profile.EditCSSGroupFor("ContactTitle")">
+                    @Html.LabelFor(model => model.Supplier.ContactTitle, new { @class = profile.EditCSSLabelFor("ContactTitle") })
+                    @Html.EditorFor(model => model.Supplier.ContactTitle, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ContactTitle"), id = "Supplier_ContactTitle" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.ContactTitle, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_Address" class="@profile.EditCSSGroupFor("Address")">
+                    @Html.LabelFor(model => model.Supplier.Address, new { @class = profile.EditCSSLabelFor("Address") })
+                    @Html.EditorFor(model => model.Supplier.Address, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Address"), id = "Supplier_Address" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.Address, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_City" class="@profile.EditCSSGroupFor("City")">
+                    @Html.LabelFor(model => model.Supplier.City, new { @class = profile.EditCSSLabelFor("City") })
+                    @Html.EditorFor(model => model.Supplier.City, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("City"), id = "Supplier_City" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.City, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_Region" class="@profile.EditCSSGroupFor("Region")">
+                    @Html.LabelFor(model => model.Supplier.Region, new { @class = profile.EditCSSLabelFor("Region") })
+                    @Html.EditorFor(model => model.Supplier.Region, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Region"), id = "Supplier_Region" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.Region, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_PostalCode" class="@profile.EditCSSGroupFor("PostalCode")">
+                    @Html.LabelFor(model => model.Supplier.PostalCode, new { @class = profile.EditCSSLabelFor("PostalCode") })
+                    @Html.EditorFor(model => model.Supplier.PostalCode, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("PostalCode"), id = "Supplier_PostalCode" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.PostalCode, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_Country" class="@profile.EditCSSGroupFor("Country")">
+                    @Html.LabelFor(model => model.Supplier.Country, new { @class = profile.EditCSSLabelFor("Country") })
+                    @Html.EditorFor(model => model.Supplier.Country, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Country"), id = "Supplier_Country" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.Country, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_Phone" class="@profile.EditCSSGroupFor("Phone")">
+                    @Html.LabelFor(model => model.Supplier.Phone, new { @class = profile.EditCSSLabelFor("Phone") })
+                    @Html.EditorFor(model => model.Supplier.Phone, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Phone"), id = "Supplier_Phone" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.Phone, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_Fax" class="@profile.EditCSSGroupFor("Fax")">
+                    @Html.LabelFor(model => model.Supplier.Fax, new { @class = profile.EditCSSLabelFor("Fax") })
+                    @Html.EditorFor(model => model.Supplier.Fax, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Fax"), id = "Supplier_Fax" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.Fax, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Supplier_HomePage" class="@profile.EditCSSGroupFor("HomePage")">
+                    @Html.LabelFor(model => model.Supplier.HomePage, new { @class = profile.EditCSSLabelFor("HomePage") })
+                    @Html.EditorFor(model => model.Supplier.HomePage, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("HomePage"), id = "Supplier_HomePage" } })
+                    @* @Html.ValidationMessageFor(model => model.Supplier.HomePage, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+
+            </div>);
+            data.Add().ID("TabSheet_Supplier_Products").Text(ProductResources.EntityPlural).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">    
+                <div id="Ajax_Supplier_Products"></div>
+            </div>);
+        })
+        .Render();
+    }
+</div>
+
+<script>
+    zSyncfusionItem("Item_Supplier");
+    
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_Supplier");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            // Associations (FK)
+
+            // Collections (PK)
+            if (controllerAction != "create" && zContains(profile.EditCollections, "Products")) {
+                zUrlDictionaryWrite("Product", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "Product", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "Supplier", MasterKey = Model.Supplier.SupplierId })))";
+                zAjaxLoadSync("Ajax_Supplier_Products", ajaxUrl);
+            }
+
+            zOnItemView(model, profile);        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });    
+
+    function itemActive_Tab_Supplier(args) {
+        zTabDictionaryWrite("Supplier", args.model.selectedItemIndex);
+
+        try {        
+            var ejTab = zTab("Tab_Supplier");
+            var tabId = ejTab.contentPanels[args.model.selectedItemIndex].id;
+            switch (tabId) {
+                case "TabSheet_Supplier_Products":
+                    zGridDataSource("Grid_Product", "@Url.Action("DataSource", "Product")");
+                    break;
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "itemActive_Tab_Supplier", exception));
+        }
+    }
+</script>

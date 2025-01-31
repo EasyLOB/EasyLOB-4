@@ -1,0 +1,44 @@
+@model TaskViewModel
+
+@{
+    string CSHTML = "Globalization.cshtml";
+
+    string documentTitle, pageTitle;
+    AppHelper.Title(out documentTitle, out pageTitle,
+        Model.Controller, Model.Action, Model.Task);
+}
+
+<div class="z-task">
+    <h4>@pageTitle</h4>
+
+    <button class="btn btn-success col-md-4" onclick="return globalize0()">Globalize 0.X ( F12 + Console )</button>
+</div>
+
+<script>
+    $(function () {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+            $(document).prop("title", "@Html.Raw(documentTitle)");
+            zShowOperationResult(model.OperationResult);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function globalize0() {
+
+        // Globalize 0.X
+        // https://github.com/globalizejs/globalize/tree/v0.1.1
+
+        console.clear();
+        console.log("@AppHelper.Culture");
+        console.log(Globalize.culture().name);
+
+        console.log(Globalize.format(new Date(), "f"));
+        console.log(Globalize.format(123456.78, "d"));
+        console.log(Globalize.format(123456.78, "n"));
+
+        return false;
+    }
+</script>

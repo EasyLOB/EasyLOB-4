@@ -1,0 +1,293 @@
+﻿@model LookupModel
+
+@{
+    string CSHTML = "_ProductLookup.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(Product));    
+}
+
+<div class="@AppDefaults.CSSClassLookup">
+    <span class="input-group-addon z-lookupButton"><img id="@(Model.ValueId)_LookupButton" class="btn z-buttonLookup" /></span>
+    @Html.TextBox(Model.ValueId + "_LookupText", Model.Text, new { @class = profile.EditCSSLookupEditor(Model.Required) })
+</div>
+
+<div id="@(Model.ValueId)_LookupModal" aria-labelledby="@(Model.ValueId)_LookupLabel" class="modal fade col-md-10" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="@PresentationResources.Cancel" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                <h4 id="@(Model.ValueId)_LookupLabel" class="modal-title">@ProductResources.EntityPlural</h4>
+            </div>
+            <div class="modal-body">
+
+                @(Html.EJ().Grid<Product>(Model.ValueId + "_LookupGrid")
+                    .Query(Model.Query)
+                    .AllowFiltering()
+                    .AllowPaging()
+                    .AllowReordering()
+                    //.AllowResizeToFit()
+                    .AllowResizing()
+                    //.AllowScrolling()
+                    .AllowSearching()
+                    .AllowSorting()
+                    .AllowTextWrap()
+                    .TextWrapSettings(wrap =>
+                    {
+                        wrap.WrapMode(WrapMode.Both);
+                    })
+                    .ClientSideEvents(clientEvent => clientEvent
+                        .ActionFailure("actionFailure_" + Model.ValueId + "_LookupGrid")
+                        .Load("load_" + Model.ValueId + "_LookupGrid")
+                        .RowSelected("rowSelected_" + Model.ValueId + "_LookupGrid")                       
+                        .ToolbarClick("toolbarClick_" + Model.ValueId + "_LookupGrid")
+                    )
+                    .Columns(column =>
+                    {
+                        column.Field("ProductId")
+                            .AllowEditing(false)
+                            .Type("number")
+                            .EditType(EditingType.NumericEdit)
+                            .Format(SyncfusionPatternResources.GridFormat_Integer)
+                            .HeaderText(ProductResources.PropertyProductId)
+                            .IsIdentity(true)
+                            .IsPrimaryKey(true)
+                            .TextAlign(TextAlign.Right)
+                            .Visible(profile.IsGridVisibleFor("ProductId"))
+                            .Width(profile.GridWidthFor("ProductId"))
+                            .Add();
+                        column.Field("ProductName")
+                            .Type("string")
+                            .EditType(EditingType.StringEdit)
+                            .HeaderText(ProductResources.PropertyProductName)
+                            .Visible(profile.IsGridVisibleFor("ProductName"))
+                            .Width(profile.GridWidthFor("ProductName"))
+                            .Add();
+                        column.Field("SupplierId")
+                            .Type("number")
+                            .EditType(EditingType.NumericEdit)
+                            .Format(SyncfusionPatternResources.GridFormat_Integer)
+                            .HeaderText(ProductResources.PropertySupplierId)
+                            .TextAlign(TextAlign.Right)
+                            .Visible(profile.IsGridVisibleFor("SupplierId"))
+                            .Width(profile.GridWidthFor("SupplierId"))
+                            .Add();
+                        column.Field("SupplierLookupText")
+                            .AllowEditing(false)
+                            .Type("string")
+                            .HeaderText(SupplierResources.EntitySingular)
+                            .Visible(profile.IsGridVisibleFor("SupplierLookupText"))
+                            .Width(profile.GridWidthFor("SupplierLookupText"))
+                            .Add();
+                        column.Field("CategoryId")
+                            .Type("number")
+                            .EditType(EditingType.NumericEdit)
+                            .Format(SyncfusionPatternResources.GridFormat_Integer)
+                            .HeaderText(ProductResources.PropertyCategoryId)
+                            .TextAlign(TextAlign.Right)
+                            .Visible(profile.IsGridVisibleFor("CategoryId"))
+                            .Width(profile.GridWidthFor("CategoryId"))
+                            .Add();
+                        column.Field("CategoryLookupText")
+                            .AllowEditing(false)
+                            .Type("string")
+                            .HeaderText(CategoryResources.EntitySingular)
+                            .Visible(profile.IsGridVisibleFor("CategoryLookupText"))
+                            .Width(profile.GridWidthFor("CategoryLookupText"))
+                            .Add();
+                        column.Field("QuantityPerUnit")
+                            .Type("string")
+                            .EditType(EditingType.StringEdit)
+                            .HeaderText(ProductResources.PropertyQuantityPerUnit)
+                            .Visible(profile.IsGridVisibleFor("QuantityPerUnit"))
+                            .Width(profile.GridWidthFor("QuantityPerUnit"))
+                            .Add();
+                        column.Field("UnitPrice")
+                            .Type("number")
+                            .EditType(EditingType.NumericEdit)
+                            .Format(SyncfusionPatternResources.GridFormat_Float)
+                            .HeaderText(ProductResources.PropertyUnitPrice)
+                            .TextAlign(TextAlign.Right)
+                            .Visible(profile.IsGridVisibleFor("UnitPrice"))
+                            .Width(profile.GridWidthFor("UnitPrice"))
+                            .Add();
+                        column.Field("UnitsInStock")
+                            .Type("number")
+                            .EditType(EditingType.NumericEdit)
+                            .Format(SyncfusionPatternResources.GridFormat_Integer)
+                            .HeaderText(ProductResources.PropertyUnitsInStock)
+                            .TextAlign(TextAlign.Right)
+                            .Visible(profile.IsGridVisibleFor("UnitsInStock"))
+                            .Width(profile.GridWidthFor("UnitsInStock"))
+                            .Add();
+                        column.Field("UnitsOnOrder")
+                            .Type("number")
+                            .EditType(EditingType.NumericEdit)
+                            .Format(SyncfusionPatternResources.GridFormat_Integer)
+                            .HeaderText(ProductResources.PropertyUnitsOnOrder)
+                            .TextAlign(TextAlign.Right)
+                            .Visible(profile.IsGridVisibleFor("UnitsOnOrder"))
+                            .Width(profile.GridWidthFor("UnitsOnOrder"))
+                            .Add();
+                        column.Field("ReorderLevel")
+                            .Type("number")
+                            .EditType(EditingType.NumericEdit)
+                            .Format(SyncfusionPatternResources.GridFormat_Integer)
+                            .HeaderText(ProductResources.PropertyReorderLevel)
+                            .TextAlign(TextAlign.Right)
+                            .Visible(profile.IsGridVisibleFor("ReorderLevel"))
+                            .Width(profile.GridWidthFor("ReorderLevel"))
+                            .Add();
+                        column.Field("Discontinued")
+                            .Type("boolean")
+                            .EditType(EditingType.BooleanEdit)
+                            .HeaderText(ProductResources.PropertyDiscontinued)
+                            .Visible(profile.IsGridVisibleFor("Discontinued"))
+                            .Width(profile.GridWidthFor("Discontinued"))
+                            .Add();
+                    })
+                    //.EnablePersistence()
+                    .EnableTouch(false)
+                    //.IsResponsive(true)
+                    .FilterSettings(filter => filter
+                        .EnableCaseSensitivity(false)
+                        .FilterType(FilterType.Excel)
+                        .MaxFilterChoices(AppDefaults.SyncfusionRecordsForFiltering)
+                    )
+                    .PageSettings(page => page
+                        .PageSize(AppDefaults.SyncfusionRecordsByPage)
+                    )
+                    .ShowColumnChooser()
+                    .ToolbarSettings(toolbar => toolbar
+                        .CustomToolbarItems(new List<object>() {
+                            new Syncfusion.JavaScript.Models.CustomToolbarItem() { TemplateID = "#" + Model.ValueId + "_LookupGrid_Toolbar", Tooltip = "" }
+                        })
+                        .ShowToolbar()
+                        .ToolbarItems(items =>
+                        {
+                            items.AddTool(ToolBarItems.Search);
+                        })
+                    )
+                )
+
+                <div class="z-lookupButtons">
+                    @Html.ZImage("Button_Clear", "btn z-buttonClear", PresentationResources.Clear, "clear_" + Model.ValueId + "()")
+                    @Html.ZImage("Button_Create", "btn z-buttonCreate", PresentationResources.Create, "create_" + Model.ValueId + "()")
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-jsrender" id="@(Model.ValueId)_LookupGrid_Toolbar">
+    <div id="@(Model.ValueId)_LookupGrid_Toolbar_Refresh" class="e-toolbaricons e-icon e-reload" title="@PresentationResources.Refresh"></div>
+</script>
+
+<script>
+    zSyncfusionLookup("@(Model.ValueId)_LookupModal");
+
+    $(function () {
+        try {
+            zSyncfusionLookupReady("@(Model.ValueId)_LookupModal");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+
+            $("#@(Model.ValueId)").hide();
+
+            $("#@(Model.ValueId)_LookupButton").click(function () {
+                zGridDataSource("@(Model.ValueId)_LookupGrid", "@Url.Action("DataSource", "Product")");
+
+                $("#@(Model.ValueId)_LookupGrid_Toolbar").removeAttr("data-content");
+
+                $("#@(Model.ValueId)_LookupModal").modal("show");
+            });
+
+            $("#@(Model.ValueId)_LookupText").prop("readonly", true);
+            $("#@(Model.ValueId)_LookupText").val(model.Text.toLocaleString("@CultureInfo.CurrentCulture.Name"));
+
+            $("#@(Model.ValueId)_LookupModal").modal("hide");
+
+            $("#@(Model.ValueId)_LookupGrid_Toolbar").removeAttr("data-content");
+
+            @*
+            var ejGrid = zGrid("@(Model.ValueId)_LookupGrid");
+            zOnLookupView(model, profile, ejGrid);
+            *@
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function actionFailure_@(Model.ValueId)_LookupGrid(args) {
+        try {
+            zAlert(args.error.responseText);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "actionFailure_@(Model.ValueId)_LookupGrid", exception));
+        }
+    }    
+
+    function clear_@(Model.ValueId)() {
+        try {
+            $("#@(Model.ValueId)").val("").change();
+
+            $("#@(Model.ValueId)_LookupText").val("").change();
+
+            $("#@(Model.ValueId)_LookupModal").modal("hide");
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "clear_@(Model.ValueId)", exception));
+        }
+    }
+
+    function create_@(Model.ValueId)() {
+        try {
+            window.open("@(Url.Action("Index", "Product", new { Operation = "create" }, Request.Url.Scheme))");
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "create_@(Model.ValueId)", exception));
+        }
+    }
+
+    function load_@(Model.ValueId)_LookupGrid(args) {
+        try {            
+            var culture = "@System.Globalization.CultureInfo.CurrentCulture.Name";
+            this.model.locale = culture;
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            zOnLookupView(model, profile);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "load_@(Model.ValueId)_LookupGrid", exception));
+        }
+    }
+
+    function rowSelected_@(Model.ValueId)_LookupGrid(args) {
+        try {
+            var data = this.model.currentViewData[args.rowIndex];
+    
+            $("#@(Model.ValueId)").val(data.ProductId).change();
+    
+            $("#@(Model.ValueId)_LookupText").val(data.LookupText).change();
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var culture = "@System.Globalization.CultureInfo.CurrentCulture.Name";
+            zLookupElements(data, model.Elements, culture);
+    
+            $("#@(Model.ValueId)_LookupModal").modal("hide");
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "rowSelected_@(Model.ValueId)_LookupGrid", exception));
+        }
+    }
+
+    function toolbarClick_@(Model.ValueId)_LookupGrid(sender) {
+        try {
+            var toolbar = $(sender.target);
+            var ejGrid = zGrid("@(Model.ValueId)_LookupGrid");
+
+            if (toolbar.prop("id") == "@(Model.ValueId)_LookupGrid_Toolbar_Refresh") {
+                ejGrid.refreshContent();
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "toolbarClick_@(Model.ValueId)_LookupGrid", exception));
+        }
+    }
+</script>

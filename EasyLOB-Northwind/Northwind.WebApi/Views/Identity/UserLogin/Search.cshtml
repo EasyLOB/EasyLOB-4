@@ -1,0 +1,39 @@
+﻿@model UserLoginCollectionModel
+
+@{
+    string CSHTML = "UserLogin - Search.cshtml";
+
+    string controllerAction = Model.ControllerAction.ToLower();
+    string controllerActionResource = PresentationResources.ResourceManager.GetString(Model.ControllerAction);
+
+    string documentTitle, pageTitle;
+    AppHelper.Title(out documentTitle, out pageTitle,
+        UserLoginResources.EntitySingular, UserLoginResources.EntityPlural,
+        controllerAction, controllerActionResource,
+        Model.IsMasterDetail);
+}
+
+<h4>@pageTitle</h4>
+
+<div class="form-inline" style="display: none">
+    @{ Html.RenderPartial("_UserLoginCollection", Model); }
+</div>
+
+<script>
+    $(function () {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+            var url = zUrlDictionaryRead("UserLogin"); // Master-Detail
+            if (!url) {
+                zUrlDictionaryWrite("UserLogin", "@Context.Request.Url.AbsoluteUri");
+            }
+
+            if (!model.IsMasterDetail) {
+                $(document).prop("title", "@Html.Raw(documentTitle)");
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception.message));
+        }
+    });
+</script>

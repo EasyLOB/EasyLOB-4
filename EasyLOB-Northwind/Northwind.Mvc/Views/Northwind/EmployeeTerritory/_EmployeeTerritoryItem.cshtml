@@ -1,0 +1,108 @@
+﻿@model EmployeeTerritoryItemModel
+
+@{
+    string CSHTML = "_EmployeeTerritoryItem.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(EmployeeTerritory));    
+    // Associations (FK)
+    string employeeText = Model.EmployeeTerritory == null ? "" : (Model.EmployeeTerritory.EmployeeLookupText ?? "");
+    string territoryText = Model.EmployeeTerritory == null ? "" : (Model.EmployeeTerritory.TerritoryLookupText ?? "");
+}
+
+<div id="Item_EmployeeTerritory">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "EmployeeTerritory_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "EmployeeTerritory_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "EmployeeTerritory_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "EmployeeTerritory_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "EmployeeTerritory_Item_IsSave")
+
+    @{Html.EJ().Tab("Tab_EmployeeTerritory")
+        .ClientSideEvents(clientEvent => clientEvent
+            .ItemActive("itemActive_Tab_EmployeeTerritory")
+        )
+        //.EnablePersistence()
+        .Items(data =>
+        {
+            data.Add().ID("TabSheet_EmployeeTerritory_EmployeeTerritory").Text(EmployeeTerritoryResources.EntitySingular).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">
+                
+                <div id="Group_EmployeeTerritory_EmployeeId" class="@profile.EditCSSGroupFor("EmployeeLookupText")">
+                    @Html.LabelFor(model => model.EmployeeTerritory.EmployeeId, new { @class = profile.EditCSSLabelFor("EmployeeId") })
+                    @Html.EditorFor(model => model.EmployeeTerritory.EmployeeId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("EmployeeId"), id = "EmployeeTerritory_EmployeeId" } })
+                    @{
+                        Html.RenderAction("Lookup", "Employee", new
+                        {
+                            Text = employeeText,
+                            ValueId = "EmployeeTerritory_EmployeeId",
+                            Required = profile.IsRequiredView("EmployeeId")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.EmployeeTerritory.EmployeeId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_EmployeeTerritory_TerritoryId" class="@profile.EditCSSGroupFor("TerritoryLookupText")">
+                    @Html.LabelFor(model => model.EmployeeTerritory.TerritoryId, new { @class = profile.EditCSSLabelFor("TerritoryId") })
+                    @Html.EditorFor(model => model.EmployeeTerritory.TerritoryId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("TerritoryId"), id = "EmployeeTerritory_TerritoryId" } })
+                    @{
+                        Html.RenderAction("Lookup", "Territory", new
+                        {
+                            Text = territoryText,
+                            ValueId = "EmployeeTerritory_TerritoryId",
+                            Required = profile.IsRequiredView("TerritoryId")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.EmployeeTerritory.TerritoryId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+
+            </div>);
+        })
+        .Render();
+    }
+</div>
+
+<script>
+    zSyncfusionItem("Item_EmployeeTerritory");
+    
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_EmployeeTerritory");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            if (controllerAction != "create" || profile.IsIdentity) {
+                $("#Group_EmployeeTerritory_EmployeeId").hide();
+                $("#Group_EmployeeTerritory_TerritoryId").hide();
+            }
+
+            // Associations (FK)
+            switch (model.MasterEntity) {
+                case "Employee":
+                    $("#EmployeeTerritory_EmployeeId").val(model.MasterKey);
+                    $("#Group_EmployeeTerritory_EmployeeId").hide();
+                    break;
+                case "Territory":
+                    $("#EmployeeTerritory_TerritoryId").val(model.MasterKey);
+                    $("#Group_EmployeeTerritory_TerritoryId").hide();
+                    break;
+            }
+
+            // Collections (PK)
+
+            zOnItemView(model, profile);        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });    
+
+    function itemActive_Tab_EmployeeTerritory(args) {
+        zTabDictionaryWrite("EmployeeTerritory", args.model.selectedItemIndex);
+
+        try {        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "itemActive_Tab_EmployeeTerritory", exception));
+        }
+    }
+</script>

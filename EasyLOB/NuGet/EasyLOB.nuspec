@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <version>$propertyVersion$</version>
+        <authors>EasyLOB</authors>
+        <owners />
+        <icon>icon.png</icon>
+        <id>EasyLOB</id>
+        <title>EasyLOB</title>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>EasyLOB</description>
+        <license type="expression">MIT</license>        
+        <dependencies>
+            <group targetFramework="net46">
+                <dependency id="AutoMapper" version="9.0.0" />
+                <dependency id="Newtonsoft.Json" version="12.0.2" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="icon.png" target="" />
+        <file src="..\EasyLOB\bin\Debug\EasyLOB.dll" target="lib\net46" />
+        <file src="..\EasyLOB\bin\Debug\EasyLOB.pdb" target="lib\net46" />
+        <file src="..\EasyLOB\bin\Debug\pt-BR\EasyLOB.resources.dll" target="lib\net46\pt-BR" />
+        <file src="..\EasyLOB.Application\bin\Debug\EasyLOB.Application.dll" target="lib\net46" />
+        <file src="..\EasyLOB.Application\bin\Debug\EasyLOB.Application.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.AuditTrail\EasyLOB.AuditTrail\bin\Debug\EasyLOB.AuditTrail.dll" target="lib\net46" />
+        <file src="..\EasyLOB.AuditTrail\EasyLOB.AuditTrail\bin\Debug\EasyLOB.AuditTrail.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.AuditTrail\EasyLOB.AuditTrail\bin\Debug\pt-BR\EasyLOB.AuditTrail.resources.dll" target="lib\net46\pt-BR" />
+        <file src="..\EasyLOB.Data\bin\Debug\EasyLOB.Data.dll" target="lib\net46" />
+        <file src="..\EasyLOB.Data\bin\Debug\EasyLOB.Data.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.Environment\EasyLOB.Environment\bin\Debug\EasyLOB.Environment.dll" target="lib\net46" />
+        <file src="..\EasyLOB.Environment\EasyLOB.Environment\bin\Debug\EasyLOB.Environment.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.Log\EasyLOB.Log\bin\Debug\EasyLOB.Log.dll" target="lib\net46" />
+        <file src="..\EasyLOB.Log\EasyLOB.Log\bin\Debug\EasyLOB.Log.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.Log\EasyLOB.Log\bin\Debug\pt-BR\EasyLOB.Log.resources.dll" target="lib\net46\pt-BR" />
+        <file src="..\EasyLOB.Persistence\EasyLOB.Persistence\bin\Debug\EasyLOB.Persistence.dll" target="lib\net46" />
+        <file src="..\EasyLOB.Persistence\EasyLOB.Persistence\bin\Debug\EasyLOB.Persistence.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.Security\bin\Debug\EasyLOB.Security.dll" target="lib\net46" />
+        <file src="..\EasyLOB.Security\bin\Debug\EasyLOB.Security.pdb" target="lib\net46" />
+        <file src="..\EasyLOB.Security\bin\Debug\pt-BR\EasyLOB.Security.resources.dll" target="lib\net46\pt-BR" />
+    </files>
+</package>

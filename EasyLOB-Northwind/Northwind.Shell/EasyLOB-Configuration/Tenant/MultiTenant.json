@@ -1,0 +1,24 @@
+[
+  {
+    "Name": "Northwind",
+    "Description": "Northwind",
+    "Connections": [
+      {
+        "Name": "Northwind",
+        "ConnectionName": "Northwind"
+      },
+      {
+        "Name": "Activity",
+        "ConnectionName": "Activity"
+      },
+      {
+        "Name": "AuditTrail",
+        "ConnectionName": "AuditTrail"
+      },
+      {
+        "Name": "Identity",
+        "ConnectionName": "Identity"
+      }
+    ]
+  }
+]

@@ -1,0 +1,824 @@
+﻿
+/* .4rem ~ 8px */
+
+/* Bootstrap */
+
+.popover {
+    max-width: 100%;
+}
+
+/* Syncfusion */
+
+.e-datewidget {
+    height: 30px !important;
+    margin-top: 2px !important;
+}
+
+.e-datetime-wrap {
+    height: 30px !important;
+    margin-top: 2px !important;
+}
+
+.e-grid .e-alt_row { 
+    background-color: #eaeaea;
+}
+
+.e-grid .e-toolbaricons.e-searchfind {
+    padding-left: 12px;
+}
+
+.e-filteredicon {
+    background-color: transparent;
+    background-image: url(../../Images/16/filter.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 16px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 16px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Z Button */
+
+.z-buttonBackward {
+    background-color: transparent;
+    background-image: url(../../Images/32/backward.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonCancel {
+    background-color: transparent;
+    background-image: url(../../Images/32/cancel.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonClear {
+    background-color: transparent;
+    background-image: url(../../Images/32/clear.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonCreate {
+    background-color: transparent;
+    background-image: url(../../Images/32/create.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonCreateIndex {
+    background-color: transparent;
+    background-image: url(../../Images/24/create.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonDelete {
+    background-color: transparent;
+    background-image: url(../../Images/32/delete.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonDeleteIndex {
+    background-color: transparent;
+    background-image: url(../../Images/24/delete.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonDown {
+    background-color: transparent;
+    background-image: url(../../Images/32/down.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonExecute {
+    background-color: transparent;
+    background-image: url(../../Images/32/execute.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonForward {
+    background-color: transparent;
+    background-image: url(../../Images/32/forward.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonHelp {
+    background-color: transparent;
+    background-image: url(../../Images/32/help.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonHome {
+    background-color: transparent;
+    background-image: url(../../Images/32/home.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonHome {
+    background-color: transparent;
+    background-image: url(../../Images/32/home.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonLookup {
+    background-color: transparent;
+    background-image: url(../../Images/16/search.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 16px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 16px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonMail {
+    background-color: transparent;
+    background-image: url(../../Images/32/mail.png);
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonOk {
+    background-color: transparent;
+    background-image: url(../../Images/32/ok.png);
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonPrint {
+    background-color: transparent;
+    background-image: url(../../Images/32/print.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonRead {
+    background-color: transparent;
+    background-image: url(../../Images/32/read.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonReadIndex {
+    background-color: transparent;
+    background-image: url(../../Images/24/read.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonSave {
+    background-color: transparent;
+    background-image: url(../../Images/32/save.png);
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonSearch {
+    background-color: transparent;
+    background-image: url(../../Images/32/search.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonSearchIndex {
+    background-color: transparent;
+    background-image: url(../../Images/24/search.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonUp {
+    background-color: transparent;
+    background-image: url(../../Images/32/up.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonUpdate {
+    background-color: transparent;
+    background-image: url(../../Images/32/update.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 32px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-buttonUpdateIndex {
+    background-color: transparent;
+    background-image: url(../../Images/24/update.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    padding: 0;
+    /* text-indent: -99999px; */
+    vertical-align: bottom;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-editorDate .e-datepicker {
+}
+
+.z-editorDateRequired .e-datepicker {
+    background-color: lightyellow !important;
+}
+
+.z-editorDateTime .e-datetimepicker {
+}
+
+.z-editorDateTimeRequired .e-datetimepicker {
+    background-color: lightyellow !important;
+}
+
+.z-editor {
+    height: 30px;
+    margin-top: 2px;
+}
+
+.z-editorRequired {
+    background-color: lightyellow !important;
+    /* background-color: lightsalmon !important; */
+    height: 30px;
+    margin-top: 2px;
+}
+
+/* Z Culture */
+
+.z-culture-en-US {
+    background-color: transparent;
+    background-image: url(../../Images/Culture/en-US.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    width: 24px;
+    /* alt="@CultureInfo.CurrentCulture.Name" */
+    /*
+    text-indent: 200%;
+    overflow: hidden;
+    white-space: nowrap;
+    */
+}
+
+.z-culture-pt-BR {
+    background-color: transparent;
+    background-image: url(../../Images/Culture/pt-BR.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    width: 24px;
+    /* alt="@CultureInfo.CurrentCulture.Name" */
+    /*
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    */
+}
+
+/* Z File */
+
+.z-fileAudio {
+    background-color: transparent;
+    background-image: url(../../Images/File/24/audio.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    vertical-align: middle;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-fileExcel {
+    background-color: transparent;
+    background-image: url(../../Images/File/24/excel.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    vertical-align: middle;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-fileImage {
+    background-color: transparent;
+    background-image: url(../../Images/File/24/image.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    vertical-align: middle;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-fileMail {
+    background-color: transparent;
+    background-image: url(../../Images/File/24/mail.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    vertical-align: middle;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-filePDF {
+    background-color: transparent;
+    background-image: url(../../Images/File/24/pdf.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    vertical-align: middle;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-fileTXT {
+    background-color: transparent;
+    background-image: url(../../Images/File/24/txt.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    vertical-align: middle;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-fileVideo {
+    background-color: transparent;
+    background-image: url(../../Images/File/24/video.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    vertical-align: middle;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-fileWord {
+    background-color: transparent;
+    background-image: url(../../Images/File/24/word.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    vertical-align: middle;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.z-fileUnknown {
+    background-color: transparent;
+    background-image: url(../../Images/File/24/unknown.png);
+    background-repeat: no-repeat;
+    border: none;
+    height: 24px;
+    outline: none;
+    /* text-indent: -99999px; */
+    vertical-align: middle;
+    width: 24px;
+    /* alt */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Z */
+
+.z-form {
+}
+
+.z-formButtons {
+    clear: both;
+    margin-top: 4px;
+    padding-top: 4px;
+}
+
+.z-group {
+    height: 55px;
+    margin: 0;
+    margin-left: 8px;
+    margin-top: 2px;
+    padding: 0;
+}
+
+.z-groupImage {
+    height: auto;
+    margin: 0;
+    margin-left: 8px;
+    margin-top: 2px;
+    padding: 0;
+}
+
+.z-groupTextArea {
+    margin: 0;
+    margin-left: 8px;
+    margin-top: 2px;
+    padding: 0;
+}
+
+.z-image {
+    /* height: 100px; */
+    width: 100px;
+}
+
+.z-label {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    /* Truncante Label with ellipsis */
+    margin-bottom: -4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.z-labelRequired {
+    color: red;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    /* Truncante Label with ellipsis */
+    margin-bottom: -4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.z-newLine {
+    clear: both;
+}
+
+.z-panel {
+    margin: 0;
+    padding: 0;
+}
+
+.z-validator {
+    color: red;
+}
+
+.z-task {
+}
+
+/* Z Lookup */
+
+/*
+Modals in Bootstrap 3
+http://coolestguidesontheplanet.com/bootstrap/modal.php
+*/
+
+@media screen and (min-width: 768px) {
+    .modal {
+        width: 100%;
+    }
+
+    .modal-dialog {
+        margin-left: 10%;
+        width: 80%;
+    }
+}
+
+.z-lookup {
+    height: 30px;
+    margin-top: 2px;
+    margin-bottom: 1px;
+}
+
+.z-lookupButton {
+    background-color: darkgrey;
+    height: 30px;
+}
+
+.z-lookupButtons {
+    clear: both;
+    margin-top: 4px;
+    padding-top: 4px;
+}
+
+.z-lookupEditor {
+    height: 30px;
+}
+
+.z-lookupEditorRequired {
+    background-color: lightyellow !important;
+    /* background-color: lightsalmon !important; */
+    height: 30px;
+}
+
+/* Z Layout */
+
+.z-layoutHeader {
+    background-color: white;
+    margin-top: 4px;
+}
+
+.z-layoutMenu {
+    background-color: white;
+    height: 40px;
+    visibility: hidden;
+}
+
+.z-layoutBody {
+    padding-left: 16px;
+    padding-right: 16px;
+}

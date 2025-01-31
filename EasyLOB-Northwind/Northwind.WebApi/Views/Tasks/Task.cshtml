@@ -1,0 +1,43 @@
+@model TaskViewModel
+
+@{
+    string CSHTML = "Tasks.cshtml";
+
+    string documentTitle, pageTitle;
+    AppHelper.Title(out documentTitle, out pageTitle,
+        Model.Controller, Model.Action, Model.Task);
+}
+
+<div id="Form" style="display: none">
+    @using (Html.BeginForm())
+    {
+        <h4>@pageTitle</h4>
+
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.Controller)
+        @Html.HiddenFor(model => model.Action)
+        @Html.HiddenFor(model => model.Task)
+
+        <div class="z-formButtons">
+            @Html.ZImageInput("Button_OK", "btn z-buttonOk", PresentationResources.OK)
+        </div>
+    }
+</div>
+
+<script>
+    $(function () {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+            $(document).prop("title", "@Html.Raw(documentTitle)");
+            zShowOperationResult(model.OperationResult);
+
+            $("#Form").show();
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+</script>

@@ -1,0 +1,126 @@
+﻿@model OrderDetailItemModel
+
+@{
+    string CSHTML = "_OrderDetailItem.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(OrderDetail));    
+    // Associations (FK)
+    string orderText = Model.OrderDetail == null ? "" : (Model.OrderDetail.OrderLookupText ?? "");
+    string productText = Model.OrderDetail == null ? "" : (Model.OrderDetail.ProductLookupText ?? "");
+}
+
+<div id="Item_OrderDetail">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "OrderDetail_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "OrderDetail_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "OrderDetail_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "OrderDetail_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "OrderDetail_Item_IsSave")
+
+    @{Html.EJ().Tab("Tab_OrderDetail")
+        .ClientSideEvents(clientEvent => clientEvent
+            .ItemActive("itemActive_Tab_OrderDetail")
+        )
+        //.EnablePersistence()
+        .Items(data =>
+        {
+            data.Add().ID("TabSheet_OrderDetail_OrderDetail").Text(OrderDetailResources.EntitySingular).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">
+                
+                <div id="Group_OrderDetail_OrderId" class="@profile.EditCSSGroupFor("OrderLookupText")">
+                    @Html.LabelFor(model => model.OrderDetail.OrderId, new { @class = profile.EditCSSLabelFor("OrderId") })
+                    @Html.EditorFor(model => model.OrderDetail.OrderId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("OrderId"), id = "OrderDetail_OrderId" } })
+                    @{
+                        Html.RenderAction("Lookup", "Order", new
+                        {
+                            Text = orderText,
+                            ValueId = "OrderDetail_OrderId",
+                            Required = profile.IsRequiredView("OrderId")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.OrderDetail.OrderId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_OrderDetail_ProductId" class="@profile.EditCSSGroupFor("ProductLookupText")">
+                    @Html.LabelFor(model => model.OrderDetail.ProductId, new { @class = profile.EditCSSLabelFor("ProductId") })
+                    @Html.EditorFor(model => model.OrderDetail.ProductId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ProductId"), id = "OrderDetail_ProductId" } })
+                    @{
+                        Html.RenderAction("Lookup", "Product", new
+                        {
+                            Text = productText,
+                            ValueId = "OrderDetail_ProductId",
+                            Required = profile.IsRequiredView("ProductId")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.OrderDetail.ProductId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_OrderDetail_UnitPrice" class="@profile.EditCSSGroupFor("UnitPrice")">
+                    @Html.LabelFor(model => model.OrderDetail.UnitPrice, new { @class = profile.EditCSSLabelFor("UnitPrice") })
+                    @Html.EditorFor(model => model.OrderDetail.UnitPrice, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("UnitPrice"), id = "OrderDetail_UnitPrice" } })
+                    @* @Html.ValidationMessageFor(model => model.OrderDetail.UnitPrice, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_OrderDetail_Quantity" class="@profile.EditCSSGroupFor("Quantity")">
+                    @Html.LabelFor(model => model.OrderDetail.Quantity, new { @class = profile.EditCSSLabelFor("Quantity") })
+                    @Html.EditorFor(model => model.OrderDetail.Quantity, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Quantity"), id = "OrderDetail_Quantity" } })
+                    @* @Html.ValidationMessageFor(model => model.OrderDetail.Quantity, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_OrderDetail_Discount" class="@profile.EditCSSGroupFor("Discount")">
+                    @Html.LabelFor(model => model.OrderDetail.Discount, new { @class = profile.EditCSSLabelFor("Discount") })
+                    @Html.EditorFor(model => model.OrderDetail.Discount, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Discount"), id = "OrderDetail_Discount" } })
+                    @* @Html.ValidationMessageFor(model => model.OrderDetail.Discount, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+
+            </div>);
+        })
+        .Render();
+    }
+</div>
+
+<script>
+    zSyncfusionItem("Item_OrderDetail");
+    
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_OrderDetail");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            if (controllerAction != "create" || profile.IsIdentity) {
+                $("#Group_OrderDetail_OrderId").hide();
+                $("#Group_OrderDetail_ProductId").hide();
+            }
+
+            // Associations (FK)
+            switch (model.MasterEntity) {
+                case "Order":
+                    $("#OrderDetail_OrderId").val(model.MasterKey);
+                    $("#Group_OrderDetail_OrderId").hide();
+                    break;
+                case "Product":
+                    $("#OrderDetail_ProductId").val(model.MasterKey);
+                    $("#Group_OrderDetail_ProductId").hide();
+                    break;
+            }
+
+            // Collections (PK)
+
+            zOnItemView(model, profile);        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });    
+
+    function itemActive_Tab_OrderDetail(args) {
+        zTabDictionaryWrite("OrderDetail", args.model.selectedItemIndex);
+
+        try {        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "itemActive_Tab_OrderDetail", exception));
+        }
+    }
+</script>

@@ -1,0 +1,96 @@
+@model ReportRDLCModel
+
+@{ 
+    string reportDirectory = ConfigurationHelper.AppSettings<string>("EasyLOB.Report.RDLC.Directory");
+    string reportPath = Path.Combine(reportDirectory, Model.ReportDirectory, Model.ReportName + ".rdl");
+}
+
+@section Styles {
+    <style>
+        #ReportViewer {
+            min-height: 768px;
+            min-width: 100%;
+        }
+    </style>
+}
+
+<br />
+
+<div style="width: 100%">
+    @(Html.EJ().ReportViewer("ReportViewer")
+        .Locale(System.Globalization.CultureInfo.CurrentCulture.Name)
+        .Parameters(Model.ReportParameters)
+        .ProcessingMode(Syncfusion.JavaScript.ReportViewerEnums.ProcessingMode.Local)
+        .ReportLoaded("loaded_ReportViewer")
+        .ReportPath(reportPath)
+        .ReportServiceUrl(@Url.Content("~/syncfusion/RDLCApi"))
+    )
+</div>
+
+<script>
+    function loaded_ReportViewer(args) {
+        try {
+            var culture = "@System.Globalization.CultureInfo.CurrentCulture.Name";
+            var reportViewer = $("#ReportViewer");
+            var ejReportViewer = reportViewer.data("ejReportViewer");
+            ejReportViewer.model.locale = culture;
+        } catch (exception) {
+            zAlert(zExceptionMessage("RDLC.cshtml", "loaded_ReportViewer", exception));
+        }
+    }
+
+    var _params = null;
+
+    ej.ReportViewer.prototype._viewReportParamsClick = function (event) {
+        var proxy = $('#ReportViewer').data('ejReportViewer');
+        var parameters = event.data.params;
+        var reportParams = proxy._getParameterJson(parameters);
+        proxy._refresh = true;
+        $('#' + proxy._id + '_viewBlockContainer .e-reportviewer-viewerblockcontent table:first').prop('isviewclick', 'true');
+        _params = reportParams;
+        proxy._refreshReport();
+    }
+
+    ej.ReportViewer.prototype.doAjaxPost = function (type, url, jsondata, onSuccess) {
+        var proxy = $('#ReportViewer').data('ejReportViewer');
+        var inVokemethod = onSuccess;
+        $.ajax({
+            type: type,
+            url: url,
+            crossDomain: true,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: jsondata,
+            beforeSend: function (req) {
+                if (inVokemethod == "_getDataSourceCredential") {
+                    var _json = jQuery.parseJSON(this.data);
+                    if (_params != null) {
+                        _json["params"] = _params;
+                    }
+                    this.data = JSON.stringify(_json);
+                }
+                if (inVokemethod == "_getPageModel" || inVokemethod == "_getPreviewModel") {
+                    if (!proxy._isToolbarClick) {
+                        proxy._showloadingIndicator(true);
+                        proxy._updateDatasource = true;
+                    } else {
+                        proxy._showNavigationIndicator(true);
+                    }
+                }
+                req.setRequestHeader('ejAuthenticationToken', proxy._authenticationToken);
+            },
+            success: function (data) {
+                if (data && typeof (data.Data) != "undefined") {
+                    data = data.Data;
+                }
+                if (typeof (data) == "string") {
+                    if (data.indexOf("Sf_Exception") != -1) {
+                        proxy._renderExcpetion(inVokemethod + ":" + data);
+                        return;
+                    }
+                }
+                proxy[inVokemethod](data);
+            },
+        });
+    }
+</script>

@@ -1,0 +1,233 @@
+﻿@model EmployeeItemModel
+
+@{
+    string CSHTML = "_EmployeeItem.cshtml";
+    
+    IZProfile profile = DataHelper.GetProfile(typeof(Employee));    
+    // Associations (FK)
+    string EmployeeXText = Model.Employee == null ? "" : (Model.Employee.EmployeeXLookupText ?? "");
+    string employee_Photo_Base64 = Convert.ToBase64String(new byte[] {});
+    if (Model.Employee != null && Model.Employee.Photo != null)
+    {
+        employee_Photo_Base64 = Convert.ToBase64String(Model.Employee.Photo);
+    }
+    string employee_Photo_Source = string.Format("data:image/jpg;base64,{0}", employee_Photo_Base64);        
+}
+
+<div id="Item_Employee">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "Employee_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "Employee_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "Employee_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "Employee_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "Employee_Item_IsSave")
+
+    @{Html.EJ().Tab("Tab_Employee")
+        .ClientSideEvents(clientEvent => clientEvent
+            .ItemActive("itemActive_Tab_Employee")
+        )
+        //.EnablePersistence()
+        .Items(data =>
+        {
+            data.Add().ID("TabSheet_Employee_Employee").Text(EmployeeResources.EntitySingular).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">
+                
+                <div id="Group_Employee_EmployeeId" class="@profile.EditCSSGroupFor("EmployeeId")">
+                    @Html.LabelFor(model => model.Employee.EmployeeId, new { @class = profile.EditCSSLabelFor("EmployeeId") })
+                    @Html.EditorFor(model => model.Employee.EmployeeId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("EmployeeId"), id = "Employee_EmployeeId" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.EmployeeId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_LastName" class="@profile.EditCSSGroupFor("LastName")">
+                    @Html.LabelFor(model => model.Employee.LastName, new { @class = profile.EditCSSLabelFor("LastName") })
+                    @Html.EditorFor(model => model.Employee.LastName, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("LastName"), id = "Employee_LastName" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.LastName, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_FirstName" class="@profile.EditCSSGroupFor("FirstName")">
+                    @Html.LabelFor(model => model.Employee.FirstName, new { @class = profile.EditCSSLabelFor("FirstName") })
+                    @Html.EditorFor(model => model.Employee.FirstName, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("FirstName"), id = "Employee_FirstName" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.FirstName, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_Title" class="@profile.EditCSSGroupFor("Title")">
+                    @Html.LabelFor(model => model.Employee.Title, new { @class = profile.EditCSSLabelFor("Title") })
+                    @Html.EditorFor(model => model.Employee.Title, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Title"), id = "Employee_Title" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.Title, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_TitleOfCourtesy" class="@profile.EditCSSGroupFor("TitleOfCourtesy")">
+                    @Html.LabelFor(model => model.Employee.TitleOfCourtesy, new { @class = profile.EditCSSLabelFor("TitleOfCourtesy") })
+                    @Html.EditorFor(model => model.Employee.TitleOfCourtesy, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("TitleOfCourtesy"), id = "Employee_TitleOfCourtesy" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.TitleOfCourtesy, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_BirthDate" class="@profile.EditCSSGroupFor("BirthDate")">
+                    @Html.LabelFor(model => model.Employee.BirthDate, new { @class = profile.EditCSSLabelFor("BirthDate") })
+                    @* @Html.EditorFor(model => model.Employee.BirthDate, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("BirthDate"), id = "Employee_BirthDate" } }) *@
+                    @Html.EJ().DateTimePickerFor(model => model.Employee.BirthDate, AppHelper.DateTimeModel, new { @class = profile.EditCSSEditorDateTimeFor("BirthDate"), id = "Employee_BirthDate" })
+                    @* @Html.ValidationMessageFor(model => model.Employee.BirthDate, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_HireDate" class="@profile.EditCSSGroupFor("HireDate")">
+                    @Html.LabelFor(model => model.Employee.HireDate, new { @class = profile.EditCSSLabelFor("HireDate") })
+                    @* @Html.EditorFor(model => model.Employee.HireDate, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("HireDate"), id = "Employee_HireDate" } }) *@
+                    @Html.EJ().DateTimePickerFor(model => model.Employee.HireDate, AppHelper.DateTimeModel, new { @class = profile.EditCSSEditorDateTimeFor("HireDate"), id = "Employee_HireDate" })
+                    @* @Html.ValidationMessageFor(model => model.Employee.HireDate, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_Address" class="@profile.EditCSSGroupFor("Address")">
+                    @Html.LabelFor(model => model.Employee.Address, new { @class = profile.EditCSSLabelFor("Address") })
+                    @Html.EditorFor(model => model.Employee.Address, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Address"), id = "Employee_Address" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.Address, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_City" class="@profile.EditCSSGroupFor("City")">
+                    @Html.LabelFor(model => model.Employee.City, new { @class = profile.EditCSSLabelFor("City") })
+                    @Html.EditorFor(model => model.Employee.City, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("City"), id = "Employee_City" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.City, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_Region" class="@profile.EditCSSGroupFor("Region")">
+                    @Html.LabelFor(model => model.Employee.Region, new { @class = profile.EditCSSLabelFor("Region") })
+                    @Html.EditorFor(model => model.Employee.Region, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Region"), id = "Employee_Region" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.Region, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_PostalCode" class="@profile.EditCSSGroupFor("PostalCode")">
+                    @Html.LabelFor(model => model.Employee.PostalCode, new { @class = profile.EditCSSLabelFor("PostalCode") })
+                    @Html.EditorFor(model => model.Employee.PostalCode, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("PostalCode"), id = "Employee_PostalCode" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.PostalCode, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_Country" class="@profile.EditCSSGroupFor("Country")">
+                    @Html.LabelFor(model => model.Employee.Country, new { @class = profile.EditCSSLabelFor("Country") })
+                    @Html.EditorFor(model => model.Employee.Country, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Country"), id = "Employee_Country" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.Country, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_HomePhone" class="@profile.EditCSSGroupFor("HomePhone")">
+                    @Html.LabelFor(model => model.Employee.HomePhone, new { @class = profile.EditCSSLabelFor("HomePhone") })
+                    @Html.EditorFor(model => model.Employee.HomePhone, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("HomePhone"), id = "Employee_HomePhone" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.HomePhone, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_Extension" class="@profile.EditCSSGroupFor("Extension")">
+                    @Html.LabelFor(model => model.Employee.Extension, new { @class = profile.EditCSSLabelFor("Extension") })
+                    @Html.EditorFor(model => model.Employee.Extension, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Extension"), id = "Employee_Extension" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.Extension, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_Photo" class="@AppDefaults.CSSClassGroupImage col-md-2">
+                    @Html.LabelFor(model => model.Employee.Photo, new { @class = profile.EditCSSLabelFor("Photo") })
+                    <div>
+                        <img src="@employee_Photo_Source" class="z-image" />
+                    </div>
+                    @* @Html.ValidationMessageFor(model => model.Employee.Photo, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_Notes" class="@profile.EditCSSGroupFor("Notes")">
+                    @Html.LabelFor(model => model.Employee.Notes, new { @class = profile.EditCSSLabelFor("Notes") })
+                    @Html.EditorFor(model => model.Employee.Notes, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Notes"), id = "Employee_Notes" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.Notes, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_ReportsTo" class="@profile.EditCSSGroupFor("Employee_EmployeeLookupText")">
+                    @Html.LabelFor(model => model.Employee.ReportsTo, new { @class = profile.EditCSSLabelFor("ReportsTo") })
+                    @Html.EditorFor(model => model.Employee.ReportsTo, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ReportsTo"), id = "Employee_ReportsTo" } })
+                    @{
+                        Html.RenderAction("Lookup", "Employee", new
+                        {
+                            Text = EmployeeXText,
+                            ValueId = "Employee_ReportsTo",
+                            Required = profile.IsRequiredView("ReportsTo")
+                        });
+                    }
+                    @* @Html.ValidationMessageFor(model => model.Employee.ReportsTo, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+                
+                <div id="Group_Employee_PhotoPath" class="@profile.EditCSSGroupFor("PhotoPath")">
+                    @Html.LabelFor(model => model.Employee.PhotoPath, new { @class = profile.EditCSSLabelFor("PhotoPath") })
+                    @Html.EditorFor(model => model.Employee.PhotoPath, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("PhotoPath"), id = "Employee_PhotoPath" } })
+                    @* @Html.ValidationMessageFor(model => model.Employee.PhotoPath, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                </div>
+
+            </div>);
+            data.Add().ID("TabSheet_Employee_Employees").Text(EmployeeResources.EntityPlural).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">    
+                <div id="Ajax_Employee_Employees"></div>
+            </div>);
+            data.Add().ID("TabSheet_Employee_EmployeeTerritories").Text(EmployeeTerritoryResources.EntityPlural).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">    
+                <div id="Ajax_Employee_EmployeeTerritories"></div>
+            </div>);
+            data.Add().ID("TabSheet_Employee_Orders").Text(OrderResources.EntityPlural).ContentTemplate(@<div class="@AppDefaults.CSSClassPanel">    
+                <div id="Ajax_Employee_Orders"></div>
+            </div>);
+        })
+        .Render();
+    }
+</div>
+
+<script>
+    zSyncfusionItem("Item_Employee");
+    
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_Employee");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            // Associations (FK)
+            switch (model.MasterEntity) {
+                case "Employee":
+                    $("#Employee_ReportsTo").val(model.MasterKey);
+                    $("#Group_Employee_ReportsTo").hide();
+                    break;
+            }
+
+            // Collections (PK)
+            if (controllerAction != "create" && zContains(profile.EditCollections, "Employees")) {
+                zUrlDictionaryWrite("Employee", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "Employee", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "Employee", MasterKey = Model.Employee.EmployeeId })))";
+                zAjaxLoadSync("Ajax_Employee_Employees", ajaxUrl);
+            }
+            if (controllerAction != "create" && zContains(profile.EditCollections, "EmployeeTerritories")) {
+                zUrlDictionaryWrite("EmployeeTerritory", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "EmployeeTerritory", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "Employee", MasterKey = Model.Employee.EmployeeId })))";
+                zAjaxLoadSync("Ajax_Employee_EmployeeTerritories", ajaxUrl);
+            }
+            if (controllerAction != "create" && zContains(profile.EditCollections, "Orders")) {
+                zUrlDictionaryWrite("Order", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "Order", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "Employee", MasterKey = Model.Employee.EmployeeId })))";
+                zAjaxLoadSync("Ajax_Employee_Orders", ajaxUrl);
+            }
+
+            zOnItemView(model, profile);        
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });    
+
+    function itemActive_Tab_Employee(args) {
+        zTabDictionaryWrite("Employee", args.model.selectedItemIndex);
+
+        try {        
+            var ejTab = zTab("Tab_Employee");
+            var tabId = ejTab.contentPanels[args.model.selectedItemIndex].id;
+            switch (tabId) {
+                case "TabSheet_Employee_Employees":
+                    zGridDataSource("Grid_Employee", "@Url.Action("DataSource", "Employee")");
+                    break;
+                case "TabSheet_Employee_EmployeeTerritories":
+                    zGridDataSource("Grid_EmployeeTerritory", "@Url.Action("DataSource", "EmployeeTerritory")");
+                    break;
+                case "TabSheet_Employee_Orders":
+                    zGridDataSource("Grid_Order", "@Url.Action("DataSource", "Order")");
+                    break;
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "itemActive_Tab_Employee", exception));
+        }
+    }
+</script>

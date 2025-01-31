@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyLOB.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:EasyLOB.AuditTrail.WebApi.AuditTrailLogAPIController.DeleteAuditTrailLog(System.Int32)">
+            <summary>
+            DELETE: api/AuditTrailLog/1 
+            </summary>
+            <param name="id">id</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:EasyLOB.AuditTrail.WebApi.AuditTrailLogAPIController.GetAuditTrailLog(System.Int32)">
+            <summary>
+            GET: api/AuditTrailLog/1
+            </summary>
+            <param name="id">id</param>
+            <returns>AuditTrailLogDTO</returns>
+        </member>
+        <member name="M:EasyLOB.AuditTrail.WebApi.AuditTrailLogAPIController.GetAuditTrailLogs(System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            GET: api/AuditTrailLog/Where="null"/OrderBy="null"/Skip=0/Take=100
+            </summary>
+            <param name="where">WHERE Base64</param>
+            <param name="orderBy">ORDER BY Base64</param>
+            <param name="skip">SKIP</param>
+            <param name="take">TAKE</param>
+            <returns>List[AuditTrailLogDTO]</returns>
+        </member>
+        <member name="M:EasyLOB.AuditTrail.WebApi.AuditTrailLogAPIController.PostAuditTrailLog(EasyLOB.AuditTrail.Data.AuditTrailLogDTO)">
+            <summary>
+            POST: api/AuditTrailLog
+            </summary>
+            <param name="auditTrailLogDTO">AuditTrailLogDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="M:EasyLOB.AuditTrail.WebApi.AuditTrailLogAPIController.PutAuditTrailLog(EasyLOB.AuditTrail.Data.AuditTrailLogDTO)">
+            <summary>
+            PUT: api/AuditTrailLog
+            </summary>
+            <param name="auditTrailLogDTO">AuditTrailLogDTO</param>
+            <returns>object[] Ids</returns>
+        </member>
+        <member name="T:EasyLOB.Security.Resources.EasyLOBSecurityResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ChangePassword">
+            <summary>
+              Looks up a localized string similar to Change Password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ConfirmPassword">
+            <summary>
+              Looks up a localized string similar to Confirm new password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ConfirmPasswordError">
+            <summary>
+              Looks up a localized string similar to The new password and confirmation password do not match.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.EMail">
+            <summary>
+              Looks up a localized string similar to e-mail.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ForgotPassword">
+            <summary>
+              Looks up a localized string similar to Forgot your password ?.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ForgotPasswordConfirmation">
+            <summary>
+              Looks up a localized string similar to &quot;Forgot your password ?&quot; confirmation.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ForgotPasswordConfirmationMessage">
+            <summary>
+              Looks up a localized string similar to Please check your email to reset your password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ForgotPasswordEMail">
+            <summary>
+              Looks up a localized string similar to Please reset your password by clicking &lt;a href=&quot;{0}&quot;&gt;here&lt;/a&gt;.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.LogIn">
+            <summary>
+              Looks up a localized string similar to Log In.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.LogInInvalid">
+            <summary>
+              Looks up a localized string similar to Invalid Login.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.LogOut">
+            <summary>
+              Looks up a localized string similar to Log Out.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.NewPassword">
+            <summary>
+              Looks up a localized string similar to New password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.NewPasswordError">
+            <summary>
+              Looks up a localized string similar to The {0} must be at least {2} characters long.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.OldPassword">
+            <summary>
+              Looks up a localized string similar to Old password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.Password">
+            <summary>
+              Looks up a localized string similar to Password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.RememberMe">
+            <summary>
+              Looks up a localized string similar to Remember me ?.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ResetPassword">
+            <summary>
+              Looks up a localized string similar to Reset your password.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ResetPasswordConfirmation">
+            <summary>
+              Looks up a localized string similar to Reset your password confirmation.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.ResetPasswordConfirmationMessage">
+            <summary>
+              Looks up a localized string similar to Your password has been reset.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.TenantName">
+            <summary>
+              Looks up a localized string similar to Tenant.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.UserLocked">
+            <summary>
+              Looks up a localized string similar to User Locked.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Security.Resources.EasyLOBSecurityResources.UserName">
+            <summary>
+              Looks up a localized string similar to User.
+            </summary>
+        </member>
+        <member name="M:EasyLOB.DashboardViewer.ValidateDashboardService(System.String)">
+            <summary>
+            Validate whether Dashboard Service is running in the Url
+            </summary>
+            <param name="dashboardServiceUrl">Dashboard Service Url</param>
+            <returns>returns whether valid dashboard service</returns>
+        </member>
+        <member name="M:EasyLOB.DashboardViewer.GetWindowsServiceUrl">
+            <summary>
+            Used to pick the Windows Dashboard Service URL
+            </summary>
+            <returns>ServiceURL of Windows Dashboard Service</returns>
+        </member>
+        <member name="M:EasyLOB.SyncfusionExcelExtensions.SaveAsActionResult(Syncfusion.XlsIO.ExcelEngine,Syncfusion.XlsIO.IWorkbook,System.String,System.Web.HttpResponse,Syncfusion.XlsIO.ExcelDownloadType)">
+             <summary>
+            
+             </summary>
+             <param name="_workbook"></param>
+             <param name="filename"></param>
+             <param name="response"></param>
+             <param name="DownloadType"></param>
+             <returns></returns>
+        </member>
+        <member name="M:EasyLOB.SyncfusionExcelExtensions.SaveAsActionResult(Syncfusion.XlsIO.ExcelEngine,Syncfusion.XlsIO.IWorkbook,System.String,System.Web.HttpResponse,Syncfusion.XlsIO.ExcelHttpContentType)">
+             <summary>
+            
+             </summary>
+             <param name="_workbook"></param>
+             <param name="filename"></param>
+             <param name="response"></param>
+             <param name="contentType"></param>
+             <returns></returns>
+        </member>
+        <member name="M:EasyLOB.SyncfusionExcelExtensions.SaveAsActionResult(Syncfusion.XlsIO.ExcelEngine,Syncfusion.XlsIO.IWorkbook,System.String,System.Web.HttpResponse,Syncfusion.XlsIO.ExcelDownloadType,Syncfusion.XlsIO.ExcelHttpContentType)">
+             <summary>
+            
+             </summary>
+             <param name="_workbook"></param>
+             <param name="filename"></param>
+             <param name="response"></param>
+             <param name="DownloadType"></param>
+             <param name="contentType"></param>
+             <returns></returns>
+        </member>
+        <member name="M:EasyLOB.SyncfusionExcelExtensions.SaveAsActionResult(Syncfusion.XlsIO.ExcelEngine,Syncfusion.XlsIO.IWorkbook,System.String,Syncfusion.XlsIO.ExcelSaveType,System.Web.HttpResponse,Syncfusion.XlsIO.ExcelDownloadType,Syncfusion.XlsIO.ExcelHttpContentType)">
+             <summary>
+            
+             </summary>
+             <param name="_workbook"></param>
+             <param name="filename"></param>
+             <param name="saveType"></param>
+             <param name="response"></param>
+             <param name="DownloadType"></param>
+             <param name="contentType"></param>
+             <returns></returns>
+        </member>
+        <member name="M:EasyLOB.SyncfusionExcelExtensions.SaveAsActionResult(Syncfusion.XlsIO.ExcelEngine,Syncfusion.XlsIO.IWorkbook,System.String,System.String,System.Web.HttpResponse,Syncfusion.XlsIO.ExcelDownloadType,Syncfusion.XlsIO.ExcelHttpContentType)">
+             <summary>
+            
+             </summary>
+             <param name="_workbook"></param>
+             <param name="filename"></param>
+             <param name="saveType"></param>
+             <param name="response"></param>
+             <param name="DownloadType"></param>
+             <param name="contentType"></param>
+             <returns></returns>
+        </member>
+        <member name="T:EasyLOB.Resources.EasyLOBPresentationResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskAPI">
+            <summary>
+              Looks up a localized string similar to API.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskApplicationAPI">
+            <summary>
+              Looks up a localized string similar to API.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskApplicationHelp">
+            <summary>
+              Looks up a localized string similar to Help.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskApplicationStatus">
+            <summary>
+              Looks up a localized string similar to Status.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskCleanExportImport">
+            <summary>
+              Looks up a localized string similar to Clean export and import directories.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskCleanLocalStorage">
+            <summary>
+              Looks up a localized string similar to Clean Browser Local Storage.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskExportAutoMapper">
+            <summary>
+              Looks up a localized string similar to Export AutoMapper.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskExportProfile">
+            <summary>
+              Looks up a localized string similar to Export Profile.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskExportSecurity">
+            <summary>
+              Looks up a localized string similar to Export Security.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskHelp">
+            <summary>
+              Looks up a localized string similar to Help.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskStatus">
+            <summary>
+              Looks up a localized string similar to Status.
+            </summary>
+        </member>
+        <member name="P:EasyLOB.Resources.EasyLOBPresentationResources.TaskUrlDictionary">
+            <summary>
+              Looks up a localized string similar to URLs Dictionary.
+            </summary>
+        </member>
+        <member name="T:MyLOB.WebApi.Resources.MyLOBPresentationResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:MyLOB.WebApi.Resources.MyLOBPresentationResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:MyLOB.WebApi.Resources.MyLOBPresentationResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

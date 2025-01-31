@@ -1,0 +1,11 @@
+﻿jquery.tabstop.js
+	HoffmannP/jquery.tabstop
+	https://github.com/HoffmannP/jquery.tabstop
+
+jquery.validate.globalize.js
+	johnnyreilly/GlobalizeUrls.cs
+	https://gist.github.com/johnnyreilly/3651751
+
+readonly.js
+	corenzan/readonly.js
+	https://github.com/haggen/readonly

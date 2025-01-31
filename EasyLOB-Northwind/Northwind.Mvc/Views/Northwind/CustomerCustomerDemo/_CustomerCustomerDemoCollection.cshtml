@@ -1,0 +1,242 @@
+﻿@model CustomerCustomerDemoCollectionModel
+
+@{
+    string CSHTML = "_CustomerCustomerDemoCollection.cshtml";
+
+    IZProfile profile = DataHelper.GetProfile(typeof(CustomerCustomerDemo));
+    // Associations (FK)
+    string query = "";
+    switch (Model.MasterEntity)
+    {
+        case "CustomerDemographic":
+            query = string.Format("ej.Query().where('CustomerTypeId', ej.FilterOperators.equal, '{0}')", Model.MasterKey);
+            break;
+        case "Customer":
+            query = string.Format("ej.Query().where('CustomerId', ej.FilterOperators.equal, '{0}')", Model.MasterKey);
+            break;
+    }
+}
+
+<div id="Collection_@(Model.Id)">
+    @(Html.EJ().Grid<CustomerCustomerDemo>("Grid_" + Model.Id)
+        .Query(query)
+        .AllowFiltering()
+        .AllowGrouping()
+        .AllowPaging()
+        .AllowReordering()
+        //.AllowResizeToFit()
+        .AllowResizing()
+        //.AllowScrolling()
+        .AllowSearching()
+        .AllowSorting()
+        .AllowTextWrap()
+        .TextWrapSettings(wrap =>
+        {
+            wrap.WrapMode(WrapMode.Both);
+        })
+        .ClientSideEvents(clientEvent => clientEvent
+            .ActionBegin("actionBegin_Grid_" + Model.Id)
+            .ActionFailure("actionFailure_Grid_" + Model.Id)
+            .Load("load_Grid_" + Model.Id)
+            .ToolbarClick("toolbarClick_Grid_" + Model.Id)
+        )
+        .Columns(column =>
+        {
+            column.Field("CustomerId")
+                .Type("string")
+                .EditType(EditingType.StringEdit)
+                .HeaderText(CustomerCustomerDemoResources.PropertyCustomerId)
+                .IsPrimaryKey(true)
+                .Visible(profile.IsGridVisibleFor("CustomerId"))
+                .Width(profile.GridWidthFor("CustomerId"))
+                .Add();
+            column.Field("CustomerLookupText")
+                .AllowEditing(false)
+                .Type("string")
+                .HeaderText(CustomerResources.EntitySingular)
+                .Visible(profile.IsGridVisibleFor("CustomerLookupText"))
+                .Width(profile.GridWidthFor("CustomerLookupText"))
+                .Add();
+            column.Field("CustomerTypeId")
+                .Type("string")
+                .EditType(EditingType.StringEdit)
+                .HeaderText(CustomerCustomerDemoResources.PropertyCustomerTypeId)
+                .IsPrimaryKey(true)
+                .Visible(profile.IsGridVisibleFor("CustomerTypeId"))
+                .Width(profile.GridWidthFor("CustomerTypeId"))
+                .Add();
+            column.Field("CustomerDemographicLookupText")
+                .AllowEditing(false)
+                .Type("string")
+                .HeaderText(CustomerDemographicResources.EntitySingular)
+                .Visible(profile.IsGridVisibleFor("CustomerDemographicLookupText"))
+                .Width(profile.GridWidthFor("CustomerDemographicLookupText"))
+                .Add();
+        })
+        .EditSettings(edit => edit
+            .AllowAdding()
+            .AllowDeleting()
+            .AllowEditing()
+            .AllowEditOnDblClick(false)
+        )
+        //.EnablePersistence()
+        .EnableTouch(false)
+        //.IsResponsive(true)
+        .FilterSettings(filter => filter
+            .EnableCaseSensitivity(false)
+            .FilterType(FilterType.Excel)
+            .MaxFilterChoices(AppDefaults.SyncfusionRecordsForFiltering)
+        )
+        //.Mappers(map => map
+        //    .ExportToExcelAction(Url.Content("~/CustomerCustomerDemo/ExportToExcel"))
+        //    .ExportToPdfAction(Url.Content("~/CustomerCustomerDemo/ExportToPdf"))
+        //    .ExportToWordAction(Url.Content("~/CustomerCustomerDemo/ExportToWord"))
+        //)
+        .PageSettings(page => page
+            .PageSize(AppDefaults.SyncfusionRecordsByPage)
+        )
+        .ShowColumnChooser()
+        .ToolbarSettings(toolbar => toolbar
+            .CustomToolbarItems(new List<object>() {
+                new Syncfusion.JavaScript.Models.CustomToolbarItem() { TemplateID = "#Grid_" + Model.Id + "_Toolbar", Tooltip = "" }
+            })
+            .ShowToolbar()
+            .ToolbarItems(items =>
+            {
+                items.AddTool(ToolBarItems.Search);
+                items.AddTool(ToolBarItems.Add);
+                items.AddTool(ToolBarItems.Edit);
+                items.AddTool(ToolBarItems.Delete);
+                //items.AddTool(ToolBarItems.ExcelExport);
+                //items.AddTool(ToolBarItems.PdfExport);
+                //items.AddTool(ToolBarItems.WordExport);
+            })
+        )
+    )
+</div>
+
+<script type="text/x-jsrender" id="Grid_@(Model.Id)_Toolbar">
+    <div id="Grid_@(Model.Id)_Toolbar_Read" class="e-toolbaricons e-icon e-document" title="@PresentationResources.Read"></div>
+    <div id="Grid_@(Model.Id)_Toolbar_Refresh" class="e-toolbaricons e-icon e-reload" title="@PresentationResources.Refresh"></div>
+</script>
+
+<script>
+    zSyncfusionCollection("Collection_@(Model.Id)");
+
+    $(function () {
+        try {
+            zSyncfusionCollectionReady("Collection_@(Model.Id)");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+
+            zOnCollectionView(model, profile, "@Url.Action("DataSource", "CustomerCustomerDemo")");
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function actionBegin_Grid_@(Model.Id)(args) {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+            // Associations (FK)
+            var url = "";
+            switch (model.MasterEntity) {
+                case "CustomerDemographic":
+                    url = url + (url == "" ? "" : "&") + "MasterEntity=CustomerDemographic&MasterKey=" + model.MasterKey;
+                    break;
+                case "Customer":
+                    url = url + (url == "" ? "" : "&") + "MasterEntity=Customer&MasterKey=" + model.MasterKey;
+                    break;
+            }
+
+            var scrud = zOnCollectionViewActionBeginSCRUD(model);
+            switch (args.requestType) {
+                case "searching":
+                    // Search
+                    if (scrud.isSearch) {
+                        zSearchDictionaryWrite("CustomerCustomerDemo", args.keyValue);
+                    }
+                    break;
+                case "add":
+                    // Create
+                    if (model.ActivityOperations.IsCreate && scrud.isCreate) {
+                        $("#ZAjax").load("@(Url.Action("Create", "CustomerCustomerDemo", null, Request.Url.Scheme))" +
+                            (url == "" ? "" : "?") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                    }
+                    break;
+                case "read":
+                    // Read
+                    if (model.ActivityOperations.IsRead && scrud.isRead) {
+                        var data = args.data;
+                        if (!ej.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Read", "CustomerCustomerDemo", null, Request.Url.Scheme))?CustomerId=" + String(data.CustomerId) + "&CustomerTypeId=" + String(data.CustomerTypeId) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+                case "beginedit":
+                    // Update
+                    if (model.ActivityOperations.IsUpdate && scrud.isUpdate) {
+                        var data = args.rowData;
+                        if (!ej.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Update", "CustomerCustomerDemo", null, Request.Url.Scheme))?CustomerId=" + String(data.CustomerId) + "&CustomerTypeId=" + String(data.CustomerTypeId) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+                case "delete":
+                    // Delete
+                    if (model.ActivityOperations.IsDelete && scrud.isDelete) {
+                        var data = args.data;
+                        if (!ej.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Delete", "CustomerCustomerDemo", null, Request.Url.Scheme))?CustomerId=" + String(data.CustomerId) + "&CustomerTypeId=" + String(data.CustomerTypeId) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+            }
+
+            zOnCollectionViewActionBegin(model, args);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "actionBegin_Grid_@(Model.Id)", exception));
+        }
+    }
+
+    function actionFailure_Grid_@(Model.Id)(args) {
+        try {
+            zAlert(args.error.responseText);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "actionFailure_Grid_@(Model.Id)", exception));
+        }
+    }
+
+    function load_Grid_@(Model.Id)(args) {
+        try {
+            var culture = "@System.Globalization.CultureInfo.CurrentCulture.Name";
+            this.model.locale = culture;
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "load_Grid_@(Model.Id)", exception));
+        }
+    }
+
+    function toolbarClick_Grid_@(Model.Id)(sender) {
+        try {
+            var toolbar = $(sender.target);
+
+            if (toolbar.prop("id") == "Grid_@(Model.Id)_Toolbar_Read") {
+                var records = this.getSelectedRecords();
+                if (records.length == 1) {
+                    var args = { requestType: "read", data: records[0] };
+                    actionBegin_Grid_@(Model.Id)(args);
+                }
+            }
+            else if (toolbar.prop("id") == "Grid_@(Model.Id)_Toolbar_Refresh") {
+                this.refreshContent();
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "toolbarClick_Grid_@(Model.Id)", exception));
+        }
+    }
+</script>
