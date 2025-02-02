@@ -1,0 +1,58 @@
+@model TaskViewModel
+
+@{
+    string CSHTML = "CleanLocalStorage.cshtml";
+
+    string documentTitle, pageTitle;
+    AppHelper.Title(out documentTitle, out pageTitle,
+        Model.Controller, Model.Action, Model.Task);
+}
+
+<div id="Form" style="display: none">
+    @using (Html.BeginForm())
+    {
+
+        <h4>@pageTitle</h4>
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.Controller)
+        @Html.HiddenFor(model => model.Action)
+        @Html.HiddenFor(model => model.Task)
+
+        <div class="z-formButtons">
+            @Html.ZImage("Button_OK", "btn z-buttonOk", PresentationResources.OK, "onClick()")
+        </div>
+    }
+</div>
+
+<script>
+    $(function () {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+            $(document).prop("title", "@Html.Raw(documentTitle)");
+            zShowOperationResult(model.OperationResult);
+
+            $("#Form").show();
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function onClick() {
+
+        //localStorage.clear();
+
+        for(var i = localStorage.length - 1; i >= 0; i--) {
+            var key = localStorage.key(i);
+            if (key.startsWith("$ej$")) {
+                //var value = localStorage[key];
+                localStorage.removeItem(key);
+            }
+        }
+
+        zAlert("<label class=\"badge badge-success\">@(string.Format(ErrorResources.Successful, EasyLOBPresentationResources.TaskCleanLocalStorage))</label>");
+    }
+</script>

@@ -1,0 +1,141 @@
+@model TaskViewModel
+
+@*
+
+\App_Start\BundleConfig.cs
+\Views\Shared\_Layout*.cshtml
+
+Syncfusion Internationalization
+https://ej2.syncfusion.com/aspnetmvc/documentation/common/internationalization
+
+Syncfusion Localization
+https://ej2.syncfusion.com/aspnetmvc/documentation/common/localization
+
+JavaScript Globalize + CLDR
+https://github.com/globalizejs/globalize
+
+Core module
+    cldr.js
+Currency module
+    globalize.js (core)
+    globalize/number.js
+    globalize/plural.js (only required for "code" or "name" styles)
+Date module
+    globalize.js (core)
+    globalize/number.js
+Message module
+    globalize.js (core)
+    globalize/plural.js (if using messages that need pluralization support)
+Number module
+    globalize.js (core)
+Plural
+    globalize.js (core)
+Relative time module
+    globalize.js (core)
+    globalize/number.js
+    globalize/plural.js
+Unit module
+    globalize.js (core)
+    globalize/number.js
+    globalize/plural.js
+
+Core module
+    cldr/supplemental/likelySubtags.json
+Currency module
+    cldr/main/locale/currencies.json
+    cldr/supplemental/currencyData.json
+    +CLDR JSON files from number module
+    +CLDR JSON files from plural module for name style support
+Date module
+    cldr/main/locale/ca-gregorian.json
+    cldr/main/locale/timeZoneNames.json
+    cldr/supplemental/metaZones.json
+    cldr/supplemental/timeData.json
+    cldr/supplemental/weekData.json
+    +CLDR JSON files from number module
+Number module
+    cldr/main/locale/numbers.json
+    cldr/supplemental/numberingSystems.json
+Plural module
+    cldr/supplemental/plurals.json (for cardinals)
+    cldr/supplemental/ordinals.json (for ordinals)
+Relative time module
+    cldr/main/locale/dateFields.json
+    +CLDR JSON files from number and plural modules
+Unit module
+    cldr/main/locale/units.json
+    +CLDR JSON files from number and plural module
+
+*@
+
+@{
+    string CSHTML = "Globalization.cshtml";
+
+    string documentTitle, pageTitle;
+    AppHelper.Title(out documentTitle, out pageTitle,
+        Model.Controller, Model.Action, Model.Task);
+}
+
+<div class="z-task">
+    <h4>@pageTitle</h4>
+</div>
+
+<button class="btn btn-success col-md-4" onclick="return globalizeSyncfusion()">Syncfusion Globalize ( F12 + Console )</button>
+&nbsp;&nbsp;
+<button class="btn btn-success col-md-4" onclick="return globalize1()">Globalize 1.X ( F12 + Console )</button>
+
+<script>
+    $(function () {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+            $(document).prop("title", "@Html.Raw(documentTitle)");
+            zShowOperationResult(model.OperationResult);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function globalizeSyncfusion() {
+        var i10n = new ej.base.Internationalization();
+
+        console.clear();
+        console.log("@AppHelper.Culture");
+        console.log(i10n.locale);
+
+        console.log(i10n.formatDate(new Date(),
+            { skeleton: "full" }));
+        console.log(i10n.formatNumber(123456,
+            { format: "000000000" }));
+        console.log(i10n.formatNumber(123456,
+            { format: 'N', useGrouping: true, maximumDecimalDigits: 0 }));
+        console.log(i10n.formatNumber(123456.78,
+            { format: "000000000.00" }));
+        console.log(i10n.formatNumber(123456.78,
+            { format: 'N', useGrouping: true, minimumDecimalDigits: 2, maximumDecimalDigits: 2 }));
+    }
+
+    function globalize1() {
+
+        // Globalize 1.X
+        // https://github.com/globalizejs/globalize
+
+        console.clear();
+        console.log("@AppHelper.Culture");
+        console.log(Globalize.locale());
+
+        console.log(Globalize.formatDate(new Date()));
+        console.log(Globalize.formatNumber(123456.78));
+
+        console.log(Globalize.dateFormatter()(new Date()));
+        console.log(Globalize.numberFormatter()(123456.78));
+
+        //console.log(Globalize.dateFormatter({ skeleton: "full" })(new Date()));
+        console.log(Globalize.numberFormatter({ format: "000000000" })(123456));
+        console.log(Globalize.numberFormatter({ format: 'N', useGrouping: true, maximumDecimalDigits: 0 })(123456));
+        console.log(Globalize.numberFormatter({ format: "000000000.00" })(123456.78));
+        console.log(Globalize.numberFormatter({ format: 'N', useGrouping: true, minimumDecimalDigits: 2, maximumDecimalDigits: 2 })(123456.78));
+
+        return false;
+    }
+</script>

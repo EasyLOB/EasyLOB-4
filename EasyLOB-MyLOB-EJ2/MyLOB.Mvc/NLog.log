@@ -1,0 +1,7 @@
+2020-09-28 14:54:32.1210|ERROR|NLog|Error 1Warning 1
+2020-09-28 14:54:51.8010|ERROR|NLog|Error 1Warning 1
+2020-09-28 15:12:05.9955|ERROR|NLog|Error 1Warning 1
+2020-09-28 15:12:13.0426|ERROR|NLog|Error 1Warning 1
+2020-09-30 09:48:39.5861|ERROR|NLog|Valor não pode ser nulo.
+Nome do parâmetro: password
+2020-09-30 09:48:46.9112|ERROR|NLog|Passwords must have at least one lowercase ('a'-'z'). Passwords must have at least one uppercase ('A'-'Z').

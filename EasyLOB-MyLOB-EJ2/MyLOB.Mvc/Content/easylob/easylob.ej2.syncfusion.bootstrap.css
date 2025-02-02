@@ -1,0 +1,19 @@
+﻿
+/* Syncfusion */
+/* https://ej2.syncfusion.com/documentation/appearance/icons */
+
+.e-easylob-read:before {
+    content: '\e345';
+}
+
+.e-easylob-refresh:before {
+    content: '\e975';
+}
+
+.e-easylob-down:before {
+    content: '\e83d';
+}
+
+.e-easylob-up:before {
+    content: '\e834';
+}

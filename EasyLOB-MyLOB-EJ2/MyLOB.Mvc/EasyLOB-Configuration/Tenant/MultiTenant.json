@@ -1,0 +1,24 @@
+[
+  {
+    "Name": "MyLOB",
+    "Description": "MyLOB",
+    "Connections": [
+      {
+        "Name": "MyLOB",
+        "ConnectionName": "MyLOB"
+      },
+      {
+        "Name": "Activity",
+        "ConnectionName": "Activity"
+      },
+      {
+        "Name": "AuditTrail",
+        "ConnectionName": "AuditTrail"
+      },
+      {
+        "Name": "Identity",
+        "ConnectionName": "Identity"
+      }
+    ]
+  }
+]

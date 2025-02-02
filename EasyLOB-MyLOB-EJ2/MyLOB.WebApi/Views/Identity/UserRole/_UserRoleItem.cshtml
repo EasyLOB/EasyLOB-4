@@ -1,0 +1,112 @@
+﻿@model UserRoleItemModel
+
+@{
+    string CSHTML = "_UserRoleItem.cshtml";
+
+    IZProfile profile = DataHelper.GetProfile(typeof(UserRole));
+    // Associations (FK)
+    string roleText = Model.UserRole == null ? "" : (Model.UserRole.RoleLookupText ?? "");
+    string userText = Model.UserRole == null ? "" : (Model.UserRole.UserLookupText ?? "");
+}
+
+<div id="Item_UserRole">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "UserRole_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "UserRole_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "UserRole_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "UserRole_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "UserRole_Item_IsSave")
+
+    <div id="Tab_UserRole" class="@AppDefaults.CSSClassTab">
+        <div class="e-tab-header">
+            <div>@UserRoleResources.EntitySingular</div>
+        </div>
+        <div class="e-content">
+            <div data-easylob-id="TabItem_UserRole">
+                <div class="@AppDefaults.CSSClassTabItem">
+
+                    <div id="Group_UserRole_UserId" class="@profile.EditCSSGroupFor("UserLookupText")">
+                        @Html.LabelFor(model => model.UserRole.UserId, new { @class = profile.EditCSSLabelFor("UserId") })
+                        @Html.EditorFor(model => model.UserRole.UserId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("UserId"), id = "UserRole_UserId" } })
+                        @{
+                            Html.RenderAction("Lookup", "User", new
+                            {
+                                Text = userText,
+                                ValueId = "UserRole_UserId",
+                                Required = profile.IsRequiredView("UserId")
+                            });
+                        }
+                        @* @Html.ValidationMessageFor(model => model.UserRole.UserId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_UserRole_RoleId" class="@profile.EditCSSGroupFor("RoleLookupText")">
+                        @Html.LabelFor(model => model.UserRole.RoleId, new { @class = profile.EditCSSLabelFor("RoleId") })
+                        @Html.EditorFor(model => model.UserRole.RoleId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("RoleId"), id = "UserRole_RoleId" } })
+                        @{
+                            Html.RenderAction("Lookup", "Role", new
+                            {
+                                Text = roleText,
+                                ValueId = "UserRole_RoleId",
+                                Required = profile.IsRequiredView("RoleId")
+                            });
+                        }
+                        @* @Html.ValidationMessageFor(model => model.UserRole.RoleId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    zSyncfusionItem("Item_UserRole");
+
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_UserRole");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            var ejTab = new ej.navigations.Tab({
+                selected: function (args) { selected_Tab_UserRole(args); }
+            });
+            ejTab.appendTo("#Tab_UserRole");
+
+            // Associations (FK)
+            switch (model.MasterEntity) {
+                case "Role":
+                    $("#UserRole_RoleId").val(model.MasterKey);
+                    $("#Group_UserRole_RoleId").hide();
+                    break;
+                case "User":
+                    $("#UserRole_UserId").val(model.MasterKey);
+                    $("#Group_UserRole_UserId").hide();
+                    break;
+            }
+
+            // Collections (PK)
+
+            zOnItemView(model, profile);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function selected_Tab_UserRole(args) {
+        zTabDictionaryWrite("UserRole", args.selectedIndex);
+
+        try {
+            var tabId = $(args.selectedContent).attr("data-easylob-id").replace("TabItem_UserRole_", "");
+            switch (tabId) {
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "selected_Tab_UserRole", exception));
+        }
+    }
+</script>
+
+@Html.EJS().ScriptManager()

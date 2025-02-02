@@ -1,0 +1,105 @@
+﻿@model AuditTrailConfigurationItemModel
+
+@{
+    string CSHTML = "_AuditTrailConfigurationItem.cshtml";
+
+    IZProfile profile = DataHelper.GetProfile(typeof(AuditTrailConfiguration));
+    // Associations (FK)
+}
+
+<div id="Item_AuditTrailConfiguration">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "AuditTrailConfiguration_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "AuditTrailConfiguration_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "AuditTrailConfiguration_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "AuditTrailConfiguration_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "AuditTrailConfiguration_Item_IsSave")
+
+    <div id="Tab_AuditTrailConfiguration" class="@AppDefaults.CSSClassTab">
+        <div class="e-tab-header">
+            <div>@AuditTrailConfigurationResources.EntitySingular</div>
+        </div>
+        <div class="e-content">
+            <div data-easylob-id="TabItem_AuditTrailConfiguration">
+                <div class="@AppDefaults.CSSClassTabItem">
+
+                    <div id="Group_AuditTrailConfiguration_Id" class="@profile.EditCSSGroupFor("Id")">
+                        @Html.LabelFor(model => model.AuditTrailConfiguration.Id, new { @class = profile.EditCSSLabelFor("Id") })
+                        @Html.EditorFor(model => model.AuditTrailConfiguration.Id, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Id"), id = "AuditTrailConfiguration_Id" } })
+                        @* @Html.ValidationMessageFor(model => model.AuditTrailConfiguration.Id, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_AuditTrailConfiguration_Domain" class="@profile.EditCSSGroupFor("Domain")">
+                        @Html.LabelFor(model => model.AuditTrailConfiguration.Domain, new { @class = profile.EditCSSLabelFor("Domain") })
+                        @Html.EditorFor(model => model.AuditTrailConfiguration.Domain, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Domain"), id = "AuditTrailConfiguration_Domain" } })
+                        @* @Html.ValidationMessageFor(model => model.AuditTrailConfiguration.Domain, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_AuditTrailConfiguration_Entity" class="@profile.EditCSSGroupFor("Entity")">
+                        @Html.LabelFor(model => model.AuditTrailConfiguration.Entity, new { @class = profile.EditCSSLabelFor("Entity") })
+                        @Html.EditorFor(model => model.AuditTrailConfiguration.Entity, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Entity"), id = "AuditTrailConfiguration_Entity" } })
+                        @* @Html.ValidationMessageFor(model => model.AuditTrailConfiguration.Entity, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    @Html.ZNewLine() @* !?! *@
+
+                    <div id="Group_AuditTrailConfiguration_LogMode" class="@profile.EditCSSGroupFor("LogMode")">
+                        @Html.LabelFor(model => model.AuditTrailConfiguration.LogMode, new { @class = profile.EditCSSLabelFor("LogMode") })
+                        @* @Html.EditorFor(model => model.AuditTrailConfiguration.LogMode, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("LogMode") }, id = "AuditTrailConfiguration_LogMode" }) *@
+                        @Html.DropDownListFor(model => model.AuditTrailConfiguration.LogMode, Model.LogModes, AuditTrailConfigurationResources.PropertyLogMode, new { @class = profile.EditCSSEditorFor("LogMode") })
+                        @* @Html.ValidationMessageFor(model => model.AuditTrailConfiguration.LogMode, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_AuditTrailConfiguration_LogOperations" class="@profile.EditCSSGroupFor("LogOperations")">
+                        @Html.LabelFor(model => model.AuditTrailConfiguration.LogOperations, new { @class = profile.EditCSSLabelFor("LogOperations") })
+                        @Html.EditorFor(model => model.AuditTrailConfiguration.LogOperations, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("LogOperations"), id = "AuditTrailConfiguration_LogOperations" } })
+                        @* @Html.ValidationMessageFor(model => model.AuditTrailConfiguration.LogOperations, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    zSyncfusionItem("Item_AuditTrailConfiguration");
+
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_AuditTrailConfiguration");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            var ejTab = new ej.navigations.Tab({
+                selected: function (args) { selected_Tab_AuditTrailConfiguration(args); }
+            });
+            ejTab.appendTo("#Tab_AuditTrailConfiguration");
+
+            // Associations (FK)
+
+            // Collections (PK)
+
+            zOnItemView(model, profile);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function selected_Tab_AuditTrailConfiguration(args) {
+        zTabDictionaryWrite("AuditTrailConfiguration", args.selectedIndex);
+
+        try {
+            var tabId = $(args.selectedContent).attr("data-easylob-id").replace("TabItem_AuditTrailConfiguration_", "");
+            switch (tabId) {
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "selected_Tab_AuditTrailConfiguration", exception));
+        }
+    }
+</script>
+
+@Html.EJS().ScriptManager()

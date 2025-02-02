@@ -1,0 +1,44 @@
+@model TaskViewModel
+
+@{ 
+    string CSHTML = "TasksAjax.cshtml";
+
+    string documentTitle, pageTitle;
+    AppHelper.Title(out documentTitle, out pageTitle,
+        Model.Controller, Model.Action, Model.Task);
+}
+
+<div id="Ajax" style="display: none">
+    @using (Ajax.BeginForm(Model.Action, Model.Controller, AppHelper.AjaxOptions))
+    {
+
+        <h4>@pageTitle</h4>
+
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.Controller)
+        @Html.HiddenFor(model => model.Action)
+        @Html.HiddenFor(model => model.Task)
+
+        <div class="z-formButtons">
+            @Html.ZImageInput("Button_OK", "btn z-buttonOk", PresentationResources.OK)
+        </div>
+    }
+</div>
+
+<script>
+    $(function () {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+            $(document).prop("title", "@Html.Raw(documentTitle)");
+            zShowOperationResult(model.OperationResult);
+
+            $("#Ajax").show();
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+</script>

@@ -1,0 +1,105 @@
+﻿@model UserLoginItemModel
+
+@{
+    string CSHTML = "_UserLoginItem.cshtml";
+
+    IZProfile profile = DataHelper.GetProfile(typeof(UserLogin));
+    // Associations (FK)
+    string userText = Model.UserLogin == null ? "" : (Model.UserLogin.UserLookupText ?? "");
+}
+
+<div id="Item_UserLogin">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "UserLogin_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "UserLogin_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "UserLogin_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "UserLogin_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "UserLogin_Item_IsSave")
+
+    <div id="Tab_UserLogin" class="@AppDefaults.CSSClassTab">
+        <div class="e-tab-header">
+            <div>@UserLoginResources.EntitySingular</div>
+        </div>
+        <div class="e-content">
+            <div data-easylob-id="TabItem_UserLogin">
+                <div class="@AppDefaults.CSSClassTabItem">
+
+                    <div id="Group_UserLogin_LoginProvider" class="@profile.EditCSSGroupFor("LoginProvider")">
+                        @Html.LabelFor(model => model.UserLogin.LoginProvider, new { @class = profile.EditCSSLabelFor("LoginProvider") })
+                        @Html.EditorFor(model => model.UserLogin.LoginProvider, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("LoginProvider"), id = "UserLogin_LoginProvider" } })
+                        @* @Html.ValidationMessageFor(model => model.UserLogin.LoginProvider, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_UserLogin_ProviderKey" class="@profile.EditCSSGroupFor("ProviderKey")">
+                        @Html.LabelFor(model => model.UserLogin.ProviderKey, new { @class = profile.EditCSSLabelFor("ProviderKey") })
+                        @Html.EditorFor(model => model.UserLogin.ProviderKey, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("ProviderKey"), id = "UserLogin_ProviderKey" } })
+                        @* @Html.ValidationMessageFor(model => model.UserLogin.ProviderKey, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_UserLogin_UserId" class="@profile.EditCSSGroupFor("UserLookupText")">
+                        @Html.LabelFor(model => model.UserLogin.UserId, new { @class = profile.EditCSSLabelFor("UserId") })
+                        @Html.EditorFor(model => model.UserLogin.UserId, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("UserId"), id = "UserLogin_UserId" } })
+                        @{
+                            Html.RenderAction("Lookup", "User", new
+                            {
+                                Text = userText,
+                                ValueId = "UserLogin_UserId",
+                                Required = profile.IsRequiredView("UserId")
+                            });
+                        }
+                        @* @Html.ValidationMessageFor(model => model.UserLogin.UserId, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    zSyncfusionItem("Item_UserLogin");
+
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_UserLogin");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            var ejTab = new ej.navigations.Tab({
+                selected: function (args) { selected_Tab_UserLogin(args); }
+            });
+            ejTab.appendTo("#Tab_UserLogin");
+
+            // Associations (FK)
+            switch (model.MasterEntity) {
+                case "User":
+                    $("#UserLogin_UserId").val(model.MasterKey);
+                    $("#Group_UserLogin_UserId").hide();
+                    break;
+            }
+
+            // Collections (PK)
+
+            zOnItemView(model, profile);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function selected_Tab_UserLogin(args) {
+        zTabDictionaryWrite("UserLogin", args.selectedIndex);
+
+        try {
+            var tabId = $(args.selectedContent).attr("data-easylob-id").replace("TabItem_UserLogin_", "");
+            switch (tabId) {
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "selected_Tab_UserLogin", exception));
+        }
+    }
+</script>
+
+@Html.EJS().ScriptManager()

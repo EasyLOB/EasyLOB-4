@@ -1,0 +1,15 @@
+﻿
+/* Menu */
+
+.z-layoutHeader {
+    padding-top: .6rem !important;
+}
+
+.z-layoutMenu {
+    background-color: white;
+    height: 40px;
+    padding-top: .6rem !important;
+}
+
+.z-layoutBody {
+}

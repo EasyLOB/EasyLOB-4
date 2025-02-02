@@ -1,0 +1,7 @@
+@{
+    string home = ResourcesHelper.GetMenuResource("Home");
+    string documentTitle, pageTitle;
+    AppHelper.Title(out documentTitle, out pageTitle,
+        "", "", home);
+    ViewBag.Title = documentTitle;
+}

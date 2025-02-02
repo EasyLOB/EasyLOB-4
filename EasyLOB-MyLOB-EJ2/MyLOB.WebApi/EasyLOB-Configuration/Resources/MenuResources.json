@@ -1,0 +1,28 @@
+[
+  {
+    "Culture": "en-US",
+    "Resources": {
+      "About": "About",
+      "Administration": "Administration",
+      "Application": "MyLOB",
+      "Contact": "Contact",
+      "Globalization": "Globalization",
+      "Home": "Home",
+      "Status": "Status",
+      "System": "System"
+    }
+  },
+  {
+    "Culture": "pt-BR",
+    "Resources": {
+      "About": "Sobre",
+      "Administration": "Administração",
+      "Application": "MyLOB",
+      "Contact": "Contato",
+      "Globalization": "Globalização",
+      "Home": "Home",
+      "Status": "Status",
+      "System": "Sistema"
+    }
+  }
+]

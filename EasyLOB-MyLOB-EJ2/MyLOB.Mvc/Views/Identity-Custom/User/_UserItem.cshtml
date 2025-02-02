@@ -1,0 +1,209 @@
+﻿@model UserItemModel
+
+@{
+    string CSHTML = "_UserItem.cshtml";
+
+    IZProfile profile = DataHelper.GetProfile(typeof(User));
+    // Associations (FK)
+}
+
+<div id="Item_User">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ControllerAction, new { id = "User_Item_ControllerAction" })
+    @Html.HiddenFor(model => model.MasterEntity, new { id = "User_Item_MasterEntity" })
+    @Html.HiddenFor(model => model.MasterKey, new { id = "User_Item_MasterKey" })
+    @Html.ZHiddenFor(model => model.IsReadOnly, "User_Item_IsReadOnly")
+    @Html.ZHiddenFor(model => model.IsSave, "User_Item_IsSave")
+
+    <div id="Tab_User" class="@AppDefaults.CSSClassTab">
+        <div class="e-tab-header">
+            <div>@UserResources.EntitySingular</div>
+            <div>@UserClaimResources.EntityPlural</div>
+            <div>@UserLoginResources.EntityPlural</div>
+            <div>@UserRoleResources.EntityPlural</div>
+        </div>
+        <div class="e-content">
+            <div data-easylob-id="TabItem_User">
+                <div class="@AppDefaults.CSSClassTabItem">
+
+                    <div id="Group_User_Id" class="@profile.EditCSSGroupFor("Id")">
+                        @Html.LabelFor(model => model.User.Id, new { @class = profile.EditCSSLabelFor("Id") })
+                        @Html.EditorFor(model => model.User.Id, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Id"), id = "User_Id" } })
+                        @* @Html.ValidationMessageFor(model => model.User.Id, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    @* !?! *@
+                    <div id="Group_User_UserName" class="@profile.EditCSSGroupFor("UserName")">
+                        @Html.LabelFor(model => model.User.UserName, new { @class = profile.EditCSSLabelFor("UserName") })
+                        @Html.EditorFor(model => model.User.UserName, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("UserName"), id = "User_UserName" } })
+                        @* @Html.ValidationMessageFor(model => model.User.UserName, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_User_Email" class="@profile.EditCSSGroupFor("Email")">
+                        @Html.LabelFor(model => model.User.Email, new { @class = profile.EditCSSLabelFor("Email") })
+                        @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("Email"), id = "User_Email" } })
+                        @* @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_User_EmailConfirmed" class="@profile.EditCSSGroupFor("EmailConfirmed")">
+                        @Html.LabelFor(model => model.User.EmailConfirmed, new { @class = profile.EditCSSLabelFor("EmailConfirmed") })
+                        @Html.EditorFor(model => model.User.EmailConfirmed, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("EmailConfirmed"), id = "User_EmailConfirmed" } })
+                        @* @Html.ValidationMessageFor(model => model.User.EmailConfirmed, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_User_PasswordHash" class="@profile.EditCSSGroupFor("PasswordHash")">
+                        @Html.LabelFor(model => model.User.PasswordHash, new { @class = profile.EditCSSLabelFor("PasswordHash") })
+                        @Html.EditorFor(model => model.User.PasswordHash, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("PasswordHash"), id = "User_PasswordHash", @type = "password" } })
+                        @* @Html.ValidationMessageFor(model => model.User.PasswordHash, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_User_SecurityStamp" class="@profile.EditCSSGroupFor("SecurityStamp")">
+                        @Html.LabelFor(model => model.User.SecurityStamp, new { @class = profile.EditCSSLabelFor("SecurityStamp") })
+                        @Html.EditorFor(model => model.User.SecurityStamp, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("SecurityStamp"), id = "User_SecurityStamp" } })
+                        @* @Html.ValidationMessageFor(model => model.User.SecurityStamp, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_User_PhoneNumber" class="@profile.EditCSSGroupFor("PhoneNumber")">
+                        @Html.LabelFor(model => model.User.PhoneNumber, new { @class = profile.EditCSSLabelFor("PhoneNumber") })
+                        @Html.EditorFor(model => model.User.PhoneNumber, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("PhoneNumber"), id = "User_PhoneNumber" } })
+                        @* @Html.ValidationMessageFor(model => model.User.PhoneNumber, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_User_PhoneNumberConfirmed" class="@profile.EditCSSGroupFor("PhoneNumberConfirmed")">
+                        @Html.LabelFor(model => model.User.PhoneNumberConfirmed, new { @class = profile.EditCSSLabelFor("PhoneNumberConfirmed") })
+                        @Html.EditorFor(model => model.User.PhoneNumberConfirmed, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("PhoneNumberConfirmed"), id = "User_PhoneNumberConfirmed" } })
+                        @* @Html.ValidationMessageFor(model => model.User.PhoneNumberConfirmed, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_User_TwoFactorEnabled" class="@profile.EditCSSGroupFor("TwoFactorEnabled")">
+                        @Html.LabelFor(model => model.User.TwoFactorEnabled, new { @class = profile.EditCSSLabelFor("TwoFactorEnabled") })
+                        @Html.EditorFor(model => model.User.TwoFactorEnabled, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("TwoFactorEnabled"), id = "User_TwoFactorEnabled" } })
+                        @* @Html.ValidationMessageFor(model => model.User.TwoFactorEnabled, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    @Html.ZNewLine() @* !?! *@
+
+                    <div id="Group_User_LockoutEnabled" class="@profile.EditCSSGroupFor("LockoutEnabled")">
+                        @Html.LabelFor(model => model.User.LockoutEnabled, new { @class = profile.EditCSSLabelFor("LockoutEnabled") })
+                        @Html.EditorFor(model => model.User.LockoutEnabled, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("LockoutEnabled"), id = "User_LockoutEnabled" } })
+                        @* @Html.ValidationMessageFor(model => model.User.LockoutEnabled, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_User_LockoutEndDateUtc" class="@profile.EditCSSGroupFor("LockoutEndDateUtc")">
+                        @Html.LabelFor(model => model.User.LockoutEndDateUtc, new { @class = profile.EditCSSLabelFor("LockoutEndDateUtc") })
+                        @* @Html.EditorFor(model => model.User.LockoutEndDateUtc, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("LockoutEndDateUtc"), id = "User_LockoutEndDateUtc" } }) *@
+                        @(Html.EJS().DateTimePickerFor(model => model.User.LockoutEndDateUtc)
+                            .CssClass(profile.EditCSSEditorDateTimeFor("LockoutEndDateUtc"))
+                            .Format(PatternResources.Format_DateTime)
+                            .HtmlAttributes(new Dictionary<string, object> { { "id", "User_LockoutEndDateUtc" } })
+                            .Locale(AppHelper.CultureLanguage)
+                            .Width(AppHelper.DateTimePickerWidth)
+                            .Render()
+                        )
+                        @* @Html.ValidationMessageFor(model => model.User.LockoutEndDateUtc, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                    <div id="Group_User_AccessFailedCount" class="@profile.EditCSSGroupFor("AccessFailedCount")">
+                        @Html.LabelFor(model => model.User.AccessFailedCount, new { @class = profile.EditCSSLabelFor("AccessFailedCount") })
+                        @Html.EditorFor(model => model.User.AccessFailedCount, new { htmlAttributes = new { @class = profile.EditCSSEditorFor("AccessFailedCount"), id = "User_AccessFailedCount" } })
+                        @* @Html.ValidationMessageFor(model => model.User.AccessFailedCount, "", new { @class = AppDefaults.CSSClassValidator }) *@
+                    </div>
+
+                </div>
+            </div>
+            <div data-easylob-id="TabItem_User_UserClaims">
+                <div class="@AppDefaults.CSSClassTabItem">
+
+                    <div id="Ajax_User_UserClaims"></div>
+
+                </div>
+            </div>
+            <div data-easylob-id="TabItem_User_UserLogins">
+                <div class="@AppDefaults.CSSClassTabItem">
+
+                    <div id="Ajax_User_UserLogins"></div>
+
+                </div>
+            </div>
+            <div data-easylob-id="TabItem_User_UserRoles">
+                <div class="@AppDefaults.CSSClassTabItem">
+
+                    <div id="Ajax_User_UserRoles"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    zSyncfusionItem("Item_User");
+
+    $(function () {
+        try {
+            zSyncfusionItemReady("Item_User");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+            var controllerAction = model.ControllerAction == null ? "" : model.ControllerAction.toLowerCase();
+
+            var ejTab = new ej.navigations.Tab({
+                selected: function (args) { selected_Tab_User(args); }
+            });
+            ejTab.appendTo("#Tab_User");
+
+            // Associations (FK)
+
+            // Collections (PK)
+            if (controllerAction != "create" && zContains(profile.EditCollections, "UserClaims")) {
+                zUrlDictionaryWrite("UserClaim", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "UserClaim", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "User", MasterKey = Model.User.Id })))";
+                zAjaxLoadSync("Ajax_User_UserClaims", ajaxUrl);
+            }
+            if (controllerAction != "create" && zContains(profile.EditCollections, "UserLogins")) {
+                zUrlDictionaryWrite("UserLogin", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "UserLogin", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "User", MasterKey = Model.User.Id })))";
+                zAjaxLoadSync("Ajax_User_UserLogins", ajaxUrl);
+            }
+            if (controllerAction != "create" && zContains(profile.EditCollections, "UserRoles")) {
+                zUrlDictionaryWrite("UserRole", "@Context.Request.Url.AbsoluteUri");
+                var ajaxUrl = "@(Html.Raw(Url.Action("Search", "UserRole", new { MasterControllerAction = Model.ControllerAction, MasterEntity = "User", MasterKey = Model.User.Id })))";
+                zAjaxLoadSync("Ajax_User_UserRoles", ajaxUrl);
+            }
+
+            zOnItemView(model, profile);
+
+            // !?!
+            if (controllerAction != "create") {
+                $("#User_UserName").prop("readonly", true);
+                $("#Group_User_PasswordHash").hide();
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function selected_Tab_User(args) {
+        zTabDictionaryWrite("User", args.selectedIndex);
+
+        try {
+            var tabId = $(args.selectedContent).attr("data-easylob-id").replace("TabItem_User_", "");
+            switch (tabId) {
+                case "UserClaims":
+                    zGridDataSource("Grid_UserClaim", "@Url.Action("DataSource", "UserClaim")");
+                    break;
+                case "UserLogins":
+                    zGridDataSource("Grid_UserLogin", "@Url.Action("DataSource", "UserLogin")");
+                    break;
+                case "UserRoles":
+                    zGridDataSource("Grid_UserRole", "@Url.Action("DataSource", "UserRole")");
+                    break;
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "selected_Tab_User", exception));
+        }
+    }
+</script>
+
+@Html.EJS().ScriptManager()

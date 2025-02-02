@@ -1,0 +1,7 @@
+﻿@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string tenantName = MultiTenantHelper.Tenant.Name;
+    Layout = "~/Views/Shared/_LayoutMenu" + (string.IsNullOrEmpty(tenantName) ? "" : "." + tenantName) + ".cshtml"; // !?! Multi-Tenant
+    //Layout = "~/Views/Shared/_LayoutSidebarMenu" + (string.IsNullOrEmpty(tenantName) ? "" : "." + tenantName) + ".cshtml"; // !?! Multi-Tenant
+}

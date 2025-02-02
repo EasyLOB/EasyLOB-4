@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+
+@{
+    string imageTenant = Url.Content("~/Images/Tenant/" + MultiTenantHelper.Tenant.Name + "/tenant.png");
+    string imageAJAX = Url.Content("~/Images/ajax.gif");
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    @* CSS *@
+
+    @System.Web.Optimization.Styles.Render("~/content/z-css-4.css")
+    @System.Web.Optimization.Styles.Render("~/content/z-syncfusion.css")
+    @System.Web.Optimization.Styles.Render("~/content/z-easylob.css")
+
+    @System.Web.Optimization.Styles.Render("~/Content/easylob/easylob.ej2.menu.css")
+
+    @RenderSection("Styles", required: false)
+
+    @* JavaScript *@
+
+    @Scripts.Render("~/scripts/z-jquery.js")
+    @Scripts.Render("~/scripts/z-jquery-ajax.js")
+    @Scripts.Render("~/scripts/z-globalize.js")
+    @Scripts.Render("~/scripts/z-jquery-validate.js")
+    @Scripts.Render("~/scripts/z-bootstrap.js")
+    @Scripts.Render("~/scripts/z-modernizr.js")
+    @Scripts.Render("~/scripts/z-syncfusion.js")
+    @Scripts.Render("~/scripts/z-easylob.js")
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var culture = "@AppHelper.Culture"; // Culture = Language-Country
+            var language = "@AppHelper.CultureLanguage"; // Culture = Language-Country
+
+            // Globalize Internationalization
+            globalizeInternationalization(culture, language);
+
+            // Syncfusion Internationalization
+            syncfusionInternationalization(language);
+
+            // Syncfusion Localization
+            syncfusionLocalization(language);
+        });
+
+        function globalizeInternationalization(culture, language) {
+            if (language != 'en') {
+                $.when(
+                    $.getJSON("/Content/cldr/supplemental/likelySubtags.json"),
+                    $.getJSON("/Content/cldr/supplemental/currencyData.json"),
+                    $.getJSON(`/Content/cldr/main/${language}/currencies.json`),
+                    $.getJSON("/Content/cldr/supplemental/timeData.json"),
+                    $.getJSON("/Content/cldr/supplemental/weekData.json"),
+                    $.getJSON(`/Content/cldr/main/${language}/ca-gregorian.json`),
+                    $.getJSON(`/Content/cldr/main/${language}/timeZoneNames.json`),
+                    $.getJSON("/Content/cldr/supplemental/numberingSystems.json"),
+                    $.getJSON(`/Content/cldr/main/${language}/numbers.json`),
+                    $.getJSON("/Content/cldr/supplemental/plurals.json"),
+                    $.getJSON("/Content/cldr/supplemental/ordinals.json")
+                ).then(function () {
+                    return [].slice.apply(arguments, [0]).map(function (result) {
+                        return result[0];
+                    });
+                }).then(Globalize.load).then(function () {
+                    Globalize.locale(culture);
+                });
+            } else {
+                $.when(
+                    $.getJSON("/npm/cldr/supplemental/likelySubtags.json"),
+                    $.getJSON("/npm/cldr/supplemental/currencyData.json"),
+                    $.getJSON("/npm/cldr/supplemental/timeData.json"),
+                    $.getJSON("/npm/cldr/supplemental/weekData.json"),
+                    $.getJSON("/npm/cldr/supplemental/numberingSystems.json"),
+                    $.getJSON("/npm/cldr/supplemental/plurals.json"),
+                    $.getJSON("/npm/cldr/supplemental/ordinals.json")
+                ).then(function () {
+                    return [].slice.apply(arguments, [0]).map(function (result) {
+                        return result[0];
+                    });
+                }).then(Globalize.load).then(function () {
+                    Globalize.locale(culture);
+                });
+            }
+        }
+
+        function syncfusionInternationalization(language) {
+            if (language != 'en') {
+                var files = [
+                    //"supplemental/likelySubtags.json",
+                    `main/${language}/numbers.json`,
+                    "supplemental/numberingSystems.json",
+                    //"supplemental/plurals.json",
+                    //"supplemental/ordinals.json",
+                    `main/${language}/currencies.json`,
+                    //"supplemental/currencyData.json",
+                    `main/${language}/ca-gregorian.json`,
+                    `main/${language}/timeZoneNames.json`
+                    //"supplemental/timeData.json",
+                    //"supplemental/weekData.json"
+                ];
+        
+                var loader = ej.base.loadCldr;
+                var loadJSON = function (file) {
+                    var url = "/Content/cldr/" + files[file].replace('$language$', language);
+                    //console.log(url);
+                    var ajax = new ej.base.Ajax(url, "GET", false);
+                    ajax.onSuccess = function (value) {
+                        loader(JSON.parse(value));
+                    };
+                    ajax.send();
+                };
+                for (var file = 0; file < files.length; file++) {
+                    loadJSON(file);
+                }
+            }
+        }
+
+        function syncfusionLocalization(language) {
+            if (language != "en") {
+                var loader = ej.base.L10n;
+                var url = `/Content/ej2/locale/${language}.json`;
+                //console.log(url);
+                var ajax = new ej.base.Ajax(url, "GET", true);
+                ajax.onSuccess = function (value) {
+                    loader.load(JSON.parse(value));
+                    // pt
+                    ej.base.setCulture(language);
+                    // BRL
+                    //ej.base.setCurrencyCode("");
+                };
+                ajax.send();
+            } else {
+                // en
+                ej.base.setCulture(language);
+                // USD
+                //ej.base.setCurrencyCode("");
+            }
+        }
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</head>
+<body style="min-height: 100vh">
+    <div>
+        <div id="Layout_Header" class="container z-layoutHeader" style="border-radius: 4px;margin-bottom: 4px">
+
+            <h5>
+                <img src="@imageTenant" />
+                &nbsp;&nbsp;&nbsp;
+                [ @CultureInfo.CurrentUICulture.EnglishName <img class="z-culture-@CultureInfo.CurrentCulture.Name" /> ]
+                &nbsp;&nbsp;&nbsp;
+                <img id="AJAXProgress" src="@imageAJAX" />
+            </h5>
+
+            <div id="ZAlert"></div>
+
+        </div>
+        <div id="Layout_Menu" class="container">
+        <!-- <div id="Layout_Menu" class="container z-layoutMenu"> -->
+
+            <div class="control-section">
+                <div class="menu-control">
+                    @Html.EJS().Menu("ZMenu").Items(ViewBag.Menu).Render()
+                </div>
+            </div>
+
+        </div>
+        <div id="Layout_Body" class="container body-content z-layoutBody">
+
+            @RenderBody()
+
+        </div>
+    </div>
+
+    <script>
+
+        $(function () {
+            try {
+                var isAuthenticated = @Request.IsAuthenticated.ToString().ToLower();
+                //var isAuthenticated = @User.Identity.IsAuthenticated.ToString().ToLower();
+
+                if (isAuthenticated)
+                {
+                    $("#ZMenu").show();
+                }
+                else
+                {
+                    $("#ZMenu").hide();
+                }
+
+                // ENTER => TAB
+                $('input').keypress(function (event) {
+                    if (event.which == 13) {
+                        //$(this).next('input').focus();
+                        $(this).tabStop(1).focus();
+                        event.preventDefault();
+                    }
+                });
+
+                $("#AJAXProgress").hide();
+            } catch (exception) {
+                zAlert(zExceptionMessage("_Layout.cshtml", "function", exception));
+            }
+        });
+
+        $(document)
+            .hide()
+            .ajaxSend(function(event, jqxhr, settings) {
+
+                $("#AJAXProgress").show();
+            })
+            .ajaxComplete(function(event, jqxhr, settings) {
+
+                $("#AJAXProgress").hide();
+            })
+
+    </script>
+
+    @Html.EJS().ScriptManager()
+
+</body>
+</html>

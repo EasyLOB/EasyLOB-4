@@ -1,0 +1,6 @@
+@model ReportRDLModel
+
+@{ 
+    string reportPath = "/" + Model.ReportDirectory + "/" + Model.ReportName;
+    string rdlUrl = ConfigurationHelper.AppSettings<string>("EasyLOB.Report.RDL.Url");
+}

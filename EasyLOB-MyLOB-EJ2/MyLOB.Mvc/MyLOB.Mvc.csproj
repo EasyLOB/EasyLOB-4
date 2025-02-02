@@ -1,0 +1,1052 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4A36DF4F-2320-494D-B348-799B94444E5D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyLOB.Mvc</RootNamespace>
+    <AssemblyName>MyLOB.Mvc</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+    <TypeScriptToolsVersion>4.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=4.3.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.4.3.1\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidationNA, Version=1.2.16.24816, Culture=neutral, PublicKeyToken=0950390b87309e14, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidationNA.1.2.16\lib\net40\FluentValidationNA.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.5\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=18.1460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Base.18.1.0.59\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.DocIO.Base, Version=18.1450.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.DocIO.AspNet.Mvc5.18.1.0.59\lib\net45\Syncfusion.DocIO.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.EJ2, Version=18.1500.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.EJ2.MVC5.18.1.0.59\lib\net45\Syncfusion.EJ2.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=18.1460.0.59, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.18.1.0.59\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.OfficeChart.Base, Version=18.1460.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.OfficeChart.Base.18.1.0.59\lib\net46\Syncfusion.OfficeChart.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=18.1450.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Pdf.AspNet.Mvc5.18.1.0.59\lib\net45\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=18.1450.0.59, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.XlsIO.AspNet.Mvc5.18.1.0.59\lib\net45\Syncfusion.XlsIO.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.7\lib\net45\System.Web.Http.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\ValidationResources.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\ValidationResources.pt-BR.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationResources.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\SecurityConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ControllersAPI\Security\ApplicationOAuthProvider.cs" />
+    <Compile Include="ControllersAPI\Security\ChallengeResultAPI.cs" />
+    <Compile Include="ControllersAPI\Security\SecurityAPIController.cs" />
+    <Compile Include="Controllers\Tasks\Globalization.cs" />
+    <Compile Include="Controllers\Tasks\ProfileViewer.cs" />
+    <Compile Include="Controllers\Tasks\Syncfusion.cs" />
+    <Compile Include="EasyLOB\Application\Filters\AppEnvironmentAttribute.cs" />
+    <Compile Include="EasyLOB\MVC\Filters\AppMenuEJ2.cs" />
+    <Compile Include="EasyLOB\MVC\Filters\EasyLOBMenuAttribute.cs" />
+    <Compile Include="EasyLOB\MVC\Extensions\ModelStateDictionaryExtensions.cs" />
+    <Compile Include="EasyLOB\MVC\Extensions\ZOperationResultExtensions.cs" />
+    <Compile Include="EasyLOB\WebAPI\ZActionResultOperationResult.cs" />
+    <Compile Include="Controllers\BaseMvcControllerSCRUDApplication.cs" />
+    <Compile Include="Controllers\BaseMvcControllerSCRUDApplicationDTO.cs" />
+    <Compile Include="Controllers\Activity-Custom\ActivityController.cs" />
+    <Compile Include="Controllers\Activity-Custom\ActivityRoleController.cs" />
+    <Compile Include="Controllers\AuditTrail\AuditTrailConfigurationController.cs" />
+    <Compile Include="Controllers\AuditTrail\AuditTrailLogController.cs" />
+    <Compile Include="Controllers\Identity-Custom\RoleController.cs" />
+    <Compile Include="Controllers\Identity-Custom\UserController.cs" />
+    <Compile Include="Controllers\Identity-Custom\UserRoleController.cs" />
+    <Compile Include="Controllers\Security\SecurityController.cs" />
+    <Compile Include="ControllersAPI\BaseApi.cs" />
+    <Compile Include="ControllersAPI\BaseApiController.cs" />
+    <Compile Include="ControllersAPI\BaseApiControllerApplication.cs" />
+    <Compile Include="ControllersAPI\BaseApiControllerApplicationDTO.cs" />
+    <Compile Include="ControllersAPI\BaseApiControllerPersistence.cs" />
+    <Compile Include="Controllers\BaseMvc.cs" />
+    <Compile Include="Controllers\BaseMvcController.cs" />
+    <Compile Include="Controllers\BaseMvcControllerDashboard.cs" />
+    <Compile Include="Controllers\BaseMvcControllerReport.cs" />
+    <Compile Include="Controllers\BaseMvcControllerSCRUD.cs" />
+    <Compile Include="Controllers\BaseMvcControllerSCRUDPersistence.cs" />
+    <Compile Include="Controllers\BaseMvcControllerTask.cs" />
+    <Compile Include="Controllers\Dashboards\DashboardsController.cs" />
+    <Compile Include="Controllers\Dashboards\PowerBI\PowerBI.cs" />
+    <Compile Include="Controllers\EDM\EDMController.cs" />
+    <Compile Include="Controllers\GlobalizationController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Identity\RoleController.cs" />
+    <Compile Include="Controllers\Identity\UserClaimController.cs" />
+    <Compile Include="Controllers\Identity\UserController.cs" />
+    <Compile Include="Controllers\Identity\UserLoginController.cs" />
+    <Compile Include="Controllers\Identity\UserRoleController.cs" />
+    <Compile Include="Controllers\MyLOB-Custom\MyLOBTasks\API.cs" />
+    <Compile Include="Controllers\MyLOB-Custom\MyLOBTasks\Help.cs" />
+    <Compile Include="Controllers\MyLOB-Custom\MyLOBTasks\MyLOBTasksController.cs" />
+    <Compile Include="Controllers\MyLOB-Custom\MyLOBTasks\Status.cs" />
+    <Compile Include="Controllers\Reports\ReportsController.cs" />
+    <Compile Include="Controllers\Tasks\API.cs" />
+    <Compile Include="Controllers\Tasks\OperationResult.cs" />
+    <Compile Include="Controllers\Tasks\CleanExportImport.cs" />
+    <Compile Include="Controllers\Tasks\CleanLocalStorage.cs" />
+    <Compile Include="Controllers\Tasks\ExportAutoMapper.cs" />
+    <Compile Include="Controllers\Tasks\ExportProfile.cs" />
+    <Compile Include="Controllers\Tasks\ExportSecurity.cs" />
+    <Compile Include="Controllers\Tasks\Help.cs" />
+    <Compile Include="Controllers\Tasks\NLog.cs" />
+    <Compile Include="Controllers\Tasks\Status.cs" />
+    <Compile Include="Controllers\Tasks\TasksController.cs" />
+    <Compile Include="Controllers\Tasks\UrlDictionary.cs" />
+    <Compile Include="EasyLOB\MVC\ZJsonResult.cs" />
+    <Compile Include="EasyLOB\Activity\ActivityViewAutoMapper.cs" />
+    <Compile Include="EasyLOB\Activity\AppDIAutofacHelperActivity.cs" />
+    <Compile Include="EasyLOB\AppDefaults.cs" />
+    <Compile Include="EasyLOB\AppHelper.cs" />
+    <Compile Include="EasyLOB\Application\MyLOBViewAutoMapper.cs" />
+    <Compile Include="EasyLOB\AuditTrail\AppDIAutofacHelperAuditTrail.cs" />
+    <Compile Include="EasyLOB\AuditTrail\AuditTrailViewAutoMapper.cs" />
+    <Compile Include="EasyLOB\DI\AppDIAutofacHelper.cs" />
+    <Compile Include="EasyLOB\EasyLOB\AppDIAutofacHelperEasyLOB.cs" />
+    <Compile Include="EasyLOB\EasyLOB\AppDIAutofacHelperExtensions.cs" />
+    <Compile Include="EasyLOB\EasyLOB\AppDIAutofacHelperLog.cs" />
+    <Compile Include="EasyLOB\Identity\AppDIAutofacHelperIdentity.cs" />
+    <Compile Include="EasyLOB\Application\AppDIAutofacHelperApplication.cs" />
+    <Compile Include="EasyLOB\MVC\Filters\EasyLOBMultiTenantAttribute.cs" />
+    <Compile Include="EasyLOB\MVC\Filters\EasyLOBEnvironmentAttribute.cs" />
+    <Compile Include="EasyLOB\Application\AppHelper.cs" />
+    <Compile Include="EasyLOB\Identity\AppHelper.cs" />
+    <Compile Include="EasyLOB\Identity\IdentityViewAutoMapper.cs" />
+    <Compile Include="EasyLOB\MVC\AppDefaults.cs" />
+    <Compile Include="EasyLOB\MVC\AppHelper.cs" />
+    <Compile Include="EasyLOB\MVC\Filters\CultureAttribute.cs" />
+    <Compile Include="EasyLOB\MVC\CustomRazorViewEngine.cs" />
+    <Compile Include="EasyLOB\Syncfusion\Excel\SyncfusionExcelExtensions.cs" />
+    <Compile Include="EasyLOB\Syncfusion\Excel\XlsResult.cs" />
+    <Compile Include="EasyLOB\Syncfusion\Grid\SyncfusionGrid.cs" />
+    <Compile Include="EasyLOB\WebAPI\AppHelper.cs" />
+    <Compile Include="EasyLOB\Helpers\PresentationHelper.cs" />
+    <Compile Include="Models\Activity-Custom\ActivityRole\ActivityRoleViewModel.cs" />
+    <Compile Include="Models\Activity-Custom\Activity\ActivityViewModel.cs" />
+    <Compile Include="Models\Activity-Profile\ActivityProfile.cs" />
+    <Compile Include="Models\Activity-Profile\ActivityRoleProfile.cs" />
+    <Compile Include="Models\Activity\ActivityRole\ActivityRoleCollectionModel.cs" />
+    <Compile Include="Models\Activity\ActivityRole\ActivityRoleItemModel.cs" />
+    <Compile Include="Models\Activity\ActivityRole\ActivityRoleViewModel.cs" />
+    <Compile Include="Models\Activity\Activity\ActivityViewModel.cs" />
+    <Compile Include="Models\Activity\Activity\ActivityCollectionModel.cs" />
+    <Compile Include="Models\Activity\Activity\ActivityItemModel.cs" />
+    <Compile Include="Models\AuditTrail-Custom\AuditTrailConfiguration\AuditTrailConfigurationItemModel.cs" />
+    <Compile Include="Models\AuditTrail-Custom\AuditTrailConfiguration\AuditTrailConfigurationViewModel.cs" />
+    <Compile Include="Models\AuditTrail-Profile\AuditTrailConfigurationProfile.cs" />
+    <Compile Include="Models\AuditTrail-Profile\AuditTrailLogProfile.cs" />
+    <Compile Include="Models\AuditTrail\AuditTrailConfiguration\AuditTrailConfigurationCollectionModel.cs" />
+    <Compile Include="Models\AuditTrail\AuditTrailConfiguration\AuditTrailConfigurationItemModel.cs" />
+    <Compile Include="Models\AuditTrail\AuditTrailConfiguration\AuditTrailConfigurationViewModel.cs" />
+    <Compile Include="Models\AuditTrail\AuditTrailLog\AuditTrailLogCollectionModel.cs" />
+    <Compile Include="Models\AuditTrail\AuditTrailLog\AuditTrailLogItemModel.cs" />
+    <Compile Include="Models\AuditTrail\AuditTrailLog\AuditTrailLogViewModel.cs" />
+    <Compile Include="Models\Identity-Profile\RoleProfile.cs" />
+    <Compile Include="Models\Identity-Profile\UserClaimProfile.cs" />
+    <Compile Include="Models\Identity-Profile\UserLoginProfile.cs" />
+    <Compile Include="Models\Identity-Profile\UserProfile.cs" />
+    <Compile Include="Models\Identity-Profile\UserRoleProfile.cs" />
+    <Compile Include="Models\Identity\Role\RoleCollectionModel.cs" />
+    <Compile Include="Models\Identity\Role\RoleItemModel.cs" />
+    <Compile Include="Models\Identity\UserClaim\UserClaimCollectionModel.cs" />
+    <Compile Include="Models\Identity\UserClaim\UserClaimItemModel.cs" />
+    <Compile Include="Models\Identity\UserLogin\UserLoginCollectionModel.cs" />
+    <Compile Include="Models\Identity\UserLogin\UserLoginItemModel.cs" />
+    <Compile Include="Models\Identity\UserRole\UserRoleCollectionModel.cs" />
+    <Compile Include="Models\Identity\UserRole\UserRoleItemModel.cs" />
+    <Compile Include="Models\Identity\User\UserCollectionModel.cs" />
+    <Compile Include="Models\Identity\User\UserItemModel.cs" />
+    <Compile Include="Models\Identity-Custom\Role\RoleViewModel.cs" />
+    <Compile Include="Models\Identity-Custom\User\UserViewModel.cs" />
+    <Compile Include="Models\Identity\Role\RoleViewModel.cs" />
+    <Compile Include="Models\Identity\UserClaim\UserClaimViewModel.cs" />
+    <Compile Include="Models\Identity\UserLogin\UserLoginViewModel.cs" />
+    <Compile Include="Models\Identity\UserRole\UserRoleViewModel.cs" />
+    <Compile Include="Models\Identity\User\UserViewModel.cs" />
+    <Compile Include="Models\LookupModel.cs" />
+    <Compile Include="EasyLOB\MVC\Filters\ValidateModelStateAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OperationResultModel.cs" />
+    <Compile Include="Models\Security\SecurityModels.cs" />
+    <Compile Include="Models\CollectionModel.cs" />
+    <Compile Include="Models\ItemModel.cs" />
+    <Compile Include="Models\Reports\RDL\ReportRDLModel.cs" />
+    <Compile Include="Models\Reports\RDLC\ReportRDLCModel.cs" />
+    <Compile Include="Models\Tasks\ProfileViewerViewModel.cs" />
+    <Compile Include="Models\Tasks\TaskViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\EasyLOBSecurityResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EasyLOBSecurityResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EasyLOBSecurityResources.pt-BR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EasyLOBSecurityResources.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\EasyLOBPresentationResources.pt-BR.Designer.cs">
+      <DependentUpon>EasyLOBPresentationResources.pt-BR.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\EasyLOBPresentationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EasyLOBPresentationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MyLOBPresentationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyLOBPresentationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MyLOBPresentationResources.pt-BR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyLOBPresentationResources.pt-BR.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\easylob\easylob.ej2.css" />
+    <Content Include="Content\easylob\easylob.ej2.menu.css" />
+    <Content Include="Content\easylob\easylob.ej2.sidebarmenu.css" />
+    <Content Include="Content\easylob\easylob.ej2.syncfusion.bootstrap.css" />
+    <Content Include="Content\easylob\easylob.ej2.syncfusion.bootstrap4.css" />
+    <Content Include="Content\ej2\bootstrap-dark.css" />
+    <Content Include="Content\ej2\bootstrap.css" />
+    <Content Include="Content\ej2\bootstrap4.css" />
+    <Content Include="Content\ej2\compatibility\bootstrap.css" />
+    <Content Include="Content\ej2\compatibility\bootstrap4.css" />
+    <Content Include="Content\ej2\compatibility\fabric.css" />
+    <Content Include="Content\ej2\compatibility\highcontrast.css" />
+    <Content Include="Content\ej2\compatibility\material.css" />
+    <Content Include="Content\ej2\fabric-dark.css" />
+    <Content Include="Content\ej2\fabric.css" />
+    <Content Include="Content\ej2\highcontrast.css" />
+    <Content Include="Content\ej2\material-dark.css" />
+    <Content Include="Content\ej2\material.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\16\backward.png" />
+    <Content Include="Images\16\cancel.png" />
+    <Content Include="Images\16\clear.png" />
+    <Content Include="Images\16\create.png" />
+    <Content Include="Images\16\delete.png" />
+    <Content Include="Images\16\down.png" />
+    <Content Include="Images\16\execute.png" />
+    <Content Include="Images\16\filter.png" />
+    <Content Include="Images\16\forward.png" />
+    <Content Include="Images\16\help.png" />
+    <Content Include="Images\16\home.png" />
+    <Content Include="Images\16\info.png" />
+    <Content Include="Images\16\mail.png" />
+    <Content Include="Images\16\ok.png" />
+    <Content Include="Images\16\print.png" />
+    <Content Include="Images\16\read.png" />
+    <Content Include="Images\16\save.png" />
+    <Content Include="Images\16\search.png" />
+    <Content Include="Images\16\up.png" />
+    <Content Include="Images\16\update.png" />
+    <Content Include="Images\24\backward.png" />
+    <Content Include="Images\24\cancel.png" />
+    <Content Include="Images\24\clear.png" />
+    <Content Include="Images\24\create.png" />
+    <Content Include="Images\24\delete.png" />
+    <Content Include="Images\24\down.png" />
+    <Content Include="Images\24\execute.png" />
+    <Content Include="Images\24\filter.png" />
+    <Content Include="Images\24\forward.png" />
+    <Content Include="Images\24\help.png" />
+    <Content Include="Images\24\home.png" />
+    <Content Include="Images\24\info.png" />
+    <Content Include="Images\24\mail.png" />
+    <Content Include="Images\24\ok.png" />
+    <Content Include="Images\24\print.png" />
+    <Content Include="Images\24\read.png" />
+    <Content Include="Images\24\save.png" />
+    <Content Include="Images\24\search.png" />
+    <Content Include="Images\24\up.png" />
+    <Content Include="Images\24\update.png" />
+    <Content Include="Images\32\backward.png" />
+    <Content Include="Images\32\cancel.png" />
+    <Content Include="Images\32\clear.png" />
+    <Content Include="Images\32\create.png" />
+    <Content Include="Images\32\delete.png" />
+    <Content Include="Images\32\down.png" />
+    <Content Include="Images\32\execute.png" />
+    <Content Include="Images\32\filter.png" />
+    <Content Include="Images\32\forward.png" />
+    <Content Include="Images\32\help.png" />
+    <Content Include="Images\32\home.png" />
+    <Content Include="Images\32\info.png" />
+    <Content Include="Images\32\mail.png" />
+    <Content Include="Images\32\ok.png" />
+    <Content Include="Images\32\print.png" />
+    <Content Include="Images\32\read.png" />
+    <Content Include="Images\32\save.png" />
+    <Content Include="Images\32\search.png" />
+    <Content Include="Images\32\up.png" />
+    <Content Include="Images\32\update.png" />
+    <Content Include="Images\ajax.gif" />
+    <Content Include="Images\Culture\en-US.png" />
+    <Content Include="Images\Culture\pt-BR.png" />
+    <Content Include="Images\File\16\mail.png" />
+    <Content Include="Images\File\24\mail.png" />
+    <Content Include="Images\File\32\mail.png" />
+    <Content Include="Images\Tenant\MyLOB\logo-ballon.png" />
+    <Content Include="Images\Tenant\MyLOB\logo-easylob-black.png" />
+    <Content Include="Images\Tenant\MyLOB\logo-easylob-white.png" />
+    <Content Include="Images\Tenant\MyLOB\tenant.png" />
+    <Content Include="Images\File\16\audio.png" />
+    <Content Include="Images\File\16\excel.png" />
+    <Content Include="Images\File\16\image.png" />
+    <Content Include="Images\File\16\pdf.png" />
+    <Content Include="Images\File\16\txt.png" />
+    <Content Include="Images\File\16\unknown.png" />
+    <Content Include="Images\File\16\video.png" />
+    <Content Include="Images\File\16\word.png" />
+    <Content Include="Images\File\24\audio.png" />
+    <Content Include="Images\File\24\excel.png" />
+    <Content Include="Images\File\24\image.png" />
+    <Content Include="Images\File\24\pdf.png" />
+    <Content Include="Images\File\24\txt.png" />
+    <Content Include="Images\File\24\unknown.png" />
+    <Content Include="Images\File\24\video.png" />
+    <Content Include="Images\File\24\word.png" />
+    <Content Include="Images\File\32\audio.png" />
+    <Content Include="Images\File\32\excel.png" />
+    <Content Include="Images\File\32\image.png" />
+    <Content Include="Images\File\32\pdf.png" />
+    <Content Include="Images\File\32\txt.png" />
+    <Content Include="Images\File\32\unknown.png" />
+    <Content Include="Images\File\32\video.png" />
+    <Content Include="Images\File\32\word.png" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EasyLOB-Configuration\Menu\Menu.MyLOB.json" />
+    <Content Include="Content\ej2\locale\github.pt.json" />
+    <Content Include="Content\ej2\locale\pt.json" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\cldr\main\en\ca-gregorian.json" />
+    <Content Include="Content\cldr\main\en\currencies.json" />
+    <Content Include="Content\cldr\main\en\numbers.json" />
+    <Content Include="Content\cldr\main\en\timeZoneNames.json" />
+    <Content Include="Content\cldr\main\pt\ca-gregorian.json" />
+    <Content Include="Content\cldr\main\pt\currencies.json" />
+    <Content Include="Content\cldr\main\pt\numbers.json" />
+    <Content Include="Content\cldr\main\pt\timeZoneNames.json" />
+    <Content Include="Content\cldr\supplemental\currencyData.json" />
+    <Content Include="Content\cldr\supplemental\likelySubtags.json" />
+    <Content Include="Content\cldr\supplemental\numberingSystems.json" />
+    <Content Include="Content\cldr\supplemental\ordinals.json" />
+    <Content Include="Content\cldr\supplemental\plurals.json" />
+    <Content Include="Content\cldr\supplemental\timeData.json" />
+    <Content Include="Content\cldr\supplemental\weekData.json" />
+    <Content Include="EasyLOB-Configuration\Tenant\MultiTenant.json" />
+    <Content Include="EasyLOB-Templates\Security.xlsx" />
+    <Content Include="EasyLOB-Configuration\Tenant\MyLOBMultiTenant.json" />
+    <Content Include="EasyLOB-Configuration\Resources\DashboardResources.json" />
+    <Content Include="EasyLOB-Configuration\Resources\MenuResources.json" />
+    <Content Include="EasyLOB-Configuration\Resources\ReportResources.json" />
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\Release.pubxml" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\easylob\easylob.ej2.syncfusion.js" />
+    <Content Include="Scripts\easylob\easylob.ej2.dictionary.js" />
+    <Content Include="Scripts\easylob\easylob.ej2.js" />
+    <Content Include="Scripts\easylob\jquery.tabstop.js" />
+    <Content Include="Scripts\easylob\jquery.tabstop.min.js" />
+    <Content Include="Scripts\easylob\jquery.validate.globalize.js" />
+    <Content Include="Scripts\easylob\readonly.js" />
+    <EmbeddedResource Include="Resources\MyLOBPresentationResources.pt-BR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyLOBPresentationResources.pt-BR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="Scripts\easylob\renderjson.js" />
+    <Content Include="Scripts\ej2\ej2.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\ej2\ej2.min.js.map" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize\currency.js" />
+    <Content Include="Scripts\globalize\date.js" />
+    <Content Include="Scripts\globalize\message.js" />
+    <Content Include="Scripts\globalize\number.js" />
+    <Content Include="Scripts\globalize\plural.js" />
+    <Content Include="Scripts\globalize\relative-time.js" />
+    <Content Include="Scripts\globalize\unit.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\ej2\tsconfig.json" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-3.5.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.5.1.js" />
+    <Content Include="Scripts\jquery-3.5.1.min.js" />
+    <Content Include="Scripts\jquery-3.5.1.slim.js" />
+    <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
+    <Content Include="Scripts\jquery.easing.1.3.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\AuditTrail\AuditTrailConfiguration\Index.cshtml" />
+    <Content Include="Views\AuditTrail\AuditTrailConfiguration\_AuditTrailConfigurationCollection.cshtml" />
+    <Content Include="Views\AuditTrail\AuditTrailConfiguration\_AuditTrailConfigurationLookup.cshtml" />
+    <Content Include="Views\AuditTrail\AuditTrailLog\Index.cshtml" />
+    <Content Include="Views\AuditTrail\AuditTrailLog\_AuditTrailLogCollection.cshtml" />
+    <Content Include="Views\AuditTrail\AuditTrailLog\_AuditTrailLogLookup.cshtml" />
+    <Content Include="Views\Reports\RDL.cshtml" />
+    <Content Include="Views\Reports\RDLC.cshtml" />
+    <Content Include="Views\Identity\Role\Index.cshtml" />
+    <Content Include="Views\Identity-Custom\Role\_RoleCollection.cshtml" />
+    <Content Include="Views\Identity\Role\_RoleLookup.cshtml" />
+    <Content Include="Views\Identity\UserClaim\Index.cshtml" />
+    <Content Include="Views\Identity\UserClaim\_UserClaimCollection.cshtml" />
+    <Content Include="Views\Identity\UserClaim\_UserClaimItem.cshtml" />
+    <Content Include="Views\Identity\UserClaim\_UserClaimLookup.cshtml" />
+    <Content Include="Views\Identity\UserLogin\Index.cshtml" />
+    <Content Include="Views\Identity\UserLogin\_UserLoginCollection.cshtml" />
+    <Content Include="Views\Identity\UserLogin\_UserLoginItem.cshtml" />
+    <Content Include="Views\Identity\UserLogin\_UserLoginLookup.cshtml" />
+    <Content Include="Views\Identity\UserRole\Index.cshtml" />
+    <Content Include="Views\Identity\UserRole\_UserRoleCollection.cshtml" />
+    <Content Include="Views\Identity\UserRole\_UserRoleLookup.cshtml" />
+    <Content Include="Views\Identity\User\Index.cshtml" />
+    <Content Include="Views\AuditTrail\AuditTrailConfiguration\Search.cshtml" />
+    <Content Include="Views\AuditTrail\AuditTrailLog\Search.cshtml" />
+    <Content Include="Views\Identity\Role\Search.cshtml" />
+    <Content Include="Views\Identity\UserClaim\Search.cshtml" />
+    <Content Include="Views\Identity\UserLogin\Search.cshtml" />
+    <Content Include="Views\Identity\UserRole\Search.cshtml" />
+    <Content Include="Views\Identity\User\Search.cshtml" />
+    <Content Include="Views\Activity\ActivityRole\Index.cshtml" />
+    <Content Include="Views\Activity\ActivityRole\Search.cshtml" />
+    <Content Include="Views\Activity\ActivityRole\_ActivityRoleLookup.cshtml" />
+    <Content Include="Views\Activity\Activity\Index.cshtml" />
+    <Content Include="Views\Activity\Activity\Search.cshtml" />
+    <Content Include="Views\Activity\Activity\_ActivityCollection.cshtml" />
+    <Content Include="Views\Activity\Activity\_ActivityItem.cshtml" />
+    <Content Include="Views\Activity\Activity\_ActivityLookup.cshtml" />
+    <Content Include="Views\Security\ChangePassword.cshtml" />
+    <Content Include="Views\Security\ForgotPassword.cshtml" />
+    <Content Include="Views\Security\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Security\Login.cshtml" />
+    <Content Include="Views\Security\ResetPassword.cshtml" />
+    <Content Include="Views\Security\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Activity-Custom\ActivityRole\_ActivityRoleCollection.cshtml" />
+    <Content Include="Views\Activity-Custom\ActivityRole\_ActivityRoleItem.cshtml" />
+    <Content Include="Views\AuditTrail-Custom\AuditTrailConfiguration\_AuditTrailConfigurationItem.cshtml" />
+    <Content Include="Views\Identity-Custom\Role\_RoleItem.cshtml" />
+    <Content Include="Views\Identity-Custom\User\_UserCollection.cshtml" />
+    <Content Include="Views\Identity-Custom\User\_UserItem.cshtml" />
+    <Content Include="Views\Identity\User\_UserLookup.cshtml" />
+    <Content Include="Views\Activity\Activity\CRUD.cshtml" />
+    <Content Include="Views\Activity\ActivityRole\CRUD.cshtml" />
+    <Content Include="Views\AuditTrail\AuditTrailConfiguration\CRUD.cshtml" />
+    <Content Include="Views\AuditTrail\AuditTrailLog\CRUD.cshtml" />
+    <Content Include="Views\Identity\Role\CRUD.cshtml" />
+    <Content Include="Views\Identity\User\CRUD.cshtml" />
+    <Content Include="Views\Identity\UserClaim\CRUD.cshtml" />
+    <Content Include="Views\Identity\UserLogin\CRUD.cshtml" />
+    <Content Include="Views\Identity\UserRole\CRUD.cshtml" />
+    <Content Include="Views\AuditTrail-Custom\AuditTrailLog\_AuditTrailLogItem.cshtml" />
+    <Content Include="Views\Tasks\CleanLocalStorage.cshtml" />
+    <Content Include="Views\Tasks\Status.cshtml" />
+    <Content Include="Views\Tasks\Task.cshtml" />
+    <Content Include="Views\Tasks\TaskAjax.cshtml" />
+    <Content Include="Views\Tasks\UrlDictionary.cshtml" />
+    <Content Include="Views\MyLOB-Custom\MyLOBTasks\Status.cshtml" />
+    <Content Include="Views\MyLOB-Custom\MyLOBTasks\Help.cshtml" />
+    <Content Include="Views\MyLOB-Custom\MyLOBTasks\API.cshtml" />
+    <Content Include="Views\Tasks\API.cshtml" />
+    <Content Include="Views\Tasks\Help.cshtml" />
+    <Content Include="Views\Dashboards\PowerBI.cshtml" />
+    <Content Include="Views\Identity\UserRole\_UserRoleItem.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.5.1.min.map" />
+    <Content Include="Views\Tasks\ProfileViewer.cshtml" />
+    <Content Include="Views\Tasks\Syncfusion.cshtml" />
+    <Content Include="Views\Tasks\Globalization.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\OperationResult.cshtml" />
+    <Content Include="Views\Shared\_LayoutMenu.MyLOB.cshtml" />
+    <Content Include="Views\Shared\_LayoutSidebarMenu.MyLOB.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ValidationResources.pt-BR.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ValidationResources.pt-BR.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\ValidationResources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ValidationResources.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Activity\EasyLOB.Activity.Application\EasyLOB.Activity.Application.csproj">
+      <Project>{b8a988b8-206e-4eaa-b450-08073e56ae32}</Project>
+      <Name>EasyLOB.Activity.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Activity\EasyLOB.Activity.Data\EasyLOB.Activity.Data.csproj">
+      <Project>{3fd320bd-301c-4702-807a-79bd097fee0f}</Project>
+      <Name>EasyLOB.Activity.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Activity\EasyLOB.Activity.PersistenceEntityFramework\EasyLOB.Activity.PersistenceEntityFramework.csproj">
+      <Project>{3dda15bd-751b-4afc-8567-c1a9d466b705}</Project>
+      <Name>EasyLOB.Activity.PersistenceEntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Activity\EasyLOB.Activity.PersistenceLINQ2DB\EasyLOB.Activity.PersistenceLINQ2DB.csproj">
+      <Project>{74d4fbc6-ca3a-499c-bf06-9aadb713467f}</Project>
+      <Name>EasyLOB.Activity.PersistenceLINQ2DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Activity\EasyLOB.Activity.PersistenceNHibernate\EasyLOB.Activity.PersistenceNHibernate.csproj">
+      <Project>{9951c29f-750e-4a76-9236-89f56580693d}</Project>
+      <Name>EasyLOB.Activity.PersistenceNHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Activity\EasyLOB.Activity\EasyLOB.Activity.csproj">
+      <Project>{d8fb9c93-4224-4eea-ac7a-68435da6065e}</Project>
+      <Name>EasyLOB.Activity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Application\EasyLOB.Application.csproj">
+      <Project>{90d108e3-3dea-45ac-84a5-53de6ffa9ff5}</Project>
+      <Name>EasyLOB.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.AuditTrail\EasyLOB.AuditTrail.Application\EasyLOB.AuditTrail.Application.csproj">
+      <Project>{87a7e2ee-a7ab-4b8c-865c-c534d5e622f6}</Project>
+      <Name>EasyLOB.AuditTrail.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.AuditTrail\EasyLOB.AuditTrail.Data\EasyLOB.AuditTrail.Data.csproj">
+      <Project>{c1271aa6-876d-4d3f-af2e-3f5097c232d3}</Project>
+      <Name>EasyLOB.AuditTrail.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.AuditTrail\EasyLOB.AuditTrail.PersistenceEntityFramework\EasyLOB.AuditTrail.PersistenceEntityFramework.csproj">
+      <Project>{aee9b888-51e7-4083-877e-c5c76c3acbaf}</Project>
+      <Name>EasyLOB.AuditTrail.PersistenceEntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.AuditTrail\EasyLOB.AuditTrail.PersistenceLINQ2DB\EasyLOB.AuditTrail.PersistenceLINQ2DB.csproj">
+      <Project>{fe30e167-5757-4e5b-8d7b-ac86070f82f6}</Project>
+      <Name>EasyLOB.AuditTrail.PersistenceLINQ2DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.AuditTrail\EasyLOB.AuditTrail.PersistenceNHibernate\EasyLOB.AuditTrail.PersistenceNHibernate.csproj">
+      <Project>{ea6c8a0a-70fb-4d4a-b32b-bafd3c1f0060}</Project>
+      <Name>EasyLOB.AuditTrail.PersistenceNHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.AuditTrail\EasyLOB.AuditTrailManager\EasyLOB.AuditTrailManager.csproj">
+      <Project>{3acd8d6b-b302-477a-aaf6-3383f3990f10}</Project>
+      <Name>EasyLOB.AuditTrailManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.AuditTrail\EasyLOB.AuditTrail\EasyLOB.AuditTrail.csproj">
+      <Project>{68555183-7e6f-4b6c-a908-63276d1ac73d}</Project>
+      <Name>EasyLOB.AuditTrail</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Data\EasyLOB.Data.csproj">
+      <Project>{1f89f104-c08b-4537-a9a8-5c51c53376f0}</Project>
+      <Name>EasyLOB.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.DI\EasyLOB.DIAutofac\EasyLOB.DIAutofac.csproj">
+      <Project>{4fa40b90-1c03-4f4d-962b-cc4f4e6d8b5e}</Project>
+      <Name>EasyLOB.DIAutofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Environment\EasyLOB.EnvironmentWeb\EasyLOB.EnvironmentWeb.csproj">
+      <Project>{050fc4d2-38b7-43b4-b6c5-267d07e87799}</Project>
+      <Name>EasyLOB.EnvironmentWeb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Environment\EasyLOB.Environment\EasyLOB.Environment.csproj">
+      <Project>{52df21cd-3cca-4aa4-a013-785e4bc8cac2}</Project>
+      <Name>EasyLOB.Environment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Extensions\EasyLOB.Extensions.Edm\EasyLOB.Extensions.Edm.csproj">
+      <Project>{e876d7fb-2103-44d7-84d1-2db735423c9c}</Project>
+      <Name>EasyLOB.Extensions.Edm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Extensions\EasyLOB.Extensions.Mail\EasyLOB.Extensions.Mail.csproj">
+      <Project>{2d9412e9-8719-4bda-9957-f4e9df5deb8f}</Project>
+      <Name>EasyLOB.Extensions.Mail</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Identity\EasyLOB.IdentityEntityFramework\EasyLOB.IdentityEntityFramework.csproj">
+      <Project>{72ccb99a-7c74-4d24-b2bd-e8928a0eb936}</Project>
+      <Name>EasyLOB.IdentityEntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Identity\EasyLOB.Identity\EasyLOB.Identity.csproj">
+      <Project>{9416c420-cd94-44df-9e0c-55dd7c0077aa}</Project>
+      <Name>EasyLOB.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Log\EasyLOB.LogNLog\EasyLOB.LogNLog.csproj">
+      <Project>{81e6e9d2-e870-46ee-9fcb-3ee959479a87}</Project>
+      <Name>EasyLOB.LogNLog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Log\EasyLOB.Log\EasyLOB.Log.csproj">
+      <Project>{0352f43e-27df-4fce-86bc-da3f6ead005a}</Project>
+      <Name>EasyLOB.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Persistence\EasyLOB.PersistenceEntityFramework\EasyLOB.PersistenceEntityFramework.csproj">
+      <Project>{97a09b32-5d2f-448a-b114-68a85ad2499e}</Project>
+      <Name>EasyLOB.PersistenceEntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Persistence\EasyLOB.PersistenceLINQ2DB\EasyLOB.PersistenceLINQ2DB.csproj">
+      <Project>{50df4579-2559-46eb-83dc-032ec732b5b9}</Project>
+      <Name>EasyLOB.PersistenceLINQ2DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Persistence\EasyLOB.PersistenceNHibernate\EasyLOB.PersistenceNHibernate.csproj">
+      <Project>{fe71a014-1922-476c-a27a-f0a819c38e7e}</Project>
+      <Name>EasyLOB.PersistenceNHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Persistence\EasyLOB.Persistence\EasyLOB.Persistence.csproj">
+      <Project>{35433610-cb14-4909-b890-2150b6443a25}</Project>
+      <Name>EasyLOB.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Identity\EasyLOB.Identity.Application\EasyLOB.Identity.Application.csproj">
+      <Project>{7fe3fcb5-79cd-48af-83a8-a1b30a58587d}</Project>
+      <Name>EasyLOB.Identity.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Identity\EasyLOB.Identity.Data\EasyLOB.Identity.Data.csproj">
+      <Project>{637e4c69-daf3-4c5d-99ac-241ef3fcee31}</Project>
+      <Name>EasyLOB.Identity.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Identity\EasyLOB.Identity.PersistenceEntityFramework\EasyLOB.Identity.PersistenceEntityFramework.csproj">
+      <Project>{a180a6b6-1543-4e97-b37e-43a33ecfe07a}</Project>
+      <Name>EasyLOB.Identity.PersistenceEntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB.Security\EasyLOB.Security.csproj">
+      <Project>{cd519bed-67d7-4be8-a3a5-7ddad88ceed5}</Project>
+      <Name>EasyLOB.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EasyLOB\EasyLOB\EasyLOB.csproj">
+      <Project>{6706907a-8932-46e7-a1c8-7575130ff8f7}</Project>
+      <Name>EasyLOB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyLOB.Application\MyLOB.Application.csproj">
+      <Project>{6e72201a-685d-4e9e-9fa6-1fcca4abf3ed}</Project>
+      <Name>MyLOB.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyLOB.Data\MyLOB.Data.csproj">
+      <Project>{8b91a0ef-d58e-4cbe-bdd9-b4ccac9d8c8a}</Project>
+      <Name>MyLOB.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyLOB.PersistenceEntityFramework\MyLOB.PersistenceEntityFramework.csproj">
+      <Project>{63a3dc51-faa0-4451-9057-5afec6823ef4}</Project>
+      <Name>MyLOB.PersistenceEntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyLOB\MyLOB.csproj">
+      <Project>{03ee3cd2-68cd-455b-986d-022cb8ffd94f}</Project>
+      <Name>MyLOB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ControllersAPI\MyLOB-Custom\" />
+    <Folder Include="ControllersAPI\MyLOB\" />
+    <Folder Include="Controllers\Activity\" />
+    <Folder Include="Controllers\AuditTrail-Custom\" />
+    <Folder Include="Controllers\MyLOB\" />
+    <Folder Include="EasyLOB-Reports\RDLC\MyLOB\" />
+    <Folder Include="Models\MyLOB-Custom\" />
+    <Folder Include="Models\MyLOB-Profile-Custom\" />
+    <Folder Include="Models\MyLOB-Profile\" />
+    <Folder Include="Models\MyLOB\" />
+    <Folder Include="Views\MyLOB\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EasyLOBSecurityResources.pt-BR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EasyLOBSecurityResources.pt-BR.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>EasyLOB.Security.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EasyLOBSecurityResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EasyLOBSecurityResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>EasyLOB.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EasyLOBPresentationResources.pt-BR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EasyLOBPresentationResources.pt-BR.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>EasyLOB.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EasyLOBPresentationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EasyLOBPresentationResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>EasyLOB.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MyLOBPresentationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyLOBPresentationResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MyLOB.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\ej2\ej2.d.ts" />
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59991</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55001/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

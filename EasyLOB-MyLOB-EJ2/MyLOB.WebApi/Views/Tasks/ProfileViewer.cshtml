@@ -1,0 +1,89 @@
+@model ProfileViewerViewModel
+
+@{
+    string CSHTML = "ProfileViewer.cshtml";
+
+    string documentTitle, pageTitle;
+    AppHelper.Title(out documentTitle, out pageTitle,
+        Model.Controller, Model.Action, Model.Task);
+}
+
+<div class="z-task">
+    <h4>@pageTitle</h4>
+
+    <div class="col-md-6" style="margin-left: -16px">
+        @Html.DropDownList("Select", new SelectList(Model.Entities, "Key", "Value"), new { @class = "form-control input-sm" })
+    </div>
+
+    <br />
+
+    <div id="Tree"></div>
+</div>
+
+<script>
+    $(function () {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+            $(document).prop("title", "@Html.Raw(documentTitle)");
+            zShowOperationResult(model.OperationResult);
+
+            $("#Select" ).change(function() {
+                $("#Select option:selected").each(function () {
+                    ajaxProfile($(this).val());
+                });
+            });
+
+            $("#Form").show();
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+    
+    function ajaxProfile(entity) {
+        if (entity && entity != "...") {
+
+            $.ajax({
+
+                async: false,
+                data: {
+                    "entity": entity
+                },
+                type: "POST",
+                url: RazorUrlAction("AjaxProfile", "Tasks")
+
+            }).done(function (data, textStatus, jqXHR) {
+
+                if (data) {
+                    // Renderjson
+                    // https://github.com/caldwell/renderjson
+                    document.getElementById("Tree").innerHTML = "";
+                    document.getElementById("Tree").append(
+                        renderjson
+                            .set_icons(' + ', ' - ')
+                            .set_show_to_level(3)
+                            (data)
+                    );
+                }
+
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+
+                //zAjaxFailure(jqXHR, textStatus, errorThrown);
+
+            });
+        } else {
+            document.getElementById("Tree").innerHTML = "";
+        }
+    }
+
+    // Functions
+
+    function RazorUrlAction(action, controller) {
+        var url = "@Url.Action("_Action_", "_Controller_")"
+        url = url.replace("_Action_", action).replace("_Controller_", controller);
+
+        return url;
+    }
+</script>
+
+<script src="/Scripts/easylob/renderjson.js"></script>

@@ -1,0 +1,248 @@
+﻿@model AuditTrailLogCollectionModel
+
+@{
+    string CSHTML = "_AuditTrailLogCollection.cshtml";
+
+    IZProfile profile = DataHelper.GetProfile(typeof(AuditTrailLog));
+    // Associations (FK)
+    string query = "null";
+
+    List<object> toolbar = new List<object>();
+    toolbar.Add("ColumnChooser");
+    toolbar.Add("Search");
+    toolbar.Add("Add");
+    toolbar.Add(new { id = "Grid_" + Model.Id + "_Read", text = "", tooltipText = PresentationResources.Read, prefixIcon = "e-easylob-read" });
+    toolbar.Add("Edit");
+    toolbar.Add("Delete");
+    toolbar.Add(new { id = "Grid_" + Model.Id + "_Refresh", text = "", tooltipText = PresentationResources.Refresh, prefixIcon = "e-easylob-refresh" });
+}
+
+<div id="Collection_@(Model.Id)">
+    @(Html.EJS().Grid("Grid_" + Model.Id)
+        .AllowFiltering()
+        .AllowGrouping(false)
+        .AllowPaging()
+        .AllowReordering()
+        .AllowResizing()
+        .AllowSorting()
+        .AllowTextWrap()
+        .Locale(AppHelper.CultureLanguage)
+        .Query(query)
+        .ShowColumnChooser(true)
+        .Toolbar(toolbar)
+        .ActionBegin("actionBegin_Grid_" + Model.Id)
+        .ActionFailure("actionFailure_Grid_" + Model.Id)
+        .ToolbarClick("toolbarClick_Grid_" + Model.Id)
+        .Columns(column =>
+        {
+            column.Field("Id")
+                .AllowEditing(false)
+                .Type("number")
+                .EditType("numericEdit")
+                .Format(SyncfusionPatternResources.GridFormat_Integer)
+                .HeaderText(AuditTrailLogResources.PropertyId)
+                .IsIdentity(true)
+                .IsPrimaryKey(true)
+                .TextAlign(TextAlign.Right)
+                .Visible(profile.IsGridVisibleFor("Id"))
+                .Width(profile.GridWidthFor("Id"))
+                .Add();
+            column.Field("LogDate")
+                .Type("datetime")
+                .EditType("dateTimePickerEdit")
+                .Format(SyncfusionPatternResources.GridFormat_DateTime)
+                .HeaderText(AuditTrailLogResources.PropertyLogDate)
+                .Visible(profile.IsGridVisibleFor("LogDate"))
+                .Width(profile.GridWidthFor("LogDate"))
+                .Add();
+            column.Field("LogTime")
+                .Type("datetime")
+                .EditType("dateTimePickerEdit")
+                .Format(SyncfusionPatternResources.GridFormat_DateTime)
+                .HeaderText(AuditTrailLogResources.PropertyLogTime)
+                .Visible(profile.IsGridVisibleFor("LogTime"))
+                .Width(profile.GridWidthFor("LogTime"))
+                .Add();
+            column.Field("LogUserName")
+                .Type("string")
+                .EditType("stringEdit")
+                .HeaderText(AuditTrailLogResources.PropertyLogUserName)
+                .Visible(profile.IsGridVisibleFor("LogUserName"))
+                .Width(profile.GridWidthFor("LogUserName"))
+                .Add();
+            column.Field("LogDomain")
+                .Type("string")
+                .EditType("stringEdit")
+                .HeaderText(AuditTrailLogResources.PropertyLogDomain)
+                .Visible(profile.IsGridVisibleFor("LogDomain"))
+                .Width(profile.GridWidthFor("LogDomain"))
+                .Add();
+            column.Field("LogEntity")
+                .Type("string")
+                .EditType("stringEdit")
+                .HeaderText(AuditTrailLogResources.PropertyLogEntity)
+                .Visible(profile.IsGridVisibleFor("LogEntity"))
+                .Width(profile.GridWidthFor("LogEntity"))
+                .Add();
+            column.Field("LogOperation")
+                .Type("string")
+                .EditType("stringEdit")
+                .HeaderText(AuditTrailLogResources.PropertyLogOperation)
+                .Visible(profile.IsGridVisibleFor("LogOperation"))
+                .Width(profile.GridWidthFor("LogOperation"))
+                .Add();
+            column.Field("LogId")
+                .Type("string")
+                .EditType("stringEdit")
+                .HeaderText(AuditTrailLogResources.PropertyLogId)
+                .Visible(profile.IsGridVisibleFor("LogId"))
+                .Width(profile.GridWidthFor("LogId"))
+                .Add();
+            column.Field("LogEntityBefore")
+                .Type("string")
+                .EditType("stringEdit")
+                .HeaderText(AuditTrailLogResources.PropertyLogEntityBefore)
+                .Visible(profile.IsGridVisibleFor("LogEntityBefore"))
+                .Width(profile.GridWidthFor("LogEntityBefore"))
+                .Add();
+            column.Field("LogEntityAfter")
+                .Type("string")
+                .EditType("stringEdit")
+                .HeaderText(AuditTrailLogResources.PropertyLogEntityAfter)
+                .Visible(profile.IsGridVisibleFor("LogEntityAfter"))
+                .Width(profile.GridWidthFor("LogEntityAfter"))
+                .Add();
+        })
+        .EditSettings(edit => edit
+            .AllowAdding(true)
+            .AllowDeleting(true)
+            .AllowEditing(true)
+            .AllowEditOnDblClick(false)
+        )
+        .FilterSettings(filter => filter
+            .EnableCaseSensitivity(false)
+            .Type(FilterType.Excel)
+        )
+        .PageSettings(page => page
+            .PageSize(AppDefaults.SyncfusionRecordsByPage)
+        )
+        .TextWrapSettings(wrap => wrap
+            .WrapMode(WrapMode.Content)
+        )
+        .Render()
+    )
+</div>
+
+<script>
+    zSyncfusionCollection("Collection_@(Model.Id)");
+
+    $(function () {
+        try {
+            zSyncfusionCollectionReady("Collection_@(Model.Id)");
+
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+            var profile = @Html.Raw(JsonConvert.SerializeObject(profile));
+
+            zOnCollectionView(model, profile, "@Url.Action("DataSource", "AuditTrailLog")");
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "function", exception));
+        }
+    });
+
+    function actionBegin_Grid_@(Model.Id)(args) {
+        try {
+            var model = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+            // Associations (FK)
+            var url = "";
+
+            var scrud = zOnCollectionViewActionBeginSCRUD(model);
+            switch (args.requestType) {
+                case "searching":
+                    // Search
+                    if (scrud.isSearch) {
+                        zSearchDictionaryWrite("AuditTrailLog", args.searchString);
+                    }
+                    break;
+                case "add":
+                    // Create
+                    if (model.ActivityOperations.IsCreate && scrud.isCreate) {
+                        $("#ZAjax").load("@(Url.Action("Create", "AuditTrailLog", null, Request.Url.Scheme))" +
+                            (url == "" ? "" : "?") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                    }
+                    break;
+                case "read":
+                    // Read
+                    if (model.ActivityOperations.IsRead && scrud.isRead) {
+                        var data = args.data;
+                        if (!ej.base.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Read", "AuditTrailLog", null, Request.Url.Scheme))?Id=" + String(data.Id) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+                case "beginEdit":
+                    // Update
+                    if (model.ActivityOperations.IsUpdate && scrud.isUpdate) {
+                        var data = args.rowData;
+                        if (!ej.base.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Update", "AuditTrailLog", null, Request.Url.Scheme))?Id=" + String(data.Id) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+                case "delete":
+                    // Delete
+                    if (model.ActivityOperations.IsDelete && scrud.isDelete) {
+                        var data = args.data[0];
+                        if (!ej.base.isNullOrUndefined(data)) {
+                            $("#ZAjax").load("@(Url.Action("Delete", "AuditTrailLog", null, Request.Url.Scheme))?Id=" + String(data.Id) +
+                                (url == "" ? "" : "&") + url, function (responseText, textStatus, jqXHR) { zAjaxLoadComplete(responseText, textStatus, jqXHR); });
+                        }
+                    }
+                    break;
+            }
+
+            zOnCollectionViewActionBegin(model, args);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "actionBegin_Grid_@(Model.Id)", exception));
+        }
+    }
+
+    function actionFailure_Grid_@(Model.Id)(args) {
+        try {
+            zAlert(args.error.error.responseText);
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "actionFailure_Grid_@(Model.Id)", exception));
+        }
+    }
+
+    function toolbarClick_Grid_@(Model.Id)(args) {
+        try {
+            var operation = args.item.id.replace("Grid_@(Model.Id)_", "").toLowerCase();
+
+            if (operation == "read") {
+                var records = this.getSelectedRecords();
+                if (records.length == 1) {
+                    var args = { requestType: "read", data: records[0] };
+                    actionBegin_Grid_@(Model.Id)(args);
+                }
+            } else if (operation == "refresh") {
+                this.refresh();
+            } else {
+                var isExport = @JsonConvert.SerializeObject(Model.ActivityOperations.IsExport);
+                if (isExport) {
+                    if (operation == "excelexport") {
+                        this.excelExport();
+                    } else if (operation == "pdfexport") {
+                        this.pdfExport();
+                    }
+                }
+            }
+        } catch (exception) {
+            zAlert(zExceptionMessage("@CSHTML", "toolbarClick_Grid_@(Model.Id)", exception));
+        }
+    }
+</script>
+
+@Html.EJS().ScriptManager()
